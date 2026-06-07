@@ -264,7 +264,7 @@
               </div>
             </a>
             <a
-              href="https://ormawautsby.web.app/"
+              href="https://ormawa-utsurabaya.web.app/"
               target="_blank"
               rel="noopener noreferrer"
               class="flex items-center gap-4 p-4 bg-indigo-50 rounded-lg hover:bg-indigo-100 transition"
@@ -272,7 +272,7 @@
               <div class="text-2xl">🌐</div>
               <div>
                 <p class="font-semibold text-gray-800">Website Resmi</p>
-                <p class="text-indigo-600 text-sm">ormawautsby.web.app</p>
+                <p class="text-indigo-600 text-sm">ormawa-utsurabaya.web.app</p>
               </div>
             </a>
           </div>

@@ -190,7 +190,8 @@ const menuItems = [
   { label: 'Profil', link: '/profil' },
   { label: 'Zona Kampus', link: '/zona-kampus' },
   { label: 'Media', link: '/media' },
-  { label: 'Kontak', link: '/kontak' }
+  { label: 'Kontak', link: '/kontak' },
+  { label: 'hehehehe', link: '/hehehe' },
 ]
 
 // ==========================================
