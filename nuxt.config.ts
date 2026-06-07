@@ -5,5 +5,11 @@ export default defineNuxtConfig({
   modules: [
     '@pinia/nuxt', // Menambahkan Pinia ke dalam Nuxt
     '@nuxtjs/tailwindcss'
-  ]
+  ],
+  nitro: {
+    prerender: {
+      failOnError: false, // Mengabaikan error 404 untuk halaman yang belum dibuat
+      crawlLinks: false
+    }
+  }
 })
