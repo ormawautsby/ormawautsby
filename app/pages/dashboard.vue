@@ -60,7 +60,7 @@
             </div>
           </div>
           <h2 class="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight">
-            Pusat Informasi & <br/> 
+            Pusat Kegiatan & <br/> 
             <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-200">Aktivitas Mahasiswa</span>
           </h2>
           <p class="text-slate-300 text-lg md:text-xl leading-relaxed max-w-2xl">
@@ -191,7 +191,7 @@ const menuItems = [
   { label: 'Zona Kampus', link: '/zona-kampus' },
   { label: 'Media', link: '/media' },
   { label: 'Kontak', link: '/kontak' },
-  { label: 'hehehehe', link: '/hehehe' },
+
 ]
 
 // ==========================================
