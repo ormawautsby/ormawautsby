@@ -1,61 +1,7 @@
 <template>
   <main class="min-h-screen bg-gray-50 font-sans text-slate-800">
     <!-- 1. NAVIGATION BAR -->
-    <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-200 shadow-sm transition-all">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between h-16">
-          
-          <!-- Logo Brand -->
-          <NuxtLink to="/dashboard" class="flex items-center gap-3 cursor-pointer hover:opacity-90 transition-opacity">
-            <img src="/img/logo ormawa panjang.png" alt="Logo Ormawa" class="h-10 w-auto" />
-          </NuxtLink>
-          
-          <!-- Desktop Navigation -->
-          <div class="hidden md:flex items-center gap-8">
-            <NuxtLink v-for="item in menuItems" :key="item.label" :to="item.link" 
-              :class="[
-                'text-sm font-semibold transition-colors',
-                isActiveLink(item.link) 
-                  ? 'text-blue-900 border-b-2 border-blue-900 pb-1' 
-                  : 'text-slate-600 hover:text-blue-900'
-              ]"
-            >
-              {{ item.label }}
-            </NuxtLink>
-            
-            <!-- Tombol Akses Masuk (Panel Admin) -->
-            <NuxtLink to="/login" class="px-5 py-2.5 rounded-full text-xs font-bold text-white bg-blue-900 hover:bg-blue-950 transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 flex items-center gap-2 border border-blue-800">
-              <svg class="w-4 h-4 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path></svg> Akses Masuk
-            </NuxtLink>
-          </div>
-
-          <!-- Mobile Menu Button -->
-          <button @click="toggleMobileMenu" class="md:hidden text-slate-600 hover:text-blue-900 focus:outline-none p-1">
-            <svg v-if="!isMobileMenuOpen" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-            <svg v-else class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-          </button>
-        </div>
-      </div>
-
-      <!-- Mobile Dropdown Menu -->
-      <div v-if="isMobileMenuOpen" class="md:hidden border-t border-slate-100 bg-white shadow-inner py-2 transition-all">
-        <NuxtLink v-for="item in menuItems" :key="item.label" :to="item.link" @click="isMobileMenuOpen = false" 
-          :class="[
-            'block px-6 py-3 text-sm font-semibold transition-all',
-            isActiveLink(item.link)
-              ? 'bg-blue-100 text-blue-900'
-              : 'text-slate-700 hover:bg-blue-50 hover:text-blue-900'
-          ]"
-        >
-          {{ item.label }}
-        </NuxtLink>
-        <div class="px-6 py-4 border-t border-slate-100">
-          <NuxtLink to="/login" @click="isMobileMenuOpen = false" class="flex justify-center items-center gap-2 w-full py-3 rounded-xl bg-blue-900 text-sm font-bold text-white hover:bg-blue-950 shadow">
-            <svg class="w-4 h-4 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path></svg> Akses Masuk Admin
-          </NuxtLink>
-        </div>
-      </div>
-    </nav>
+    <Navbar />
 
     <!-- Hero Section -->
     <section class="relative bg-slate-900 text-white py-20 px-6 md:px-12 overflow-hidden">
@@ -295,27 +241,7 @@
 import { ref } from 'vue'
 import { useRoute } from 'vue-router'
 
-// ==========================================
-// ROUTE & NAVIGATION
-// ==========================================
-const route = useRoute()
-const isMobileMenuOpen = ref(false)
 
-const toggleMobileMenu = () => {
-  isMobileMenuOpen.value = !isMobileMenuOpen.value
-}
-
-const menuItems = [
-  { label: 'Beranda', link: '/dashboard' },
-  { label: 'Profil', link: '/profil' },
-  { label: 'Zona Kampus', link: '/zona-kampus' },
-  { label: 'Media', link: '/media' },
-  { label: 'Kontak', link: '/kontak' }
-]
-
-const isActiveLink = (link: string) => {
-  return route.path === link
-}
 
 // ==========================================
 // FORM TYPES & STATE
