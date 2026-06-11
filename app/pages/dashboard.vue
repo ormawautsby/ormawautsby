@@ -4,7 +4,7 @@
     <Navbar />
 
     <!-- Hero Section -->
-    <section class="relative bg-slate-900 text-white py-20 px-6 md:px-12 overflow-hidden">
+    <section class="relative bg-admiral text-white py-20 px-6 md:px-12 overflow-hidden">
       <!-- Background Image -->
       <div class="absolute inset-0 pointer-events-none opacity-20 mix-blend-overlay" style="background-image: url('/img/Background ormawa.png'); background-size: cover; background-position: center;">
       </div>
@@ -15,22 +15,22 @@
           <div class="flex flex-wrap items-center gap-4 mb-4">
             <img src="/img/logo-ut.png" alt="Logo UT" class="h-12 w-auto bg-white rounded-full p-1 shadow-lg" />
             <img src="/img/logo ormawa bulat.jpg" alt="Logo Ormawa" class="h-12 w-auto rounded-full border-2 border-slate-700 shadow-lg" />
-            <div class="inline-block px-3 py-1 bg-slate-800 border border-slate-700 text-yellow-400 text-xs font-bold uppercase tracking-wider rounded-full shadow-sm">
+            <div class="inline-block px-3 py-1 bg-slate-800 border border-slate-700 text-lemon text-xs font-bold uppercase tracking-wider rounded-full shadow-sm">
               Sistem Informasi Resmi
             </div>
           </div>
           <h2 class="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight">
             Pusat Kegiatan & <br/> 
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-200">Aktivitas Mahasiswa</span>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-lemon to-lemon-light">Aktivitas Mahasiswa</span>
           </h2>
           <p class="text-slate-300 text-lg md:text-xl leading-relaxed max-w-2xl">
             Kelola agenda, pantau aktivitas, dan tingkatkan kolaborasi divisi secara terpadu dan profesional melalui portal organisasi.
           </p>
           <div class="flex flex-wrap gap-4 pt-4">
-            <button class="px-6 py-3 bg-yellow-400 text-slate-900 font-bold rounded-lg hover:bg-yellow-300 transition-all transform hover:-translate-y-0.5 shadow-[0_4px_14px_0_rgba(255,204,0,0.39)] focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900 focus:ring-yellow-400">
+            <button class="px-6 py-3 bg-lemon text-admiral font-bold rounded-lg hover:bg-lemon-dark transition-all transform hover:-translate-y-0.5 shadow-[0_4px_14px_0_rgba(255,204,0,0.39)] focus:ring-2 focus:ring-offset-2 focus:ring-offset-admiral focus:ring-lemon">
               Jelajahi Agenda
             </button>
-            <button class="px-6 py-3 bg-slate-800 text-white font-semibold rounded-lg border border-slate-700 hover:bg-slate-700 hover:border-slate-600 transition-all focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900 focus:ring-white">
+            <button class="px-6 py-3 bg-slate-800 text-white font-semibold rounded-lg border border-slate-700 hover:bg-slate-700 hover:border-slate-600 transition-all focus:ring-2 focus:ring-offset-2 focus:ring-offset-admiral focus:ring-white">
               Pelajari Lebih Lanjut
             </button>
           </div>
@@ -41,7 +41,7 @@
           <div class="relative w-full max-w-md aspect-square bg-slate-800 rounded-2xl border border-slate-700 shadow-2xl overflow-hidden p-6 flex flex-col gap-4">
             <div class="flex gap-2 items-center border-b border-slate-700 pb-4">
               <div class="w-3 h-3 rounded-full bg-red-400"></div>
-              <div class="w-3 h-3 rounded-full bg-yellow-400"></div>
+              <div class="w-3 h-3 rounded-full bg-lemon"></div>
               <div class="w-3 h-3 rounded-full bg-green-400"></div>
               <div class="ml-2 text-xs text-slate-400 font-mono">Live Dashboard Overview</div>
             </div>
@@ -62,10 +62,10 @@
     <section class="max-w-6xl mx-auto px-6 md:px-12 py-12 -mt-12 relative z-10">
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
         <div v-for="stat in stats" :key="stat.label" class="bg-white p-6 rounded-2xl shadow-md border border-gray-100 flex flex-col items-center text-center hover:shadow-lg transition-all group">
-          <div class="w-14 h-14 rounded-full bg-slate-50 text-slate-900 flex items-center justify-center mb-4 group-hover:bg-slate-900 group-hover:text-yellow-400 transition-colors">
+          <div class="w-14 h-14 rounded-full bg-slate-50 text-admiral flex items-center justify-center mb-4 group-hover:bg-admiral group-hover:text-lemon transition-colors">
             <component :is="stat.icon" />
           </div>
-          <h3 class="text-3xl font-extrabold text-slate-900 mb-1">{{ stat.value }}</h3>
+          <h3 class="text-3xl font-extrabold text-admiral mb-1">{{ stat.value }}</h3>
           <p class="text-sm text-slate-500 font-medium">{{ stat.label }}</p>
         </div>
       </div>
@@ -75,10 +75,10 @@
     <section class="max-w-6xl mx-auto px-6 md:px-12 py-12 mb-12">
       <div class="flex justify-between items-end mb-8 border-b border-gray-200 pb-4">
         <div>
-          <h2 class="text-3xl font-bold text-slate-900 tracking-tight">Agenda Terdekat</h2>
+          <h2 class="text-3xl font-bold text-admiral tracking-tight">Agenda Terdekat</h2>
           <p class="text-slate-500 mt-1">Pantau kegiatan terbaru dari organisasi</p>
         </div>
-        <NuxtLink to="/agenda" class="text-slate-600 hover:text-slate-900 font-semibold text-sm flex items-center gap-1 group transition-colors">
+        <NuxtLink to="/agenda" class="text-slate-600 hover:text-admiral font-semibold text-sm flex items-center gap-1 group transition-colors">
           Lihat Semua 
           <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
         </NuxtLink>
@@ -91,15 +91,15 @@
           <div class="h-36 relative overflow-hidden bg-slate-100">
             <div class="absolute inset-0 opacity-80 mix-blend-multiply transition-transform duration-700 group-hover:scale-105" :class="getCategoryPattern(event.category)"></div>
             <!-- Overlay Gradient -->
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-admiral/60 to-transparent"></div>
             <div class="absolute top-4 right-4">
-              <span class="px-3 py-1 text-xs font-bold rounded-full shadow-md backdrop-blur-sm" :class="event.status === 'Upcoming' ? 'bg-yellow-400 text-slate-900' : 'bg-white/90 text-slate-700'">
+              <span class="px-3 py-1 text-xs font-bold rounded-full shadow-md backdrop-blur-sm" :class="event.status === 'Upcoming' ? 'bg-lemon text-admiral' : 'bg-white/90 text-slate-700'">
                 {{ event.status }}
               </span>
             </div>
             <!-- Category Tag on Image -->
             <div class="absolute bottom-4 left-4">
-              <span class="text-xs font-bold px-2.5 py-1 bg-slate-900/80 text-white rounded-md backdrop-blur-sm border border-slate-700/50">
+              <span class="text-xs font-bold px-2.5 py-1 bg-admiral/80 text-white rounded-md backdrop-blur-sm border border-slate-700/50">
                 {{ event.category }}
               </span>
             </div>
@@ -111,7 +111,7 @@
                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                <time class="text-xs font-bold uppercase tracking-wider">{{ formatDate(event.date) }}</time>
             </div>
-            <h3 class="text-xl font-bold text-slate-900 mb-2 line-clamp-2 group-hover:text-slate-700 transition-colors">{{ event.title }}</h3>
+            <h3 class="text-xl font-bold text-admiral mb-2 line-clamp-2 group-hover:text-slate-700 transition-colors">{{ event.title }}</h3>
             <p class="text-slate-600 text-sm mb-6 line-clamp-3 flex-1 leading-relaxed">{{ event.description }}</p>
             
             <div class="mt-auto pt-4 border-t border-gray-100 flex items-center justify-between">
@@ -121,7 +121,7 @@
                 <div class="w-8 h-8 rounded-full bg-slate-300 border-2 border-white flex items-center justify-center text-xs font-bold text-slate-500">B</div>
                 <div class="w-8 h-8 rounded-full bg-slate-100 border-2 border-white flex items-center justify-center text-xs font-bold text-slate-500">+</div>
               </div>
-              <span class="text-slate-900 group-hover:text-yellow-500 font-bold text-sm flex items-center gap-1 transition-colors">
+              <span class="text-admiral group-hover:text-yellow-500 font-bold text-sm flex items-center gap-1 transition-colors">
                 Detail <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
               </span>
             </div>
