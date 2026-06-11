@@ -50,7 +50,7 @@
             </NuxtLink>
 
             <!-- Dropdown Menu -->
-            <div class="absolute left-1/2 -translate-x-1/2 mt-2 w-52 bg-white border border-slate-200 rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 py-2">
+            <div class="absolute left-1/2 -translate-x-1/2 mt-2 w-64 bg-white border border-slate-200 rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 py-2">
               <NuxtLink to="/profil/tentang-ut" class="block px-4 py-2.5 text-sm text-slate-600 hover:bg-slate-50 hover:text-blue-900 transition-all font-medium">
                 Tentang UT
               </NuxtLink>
@@ -60,8 +60,21 @@
               <NuxtLink to="/profil/visi-misi" class="block px-4 py-2.5 text-sm text-slate-600 hover:bg-slate-50 hover:text-blue-900 transition-all font-medium">
                 Visi & Misi
               </NuxtLink>
-              <NuxtLink to="/profil/struktur-pengurus" class="block px-4 py-2.5 text-sm text-slate-600 hover:bg-slate-50 hover:text-blue-900 transition-all font-medium">
+              <div class="border-t border-slate-100 my-1"></div>
+              <NuxtLink to="/profil/struktur-pengurus" class="block px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-50 hover:text-blue-900 transition-all font-semibold">
                 Struktur Pengurus
+              </NuxtLink>
+              <NuxtLink to="/profil/struktur-pengurus#bph" class="block px-6 py-1.5 text-xs text-slate-500 hover:bg-slate-50 hover:text-blue-900 transition-all font-medium">
+                • BPH (Ketua, Sekretaris, Bendahara)
+              </NuxtLink>
+              <NuxtLink to="/profil/struktur-pengurus#keilmuan" class="block px-6 py-1.5 text-xs text-slate-500 hover:bg-slate-50 hover:text-blue-900 transition-all font-medium">
+                • Koordinator Bidang Keilmuan
+              </NuxtLink>
+              <NuxtLink to="/profil/struktur-pengurus#minat-bakat" class="block px-6 py-1.5 text-xs text-slate-500 hover:bg-slate-50 hover:text-blue-900 transition-all font-medium">
+                • Koordinator Bidang Minat & Bakat
+              </NuxtLink>
+              <NuxtLink to="/profil/struktur-pengurus#kepedulian" class="block px-6 py-1.5 text-xs text-slate-500 hover:bg-slate-50 hover:text-blue-900 transition-all font-medium">
+                • Koordinator Kepedulian & Kesejahteraan
               </NuxtLink>
             </div>
           </div>
@@ -247,9 +260,37 @@
             <NuxtLink 
               to="/profil/struktur-pengurus" 
               @click="isMobileMenuOpen = false" 
-              class="block px-4 py-2 text-xs font-semibold text-slate-600 hover:text-blue-900 rounded-lg hover:bg-slate-50"
+              class="block px-4 py-2 text-xs font-semibold text-slate-700 hover:text-blue-900 rounded-lg hover:bg-slate-50"
             >
               Struktur Pengurus
+            </NuxtLink>
+            <NuxtLink 
+              to="/profil/struktur-pengurus#bph" 
+              @click="isMobileMenuOpen = false" 
+              class="block px-6 py-1.5 text-[11px] font-medium text-slate-500 hover:text-blue-900 rounded-lg hover:bg-slate-50"
+            >
+              • BPH (Ketua, Sekretaris, Bendahara)
+            </NuxtLink>
+            <NuxtLink 
+              to="/profil/struktur-pengurus#keilmuan" 
+              @click="isMobileMenuOpen = false" 
+              class="block px-6 py-1.5 text-[11px] font-medium text-slate-500 hover:text-blue-900 rounded-lg hover:bg-slate-50"
+            >
+              • Koordinator Bidang Keilmuan
+            </NuxtLink>
+            <NuxtLink 
+              to="/profil/struktur-pengurus#minat-bakat" 
+              @click="isMobileMenuOpen = false" 
+              class="block px-6 py-1.5 text-[11px] font-medium text-slate-500 hover:text-blue-900 rounded-lg hover:bg-slate-50"
+            >
+              • Koordinator Bidang Minat & Bakat
+            </NuxtLink>
+            <NuxtLink 
+              to="/profil/struktur-pengurus#kepedulian" 
+              @click="isMobileMenuOpen = false" 
+              class="block px-6 py-1.5 text-[11px] font-medium text-slate-500 hover:text-blue-900 rounded-lg hover:bg-slate-50"
+            >
+              • Koordinator Kepedulian & Kesejahteraan
             </NuxtLink>
           </div>
         </div>

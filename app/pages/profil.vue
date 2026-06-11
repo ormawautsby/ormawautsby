@@ -8,8 +8,8 @@
       <div class="relative max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
         <div>
           <span class="text-xs font-bold uppercase tracking-widest text-yellow-400">Profil Organisasi</span>
-          <h1 class="text-3xl md:text-4xl font-extrabold mt-1">Ormawa UT Jakarta</h1>
-          <p class="text-slate-400 text-sm mt-2 max-w-xl">Mengenal lebih dekat Universitas Terbuka Jakarta dan kepengurusan Organisasi Kemahasiswaan.</p>
+          <h1 class="text-3xl md:text-4xl font-extrabold mt-1">Ormawa UT Surabaya</h1>
+          <p class="text-slate-400 text-sm mt-2 max-w-xl">Mengenal lebih dekat Universitas Terbuka Surabaya dan kepengurusan Organisasi Kemahasiswaan.</p>
         </div>
         <div class="flex items-center gap-4">
           <img src="/img/logo-ut.png" alt="Logo UT" class="h-14 w-auto bg-white rounded-full p-1.5 shadow-lg" />
