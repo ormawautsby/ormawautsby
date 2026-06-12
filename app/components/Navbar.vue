@@ -137,6 +137,22 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
               </svg>
             </NuxtLink>
+
+            <!-- Dropdown Menu Media -->
+            <div class="absolute left-1/2 -translate-x-1/2 mt-2 w-52 bg-white border border-slate-200 rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 py-2">
+              <NuxtLink to="/media/artikel" class="block px-4 py-2.5 text-sm text-slate-600 hover:bg-slate-50 hover:text-admiral transition-all font-medium">
+                Artikel dan Berita
+              </NuxtLink>
+              <NuxtLink to="/media/perlombaan" class="block px-4 py-2.5 text-sm text-slate-600 hover:bg-slate-50 hover:text-admiral transition-all font-medium border-b border-slate-50">
+                Informasi perlombaan
+              </NuxtLink>
+              <NuxtLink to="/media/laporan" class="block px-4 py-2.5 text-sm text-slate-600 hover:bg-slate-50 hover:text-admiral transition-all font-medium border-b border-slate-50">
+                Laporan kegiatan
+              </NuxtLink>
+              <NuxtLink to="/media/social-media" class="block px-4 py-2.5 text-sm text-slate-600 hover:bg-slate-50 hover:text-admiral transition-all font-medium">
+                Social Media Ormawa
+              </NuxtLink>
+            </div>
           </div>
 
           <!-- Kontak -->
@@ -352,19 +368,55 @@
           </div>
         </div>
 
-        <!-- Media -->
-        <NuxtLink 
-          to="/media" 
-          @click="isMobileMenuOpen = false" 
-          :class="[
-            'flex items-center gap-3 px-4 py-3 text-sm font-semibold rounded-xl transition-all',
-            isActiveLink('/media') 
-              ? 'bg-slate-100 text-admiral' 
-              : 'text-slate-700 hover:bg-slate-50'
-          ]"
-        >
-          Media
-        </NuxtLink>
+        <!-- Media Expandable Section -->
+        <div>
+          <button 
+            @click="toggleMobileMedia" 
+            :class="[
+              'flex items-center justify-between w-full px-4 py-3 text-sm font-semibold rounded-xl transition-all text-left',
+              isActiveLink('/media') 
+                ? 'bg-slate-100 text-admiral' 
+                : 'text-slate-700 hover:bg-slate-50'
+            ]"
+          >
+            <span>Media</span>
+            <svg class="w-4 h-4 transition-transform duration-200" :class="isMobileMediaOpen ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          
+          <!-- Submenu -->
+          <div v-show="isMobileMediaOpen" class="pl-6 mt-1 space-y-1 border-l border-slate-100 ml-4">
+            <NuxtLink 
+              to="/media/artikel" 
+              @click="isMobileMenuOpen = false" 
+              class="block px-4 py-2 text-xs font-semibold text-slate-600 hover:text-admiral rounded-lg hover:bg-slate-50"
+            >
+              Artikel dan Berita
+            </NuxtLink>
+            <NuxtLink 
+              to="/media/perlombaan" 
+              @click="isMobileMenuOpen = false" 
+              class="block px-4 py-2 text-xs font-semibold text-slate-600 hover:text-admiral rounded-lg hover:bg-slate-50"
+            >
+              Informasi perlombaan
+            </NuxtLink>
+            <NuxtLink 
+              to="/media/laporan" 
+              @click="isMobileMenuOpen = false" 
+              class="block px-4 py-2 text-xs font-semibold text-slate-600 hover:text-admiral rounded-lg hover:bg-slate-50"
+            >
+              Laporan kegiatan
+            </NuxtLink>
+            <NuxtLink 
+              to="/media/social-media" 
+              @click="isMobileMenuOpen = false" 
+              class="block px-4 py-2 text-xs font-semibold text-slate-600 hover:text-admiral rounded-lg hover:bg-slate-50"
+            >
+              Social Media Ormawa
+            </NuxtLink>
+          </div>
+        </div>
 
         <!-- Kontak -->
         <NuxtLink 
@@ -469,6 +521,7 @@ const isMobileMenuOpen = ref(false)
 const isMobileProfilOpen = ref(false)
 const isMobileMasukOpen = ref(false)
 const isMobileZonaKampusOpen = ref(false)
+const isMobileMediaOpen = ref(false)
 
 const toggleMobileMenu = () => {
   isMobileMenuOpen.value = !isMobileMenuOpen.value
@@ -486,12 +539,19 @@ const toggleMobileZonaKampus = () => {
   isMobileZonaKampusOpen.value = !isMobileZonaKampusOpen.value
 }
 
+const toggleMobileMedia = () => {
+  isMobileMediaOpen.value = !isMobileMediaOpen.value
+}
+
 const isActiveLink = (link: string) => {
   if (link === '/profil') {
     return route.path.startsWith('/profil') || route.path.startsWith('/profile')
   }
   if (link === '/zona-kampus') {
     return route.path.startsWith('/zona-kampus')
+  }
+  if (link === '/media') {
+    return route.path.startsWith('/media')
   }
   return route.path === link
 }
