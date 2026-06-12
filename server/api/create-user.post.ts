@@ -16,6 +16,9 @@ export default defineEventHandler(async (event) => {
   try {
     if (config.firebaseAdminKey) {
       serviceAccount = JSON.parse(config.firebaseAdminKey)
+      if (serviceAccount.private_key) {
+        serviceAccount.private_key = serviceAccount.private_key.replace(/\\n/g, '\n')
+      }
     }
   } catch (e) {
     throw createError({ statusCode: 500, statusMessage: 'Invalid Firebase Admin Key configuration' })

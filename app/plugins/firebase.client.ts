@@ -1,5 +1,6 @@
 import { initializeApp, getApps } from 'firebase/app'
-import { getAuth, onAuthStateChanged, User } from 'firebase/auth'
+import { getAuth, onAuthStateChanged } from 'firebase/auth'
+import type { User } from 'firebase/auth'
 import { getFirestore, doc, getDoc } from 'firebase/firestore'
 
 export default defineNuxtPlugin((nuxtApp) => {

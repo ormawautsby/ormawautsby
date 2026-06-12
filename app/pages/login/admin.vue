@@ -97,26 +97,30 @@ const loginAdmin = async () => {
     }
 
     const result = await signInWithEmailAndPassword($auth, email.value, password.value)
-    
-    // Pastikan user ini memiliki role admin/pengurus di Firestore
+
+    // Ambil role dari Firestore setelah login berhasil
     const userDocRef = doc($db, 'users', result.user.uid)
     const userDocSnap = await getDoc(userDocRef)
-    
+    let role = 'mahasiswa'
     if (userDocSnap.exists()) {
-      const role = userDocSnap.data().role
-      if (role === 'admin' || role === 'super_admin' || role === 'pengurus') {
-        navigateTo('/dashboard/admin-area')
-      } else {
-        // Jika rolenya mahasiswa biasa tapi mencoba login lewat sini
-        errorMessage.value = 'Akun Anda tidak memiliki akses admin.'
-        // Sign out force
-        const { signOut } = await import('firebase/auth')
-        await signOut($auth)
-      }
-    } else {
-      errorMessage.value = 'Data role pengguna tidak ditemukan.'
+      role = (userDocSnap.data().role || '').trim()
     }
+    console.log('Fetched role from Firestore:', role)
 
+    // Update state global agar middleware dapat membaca role
+    const userRole = useState('userRole')
+    const firebaseUser = useState('firebaseUser')
+    userRole.value = role
+    firebaseUser.value = result.user
+    console.log('Login successful, role:', role)
+
+    // Hanya izinkan admin/super_admin untuk masuk ke admin-area
+    if (role === 'admin' || role === 'super_admin' || role === 'pengurus') {
+      navigateTo('/dashboard/admin-area')
+      console.log('Navigated to admin area')
+    } else {
+      errorMessage.value = 'Akun Anda tidak memiliki akses admin.'
+    }
   } catch (error: any) {
     console.error('Login error:', error)
     // Tampilkan pesan yang lebih user-friendly untuk error umum
