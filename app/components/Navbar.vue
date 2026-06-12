@@ -5,7 +5,7 @@
         
         <!-- Logo Brand -->
         <NuxtLink to="/dashboard" class="flex items-center gap-3 cursor-pointer hover:opacity-90 transition-opacity">
-          <img src="/img/logo ormawa panjang.png" alt="Logo Ormawa" class="h-10 w-auto" />
+          <img src="/img/Favicon-2.png" alt="Logo Ormawa" class="h-16 w-auto" />
         </NuxtLink>
         
         <!-- Desktop Navigation -->

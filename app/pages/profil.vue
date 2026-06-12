@@ -12,8 +12,7 @@
           <p class="text-slate-400 text-sm mt-2 max-w-xl">Mengenal lebih dekat Universitas Terbuka Surabaya dan kepengurusan Organisasi Kemahasiswaan.</p>
         </div>
         <div class="flex items-center gap-4">
-          <img src="/img/logo-ut.png" alt="Logo UT" class="h-14 w-auto bg-white rounded-full p-1.5 shadow-lg" />
-          <img src="/img/logo ormawa bulat.jpg" alt="Logo Ormawa" class="h-14 w-auto rounded-full border-2 border-slate-700 shadow-lg" />
+          <img src="/img/Favicon.png" alt="Logo Ormawa" class="h-14 w-auto rounded-full shadow-lg" />
         </div>
       </div>
     </section>

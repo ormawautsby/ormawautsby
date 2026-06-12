@@ -13,8 +13,7 @@
         <!-- Hero Text -->
         <div class="flex-1 space-y-6">
           <div class="flex flex-wrap items-center gap-4 mb-4">
-            <img src="/img/logo-ut.png" alt="Logo UT" class="h-12 w-auto bg-white rounded-full p-1 shadow-lg" />
-            <img src="/img/logo ormawa bulat.jpg" alt="Logo Ormawa" class="h-12 w-auto rounded-full border-2 border-slate-700 shadow-lg" />
+            <img src="/img/Favicon.png" alt="Logo Ormawa" class="h-12 w-auto rounded-full shadow-lg" />
             <div class="inline-block px-3 py-1 bg-slate-800 border border-slate-700 text-lemon text-xs font-bold uppercase tracking-wider rounded-full shadow-sm">
               Sistem Informasi Resmi
             </div>
