@@ -83,8 +83,12 @@
       </div>
     </div>
 
-    <div class="p-4 border-t border-slate-100">
-      <button @click="logout" class="flex items-center gap-2 text-sm font-bold text-red-500 hover:text-red-700 w-full px-2 py-2 transition-colors">
+    <div class="p-4 border-t border-slate-100 flex flex-col gap-1">
+      <NuxtLink to="/" class="flex items-center gap-2 text-sm font-bold text-slate-500 hover:text-blue-600 hover:bg-blue-50 rounded-lg w-full px-2 py-2 transition-colors">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+        Ke Halaman Utama Web
+      </NuxtLink>
+      <button @click="logout" class="flex items-center gap-2 text-sm font-bold text-red-500 hover:text-red-700 hover:bg-red-50 rounded-lg w-full px-2 py-2 transition-colors">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
         Keluar
       </button>
