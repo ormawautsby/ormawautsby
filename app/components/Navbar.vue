@@ -56,7 +56,7 @@
             <!-- Dropdown Menu -->
             <div class="absolute left-1/2 -translate-x-1/2 mt-2 w-52 bg-white border border-slate-200 rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 py-2">
               <NuxtLink to="/profil/tentang-ut" class="block px-4 py-2.5 text-sm text-slate-600 hover:bg-slate-50 hover:text-admiral transition-all font-medium">
-                Tentang UT
+                Tentang UT Surabaya
               </NuxtLink>
               <NuxtLink to="/profil/tentang-ormawa" class="block px-4 py-2.5 text-sm text-slate-600 hover:bg-slate-50 hover:text-admiral transition-all font-medium">
                 Tentang Ormawa
