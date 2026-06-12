@@ -1,6 +1,10 @@
 <template>
-  <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-200/80 shadow-sm transition-all">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <header class="sticky top-0 z-50">
+    <!-- Top Yellow Bar -->
+    <div class="h-10 w-full bg-[#FFD700]"></div>
+    
+    <nav class="bg-white/95 backdrop-blur border-b border-slate-200/80 shadow-sm transition-all">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
         
         <!-- Logo Brand -->
@@ -510,6 +514,7 @@
       </div>
     </div>
   </nav>
+  </header>
 </template>
 
 <script setup lang="ts">
