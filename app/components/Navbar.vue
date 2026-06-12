@@ -8,8 +8,8 @@
       <div class="flex items-center justify-between h-16">
         
         <!-- Logo Brand -->
-        <NuxtLink to="/dashboard" class="flex items-center gap-3 cursor-pointer hover:opacity-90 transition-opacity">
-          <img src="/img/Favicon-2.png" alt="Logo Ormawa" class="h-16 w-auto" />
+        <NuxtLink to="/dashboard" class="flex items-center gap-3 cursor-pointer group">
+          <NuxtImg src="/img/Favicon-2.png" alt="Logo Ormawa" class="h-16 w-auto object-contain group-hover:scale-105 transition-all duration-300" format="webp" loading="lazy" />
         </NuxtLink>
         
         <!-- Desktop Navigation -->
