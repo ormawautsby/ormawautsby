@@ -89,6 +89,31 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
               </svg>
             </NuxtLink>
+
+            <!-- Dropdown Menu Zona Kampus -->
+            <div class="absolute left-1/2 -translate-x-1/2 mt-2 w-64 bg-white border border-slate-200 rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 py-2">
+              <div class="px-4 py-2 text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">
+                Kegiatan
+              </div>
+              <NuxtLink to="/zona-kampus/akademik" class="block px-4 py-2.5 text-sm text-slate-600 hover:bg-slate-50 hover:text-admiral transition-all font-medium pl-6">
+                Akademik
+              </NuxtLink>
+              <NuxtLink to="/zona-kampus/non-akademik" class="block px-4 py-2.5 text-sm text-slate-600 hover:bg-slate-50 hover:text-admiral transition-all font-medium pl-6 border-b border-slate-50">
+                Non Akademik
+              </NuxtLink>
+              <div class="px-4 py-2 text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1 mt-1">
+                Pendaftaran
+              </div>
+              <NuxtLink to="/zona-kampus/ukm" class="block px-4 py-2.5 text-sm text-slate-600 hover:bg-slate-50 hover:text-admiral transition-all font-medium pl-6">
+                Unit Kreatifitas Mahasiswa (UKM)
+              </NuxtLink>
+              <NuxtLink to="/zona-kampus/imf" class="block px-4 py-2.5 text-sm text-slate-600 hover:bg-slate-50 hover:text-admiral transition-all font-medium pl-6 border-b border-slate-50">
+                Iam Fakultas (IMF/Hima)
+              </NuxtLink>
+              <NuxtLink to="/zona-kampus/cari-teman" class="block px-4 py-2.5 text-sm text-slate-600 hover:bg-slate-50 hover:text-admiral transition-all font-medium mt-1">
+                Cari teman
+              </NuxtLink>
+            </div>
           </div>
 
           <!-- Media -->
@@ -284,19 +309,68 @@
           </div>
         </div>
 
-        <!-- Zona Kampus -->
-        <NuxtLink 
-          to="/zona-kampus" 
-          @click="isMobileMenuOpen = false" 
-          :class="[
-            'flex items-center gap-3 px-4 py-3 text-sm font-semibold rounded-xl transition-all',
-            isActiveLink('/zona-kampus') 
-              ? 'bg-slate-100 text-admiral' 
-              : 'text-slate-700 hover:bg-slate-50'
-          ]"
-        >
-          Zona Kampus
-        </NuxtLink>
+        <!-- Zona Kampus Expandable Section -->
+        <div>
+          <button 
+            @click="toggleMobileZonaKampus" 
+            :class="[
+              'flex items-center justify-between w-full px-4 py-3 text-sm font-semibold rounded-xl transition-all text-left',
+              isActiveLink('/zona-kampus') 
+                ? 'bg-slate-100 text-admiral' 
+                : 'text-slate-700 hover:bg-slate-50'
+            ]"
+          >
+            <span>Zona Kampus</span>
+            <svg class="w-4 h-4 transition-transform duration-200" :class="isMobileZonaKampusOpen ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          
+          <!-- Submenu -->
+          <div v-show="isMobileZonaKampusOpen" class="pl-6 mt-1 space-y-1 border-l border-slate-100 ml-4">
+            <div class="px-4 py-2 text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+              Kegiatan
+            </div>
+            <NuxtLink 
+              to="/zona-kampus/akademik" 
+              @click="isMobileMenuOpen = false" 
+              class="block px-4 py-2 text-xs font-semibold text-slate-600 hover:text-admiral rounded-lg hover:bg-slate-50 ml-2"
+            >
+              Akademik
+            </NuxtLink>
+            <NuxtLink 
+              to="/zona-kampus/non-akademik" 
+              @click="isMobileMenuOpen = false" 
+              class="block px-4 py-2 text-xs font-semibold text-slate-600 hover:text-admiral rounded-lg hover:bg-slate-50 ml-2 mb-2"
+            >
+              Non Akademik
+            </NuxtLink>
+            <div class="px-4 py-2 text-[10px] font-bold text-slate-400 uppercase tracking-wider mt-2">
+              Pendaftaran
+            </div>
+            <NuxtLink 
+              to="/zona-kampus/ukm" 
+              @click="isMobileMenuOpen = false" 
+              class="block px-4 py-2 text-xs font-semibold text-slate-600 hover:text-admiral rounded-lg hover:bg-slate-50 ml-2"
+            >
+              Unit Kreatifitas Mahasiswa (UKM)
+            </NuxtLink>
+            <NuxtLink 
+              to="/zona-kampus/imf" 
+              @click="isMobileMenuOpen = false" 
+              class="block px-4 py-2 text-xs font-semibold text-slate-600 hover:text-admiral rounded-lg hover:bg-slate-50 ml-2 mb-2"
+            >
+              Iam Fakultas (IMF/Hima)
+            </NuxtLink>
+            <NuxtLink 
+              to="/zona-kampus/cari-teman" 
+              @click="isMobileMenuOpen = false" 
+              class="block px-4 py-2 text-xs font-semibold text-slate-600 hover:text-admiral rounded-lg hover:bg-slate-50"
+            >
+              Cari teman
+            </NuxtLink>
+          </div>
+        </div>
 
         <!-- Media -->
         <NuxtLink 
@@ -414,6 +488,7 @@ const route = useRoute()
 const isMobileMenuOpen = ref(false)
 const isMobileProfilOpen = ref(false)
 const isMobileMasukOpen = ref(false)
+const isMobileZonaKampusOpen = ref(false)
 
 const toggleMobileMenu = () => {
   isMobileMenuOpen.value = !isMobileMenuOpen.value
@@ -427,9 +502,16 @@ const toggleMobileMasuk = () => {
   isMobileMasukOpen.value = !isMobileMasukOpen.value
 }
 
+const toggleMobileZonaKampus = () => {
+  isMobileZonaKampusOpen.value = !isMobileZonaKampusOpen.value
+}
+
 const isActiveLink = (link: string) => {
   if (link === '/profil') {
     return route.path.startsWith('/profil') || route.path.startsWith('/profile')
+  }
+  if (link === '/zona-kampus') {
+    return route.path.startsWith('/zona-kampus')
   }
   return route.path === link
 }
