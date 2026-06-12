@@ -155,26 +155,6 @@
             </svg>
             Kontak
           </NuxtLink>
-
-          <!-- Market -->
-          <NuxtLink 
-            to="/market" 
-            :class="[
-              'flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-semibold transition-all duration-200',
-              isActiveLink('/market') 
-                ? 'bg-slate-100 text-admiral shadow-sm border border-slate-200/50' 
-                : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
-            ]"
-          >
-            <!-- Shop Icon -->
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
-            </svg>
-            Market
-          </NuxtLink>
-
-          <div class="h-6 w-px bg-slate-200 mx-1"></div>
-
           <!-- WASPADA Button -->
           <NuxtLink 
             to="/waspada" 
