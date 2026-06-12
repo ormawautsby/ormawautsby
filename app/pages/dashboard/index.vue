@@ -128,6 +128,7 @@
       </div>
     </section>
 
+    <Footer />
   </main>
 </template>
 

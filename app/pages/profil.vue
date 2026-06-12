@@ -23,6 +23,7 @@
         <NuxtPage />
       </div>
     </main>
+    <Footer />
   </div>
 </template>
 

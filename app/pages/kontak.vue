@@ -233,6 +233,7 @@
         <p class="text-blue-600 font-semibold">Bersinergi membangun prestasi.</p>
       </section>
     </div>
+    <Footer />
   </main>
 </template>
 
