@@ -11,7 +11,7 @@
         
         <!-- Column 1: Logo & Address -->
         <div class="lg:col-span-5 flex flex-col sm:flex-row items-center sm:items-center gap-6 text-center sm:text-left">
-          <NuxtImg src="/img/Favicon-2.png" alt="Logo UT" class="w-20 h-auto object-contain brightness-0 invert opacity-90" format="webp" loading="lazy" />
+          <img src="/img/Favicon-2.png" alt="Logo UT" class="w-20 h-auto object-contain brightness-0 invert opacity-90" loading="lazy" />
           <div class="text-sm leading-relaxed text-blue-50">
             <p>Universitas Terbuka Jl. Cabe</p>
             <p>Raya, Pondok Cabe, Pamulang,</p>

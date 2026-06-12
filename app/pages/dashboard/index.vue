@@ -6,13 +6,13 @@
     <!-- Hero Section -->
     <section class="relative bg-admiral text-white py-20 px-6 md:px-12 overflow-hidden">
       <!-- Background Image -->
-      <NuxtImg src="/img/Background ormawa.png" alt="Background" class="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-overlay" format="webp" loading="lazy" />
+      <img src="/img/Background ormawa.png" alt="Background" class="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-overlay" loading="lazy" />
       
       <div class="relative max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12">
         <!-- Hero Text -->
         <div class="flex-1 space-y-6">
           <div class="flex flex-wrap items-center gap-4 mb-4">
-            <NuxtImg src="/img/Favicon_bulat_transparan.png" alt="Logo Ormawa" class="h-14 w-auto rounded-full shadow-lg" format="webp" loading="lazy" />
+            <img src="/img/Favicon_bulat_transparan.png" alt="Logo Ormawa" class="h-14 w-auto rounded-full shadow-lg" loading="lazy" />
             <div class="inline-block px-3 py-1 bg-slate-800 border border-slate-700 text-lemon text-xs font-bold uppercase tracking-wider rounded-full shadow-sm">
               Sistem Informasi Resmi
             </div>
