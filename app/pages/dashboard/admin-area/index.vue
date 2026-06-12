@@ -1,206 +1,228 @@
 <template>
-  <div class="space-y-6 max-w-6xl mx-auto">
+  <div class="space-y-8 w-full pb-10 px-2 lg:px-4">
     
-    <!-- Top Welcome Header -->
-    <div class="flex justify-between items-start mb-6">
+    <!-- 1. Top Header & Welcome -->
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
       <div>
-        <h2 class="text-3xl font-extrabold text-slate-800 mb-1">Halo, {{ userName }}! 👋</h2>
-        <p class="text-slate-500 text-sm">Selamat datang di ruang kendali pribadimu.</p>
+        <h2 class="text-3xl font-extrabold text-slate-800 tracking-tight mb-1">Command Center 🚀</h2>
+        <p class="text-slate-500 font-medium">Selamat datang, {{ userName }}. Berikut adalah ringkasan aktivitas hari ini.</p>
       </div>
       
-      <!-- Profile Badge -->
-      <div class="flex items-center gap-3 bg-white px-4 py-2 rounded-full shadow-sm border border-slate-100">
-        <div class="text-right hidden sm:block">
-          <p class="text-sm font-bold text-slate-800 leading-none">{{ userRoleFormatted }}</p>
-          <p class="text-xs font-bold text-yellow-500 flex items-center justify-end gap-1 mt-1">
-            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"></path></svg>
-            5 XP
-          </p>
-        </div>
-        <img class="h-10 w-10 rounded-full object-cover border-2 border-slate-200" src="https://ui-avatars.com/api/?name=User&background=random" alt="Profile" />
+      <div class="flex items-center gap-3 w-full md:w-auto">
+        <button class="flex-1 md:flex-none bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 hover:text-blue-600 font-semibold py-2 px-4 rounded-xl shadow-sm transition-all flex items-center justify-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+          Tulis Berita
+        </button>
+        <button class="flex-1 md:flex-none bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-xl shadow-sm transition-all flex items-center justify-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+          Buat Pengumuman
+        </button>
       </div>
     </div>
 
-    <!-- Blue XP Banner -->
-    <div class="bg-gradient-to-r from-blue-600 to-blue-500 rounded-3xl p-8 text-white shadow-lg shadow-blue-500/30 relative overflow-hidden">
-      <!-- Decorative background circles -->
-      <div class="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 rounded-full bg-white opacity-5 mix-blend-overlay"></div>
-      <div class="absolute bottom-0 right-32 -mb-16 w-32 h-32 rounded-full bg-white opacity-10 mix-blend-overlay"></div>
+    <!-- 2. Hero Metrics (4 Cards) -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
       
-      <div class="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-        <div class="flex-1 w-full">
-          <div class="flex items-center gap-2 mb-1">
-            <span class="text-xs font-bold uppercase tracking-widest text-blue-100 bg-blue-700/50 px-2 py-1 rounded-md">Level Kamu</span>
-            <span class="text-yellow-400">👑</span>
+      <!-- Metric 1: Aspirasi -->
+      <div class="bg-white rounded-2xl p-6 shadow-sm border border-orange-100 hover:shadow-md transition-shadow relative overflow-hidden group">
+        <div class="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-orange-50 rounded-full opacity-50 group-hover:scale-110 transition-transform"></div>
+        <div class="relative z-10 flex justify-between items-start">
+          <div>
+            <p class="text-sm font-bold text-slate-500 uppercase tracking-wider mb-1">Tiket Aspirasi</p>
+            <h4 class="text-4xl font-black text-slate-800">12</h4>
+            <p class="text-xs font-semibold text-orange-500 mt-2 flex items-center gap-1">
+              <span class="w-2 h-2 rounded-full bg-orange-500 animate-pulse"></span> 5 Belum Dibaca
+            </p>
           </div>
-          <h3 class="text-3xl font-extrabold mb-4">Sobat UT</h3>
+          <div class="w-12 h-12 rounded-xl bg-orange-100 text-orange-600 flex items-center justify-center">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Metric 2: Proposal -->
+      <div class="bg-white rounded-2xl p-6 shadow-sm border border-blue-100 hover:shadow-md transition-shadow relative overflow-hidden group">
+        <div class="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-blue-50 rounded-full opacity-50 group-hover:scale-110 transition-transform"></div>
+        <div class="relative z-10 flex justify-between items-start">
+          <div>
+            <p class="text-sm font-bold text-slate-500 uppercase tracking-wider mb-1">Proposal Masuk</p>
+            <h4 class="text-4xl font-black text-slate-800">4</h4>
+            <p class="text-xs font-semibold text-blue-500 mt-2 flex items-center gap-1">
+              Butuh Review BEM
+            </p>
+          </div>
+          <div class="w-12 h-12 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Metric 3: Pengguna -->
+      <div class="bg-white rounded-2xl p-6 shadow-sm border border-emerald-100 hover:shadow-md transition-shadow relative overflow-hidden group">
+        <div class="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-emerald-50 rounded-full opacity-50 group-hover:scale-110 transition-transform"></div>
+        <div class="relative z-10 flex justify-between items-start">
+          <div>
+            <p class="text-sm font-bold text-slate-500 uppercase tracking-wider mb-1">Total Civitas</p>
+            <h4 class="text-4xl font-black text-slate-800">1,204</h4>
+            <p class="text-xs font-semibold text-emerald-500 mt-2 flex items-center gap-1">
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
+              +12 Minggu Ini
+            </p>
+          </div>
+          <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Metric 4: Traffic -->
+      <div class="bg-white rounded-2xl p-6 shadow-sm border border-purple-100 hover:shadow-md transition-shadow relative overflow-hidden group">
+        <div class="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-purple-50 rounded-full opacity-50 group-hover:scale-110 transition-transform"></div>
+        <div class="relative z-10 flex justify-between items-start">
+          <div>
+            <p class="text-sm font-bold text-slate-500 uppercase tracking-wider mb-1">Kunjungan</p>
+            <h4 class="text-4xl font-black text-slate-800">842</h4>
+            <p class="text-xs font-semibold text-purple-500 mt-2 flex items-center gap-1">
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
+              Trafik stabil
+            </p>
+          </div>
+          <div class="w-12 h-12 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Main Content Layout -->
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+      
+      <!-- KIRI: Modul Manajemen Utama (1/4 width) -->
+      <div class="lg:col-span-1 flex flex-col gap-4">
+        <h3 class="text-xl font-bold text-slate-800 mb-2 px-2">Modul Utama</h3>
+        
+        <!-- CMS Module -->
+        <NuxtLink to="/dashboard/admin-area/berita" class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all group flex flex-col">
+          <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path></svg>
+          </div>
+          <h4 class="font-bold text-slate-800 mb-1 group-hover:text-blue-600 transition-colors">Manajemen Konten</h4>
+          <p class="text-xs text-slate-500">Edit Berita, Banner, Agenda</p>
+        </NuxtLink>
+
+        <!-- User Module -->
+        <NuxtLink to="/dashboard/admin-area/kelola-user" class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all group flex flex-col">
+          <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+          </div>
+          <h4 class="font-bold text-slate-800 mb-1 group-hover:text-emerald-600 transition-colors">Akses & Pengguna</h4>
+          <p class="text-xs text-slate-500">Role Admin, BEM, HIMA</p>
+        </NuxtLink>
+
+        <!-- E-Proposal Module -->
+        <NuxtLink to="/dashboard/admin-area/proposal" class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all group flex flex-col">
+          <div class="w-12 h-12 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+          </div>
+          <h4 class="font-bold text-slate-800 mb-1 group-hover:text-purple-600 transition-colors">Arsip E-Proposal</h4>
+          <p class="text-xs text-slate-500">Review & Gudang LPJ</p>
+        </NuxtLink>
+
+        <!-- Settings Module -->
+        <NuxtLink to="/dashboard/admin-area/pengaturan" class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all group flex flex-col">
+          <div class="w-12 h-12 rounded-xl bg-slate-100 text-slate-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+          </div>
+          <h4 class="font-bold text-slate-800 mb-1 group-hover:text-slate-900 transition-colors">Pengaturan Sistem</h4>
+          <p class="text-xs text-slate-500">Konfigurasi Website</p>
+        </NuxtLink>
+      </div>
+
+      <!-- KANAN: Aktivitas & Inbox (3/4 width) -->
+      <div class="lg:col-span-3 grid grid-cols-1 xl:grid-cols-5 gap-8">
+        
+        <!-- Aktivitas Terbaru (col-span-3 dari 5) -->
+        <div class="xl:col-span-3 bg-white rounded-3xl p-8 shadow-sm border border-slate-100">
+          <div class="flex justify-between items-center mb-6">
+            <h3 class="text-xl font-bold text-slate-800">Log Aktivitas Terbaru</h3>
+            <button class="text-sm font-semibold text-blue-600 hover:text-blue-800 transition">Lihat Semua</button>
+          </div>
           
-          <!-- Progress Bar -->
-          <div class="max-w-md">
-            <div class="w-full bg-blue-800/50 rounded-full h-2 mb-2 border border-blue-400/20">
-              <div class="bg-yellow-400 h-2 rounded-full" style="width: 5%"></div>
+          <div class="space-y-6">
+            <!-- Activity Item 1 -->
+            <div class="flex gap-4">
+              <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center shrink-0">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+              </div>
+              <div class="flex-1 pb-4 border-b border-slate-100">
+                <p class="text-sm text-slate-800"><span class="font-bold text-blue-600">UKM Mapala</span> mengunggah Proposal "Ekspedisi Gunung Arjuno".</p>
+                <p class="text-xs text-slate-500 mt-1">10 menit yang lalu</p>
+              </div>
             </div>
-            <p class="text-sm text-blue-100 font-medium">5 / 100 XP menuju level berikutnya.</p>
+            
+            <!-- Activity Item 2 -->
+            <div class="flex gap-4">
+              <div class="w-10 h-10 rounded-full bg-green-100 text-green-600 flex items-center justify-center shrink-0">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+              </div>
+              <div class="flex-1 pb-4 border-b border-slate-100">
+                <p class="text-sm text-slate-800"><span class="font-bold text-green-600">Admin BEM</span> menerbitkan berita "Pekan Olahraga Mahasiswa 2025".</p>
+                <p class="text-xs text-slate-500 mt-1">2 jam yang lalu</p>
+              </div>
+            </div>
+            
+            <!-- Activity Item 3 -->
+            <div class="flex gap-4">
+              <div class="w-10 h-10 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center shrink-0">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+              </div>
+              <div class="flex-1">
+                <p class="text-sm text-slate-800"><span class="font-bold text-orange-600">Sistem</span> mendaftarkan 15 mahasiswa baru dari program studi Manajemen.</p>
+                <p class="text-xs text-slate-500 mt-1">Kemarin, 14:30</p>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="flex gap-3 w-full md:w-auto">
-          <button class="flex-1 md:flex-none bg-white text-blue-600 hover:bg-slate-50 font-bold py-2.5 px-5 rounded-xl shadow-sm transition-colors flex items-center justify-center gap-2">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm14 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"></path></svg>
-            Scan Absen
+        <!-- Inbox Aspirasi (col-span-2 dari 5) -->
+        <div class="xl:col-span-2 bg-white rounded-3xl p-8 shadow-sm border border-slate-100 flex flex-col">
+          <div class="flex justify-between items-center mb-6">
+            <h3 class="text-xl font-bold text-slate-800 flex items-center gap-2">
+              Inbox Aspirasi <span class="bg-red-100 text-red-600 text-xs font-bold px-2 py-0.5 rounded-full">5 Baru</span>
+            </h3>
+          </div>
+          
+          <div class="flex-1 space-y-4">
+            <!-- Message 1 -->
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-100 hover:border-blue-300 transition-colors cursor-pointer group">
+              <div class="flex justify-between items-start mb-2">
+                <h4 class="font-bold text-sm text-slate-800 group-hover:text-blue-600 transition-colors">Anonim</h4>
+                <span class="text-[10px] font-semibold text-slate-400 bg-white px-2 py-1 rounded-md border border-slate-200">10:05</span>
+              </div>
+              <p class="text-xs text-slate-600 line-clamp-2 mb-3">Mohon perbaiki lampu di area parkir motor B, sangat gelap saat malam hari.</p>
+              <button class="text-xs font-bold text-blue-600 bg-blue-100 hover:bg-blue-200 px-3 py-1.5 rounded-lg transition-colors w-full">Balas / Proses</button>
+            </div>
+            
+            <!-- Message 2 -->
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-100 hover:border-blue-300 transition-colors cursor-pointer group">
+              <div class="flex justify-between items-start mb-2">
+                <h4 class="font-bold text-sm text-slate-800 group-hover:text-blue-600 transition-colors">Ahmad Ridwan</h4>
+                <span class="text-[10px] font-semibold text-slate-400 bg-white px-2 py-1 rounded-md border border-slate-200">Kemarin</span>
+              </div>
+              <p class="text-xs text-slate-600 line-clamp-2 mb-3">Saran untuk menambahkan WiFi di area kantin baru karena susah sinyal.</p>
+              <button class="text-xs font-bold text-slate-600 bg-slate-200 hover:bg-slate-300 px-3 py-1.5 rounded-lg transition-colors w-full">Lihat Detail</button>
+            </div>
+          </div>
+          
+          <button class="mt-6 text-sm font-bold text-slate-500 hover:text-blue-600 text-center w-full transition-colors">
+            Buka Pusat Aspirasi &rarr;
           </button>
-          <button class="flex-1 md:flex-none bg-blue-700/50 hover:bg-blue-800/50 border border-blue-400/30 text-white font-bold py-2.5 px-5 rounded-xl shadow-sm transition-colors">
-            Riwayat Event
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- 3 Stats Cards -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 flex items-center gap-5 hover:shadow-md transition-shadow">
-        <div class="w-14 h-14 rounded-2xl bg-blue-50 flex items-center justify-center text-blue-600">
-          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-        </div>
-        <div>
-          <h4 class="text-2xl font-black text-slate-800 leading-none mb-1">0</h4>
-          <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Event Diikuti</p>
-        </div>
-      </div>
-
-      <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 flex items-center gap-5 hover:shadow-md transition-shadow">
-        <div class="w-14 h-14 rounded-2xl bg-green-50 flex items-center justify-center text-green-600">
-          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path></svg>
-        </div>
-        <div>
-          <h4 class="text-2xl font-black text-slate-800 leading-none mb-1">0</h4>
-          <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Sertifikat</p>
-        </div>
-      </div>
-
-      <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 flex items-center gap-5 hover:shadow-md transition-shadow">
-        <div class="w-14 h-14 rounded-2xl bg-purple-50 flex items-center justify-center text-purple-600">
-          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
-        </div>
-        <div>
-          <h4 class="text-2xl font-black text-slate-800 leading-none mb-1">0</h4>
-          <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Aspirasi</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Pencapaian Kampus Container -->
-    <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-100">
-      <div class="flex items-center gap-3 mb-8">
-        <div class="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center text-orange-500">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
-        </div>
-        <div>
-          <h3 class="text-xl font-bold text-slate-800">Pencapaian Kampus</h3>
-          <p class="text-sm text-slate-500">Koleksi lencana dari aktivitasmu di Ormawa UT.</p>
-        </div>
-      </div>
-
-      <!-- Badges Grid -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        
-        <!-- Active Badge -->
-        <div class="border border-slate-100 rounded-2xl p-6 text-center hover:shadow-md transition-all group bg-white relative overflow-hidden">
-          <div class="absolute inset-0 bg-gradient-to-b from-blue-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-          <div class="relative z-10">
-            <div class="w-16 h-16 mx-auto mb-4 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shadow-inner">
-              <span class="text-2xl">✌️</span>
-            </div>
-            <h4 class="font-bold text-slate-800 mb-1">Sobat UT</h4>
-            <p class="text-xs text-slate-500 mb-3 line-clamp-2">Selamat bergabung di keluarga besar UT.</p>
-            <span class="inline-block bg-slate-100 text-slate-600 text-[10px] font-bold px-3 py-1 rounded-full">0 XP</span>
-          </div>
-        </div>
-
-        <!-- Locked Badges -->
-        <div class="border border-slate-100 rounded-2xl p-6 text-center hover:shadow-md transition-all group bg-slate-50/50 relative overflow-hidden">
-          <div class="relative z-10 opacity-60 grayscale group-hover:grayscale-0 group-hover:opacity-100 transition-all">
-            <div class="w-16 h-16 mx-auto mb-4 bg-slate-200 text-slate-400 rounded-full flex items-center justify-center">
-              <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0v6m0-6l-9-5m9 5l9-5"></path></svg>
-            </div>
-            <h4 class="font-bold text-slate-800 mb-1">Partisipan Aktif</h4>
-            <p class="text-xs text-slate-500 mb-3 line-clamp-2">Mulai aktif mengikuti kegiatan kampus.</p>
-            <span class="inline-block bg-slate-200 text-slate-500 text-[10px] font-bold px-3 py-1 rounded-full">100 XP</span>
-          </div>
-        </div>
-
-        <div class="border border-slate-100 rounded-2xl p-6 text-center hover:shadow-md transition-all group bg-slate-50/50 relative overflow-hidden">
-          <div class="relative z-10 opacity-60 grayscale group-hover:grayscale-0 group-hover:opacity-100 transition-all">
-            <div class="w-16 h-16 mx-auto mb-4 bg-slate-200 text-slate-400 rounded-full flex items-center justify-center">
-              <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-            </div>
-            <h4 class="font-bold text-slate-800 mb-1">Aktivis Kampus</h4>
-            <p class="text-xs text-slate-500 mb-3 line-clamp-2">Sering terlibat dalam event dan aspirasi.</p>
-            <span class="inline-block bg-slate-200 text-slate-500 text-[10px] font-bold px-3 py-1 rounded-full">500 XP</span>
-          </div>
-        </div>
-
-        <div class="border border-slate-100 rounded-2xl p-6 text-center hover:shadow-md transition-all group bg-slate-50/50 relative overflow-hidden">
-          <div class="relative z-10 opacity-60 grayscale group-hover:grayscale-0 group-hover:opacity-100 transition-all">
-            <div class="w-16 h-16 mx-auto mb-4 bg-slate-200 text-slate-400 rounded-full flex items-center justify-center">
-              <span class="text-2xl">🌟</span>
-            </div>
-            <h4 class="font-bold text-slate-800 mb-1">Duta Ormawa</h4>
-            <p class="text-xs text-slate-500 mb-3 line-clamp-2">Sosok panutan yang berpengaruh.</p>
-            <span class="inline-block bg-slate-200 text-slate-500 text-[10px] font-bold px-3 py-1 rounded-full">1000 XP</span>
-          </div>
-        </div>
-        
-        <div class="border border-slate-100 rounded-2xl p-6 text-center hover:shadow-md transition-all group bg-slate-50/50 relative overflow-hidden">
-          <div class="relative z-10 opacity-60 grayscale group-hover:grayscale-0 group-hover:opacity-100 transition-all">
-            <div class="w-16 h-16 mx-auto mb-4 bg-slate-200 text-slate-400 rounded-full flex items-center justify-center">
-              <span class="text-2xl">👑</span>
-            </div>
-            <h4 class="font-bold text-slate-800 mb-1">Legenda Kampus</h4>
-            <p class="text-xs text-slate-500 mb-3 line-clamp-2">Pencapaian tertinggi mahasiswa.</p>
-            <span class="inline-block bg-slate-200 text-slate-500 text-[10px] font-bold px-3 py-1 rounded-full">2000 XP</span>
-          </div>
-        </div>
-
-        <div class="border border-slate-100 rounded-2xl p-6 text-center hover:shadow-md transition-all group bg-slate-50/50 relative overflow-hidden">
-          <div class="relative z-10 opacity-60 grayscale group-hover:grayscale-0 group-hover:opacity-100 transition-all">
-            <div class="w-16 h-16 mx-auto mb-4 bg-slate-200 text-slate-400 rounded-full flex items-center justify-center">
-              <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"></path></svg>
-            </div>
-            <h4 class="font-bold text-slate-800 mb-1">Event Hunter</h4>
-            <p class="text-xs text-slate-500 mb-3 line-clamp-2">Ikut 5 Kegiatan</p>
-            <span class="inline-block bg-slate-200 text-slate-500 text-[10px] font-bold px-3 py-1 rounded-full"><svg class="w-3 h-3 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg></span>
-          </div>
-        </div>
-
-        <div class="border border-slate-100 rounded-2xl p-6 text-center hover:shadow-md transition-all group bg-slate-50/50 relative overflow-hidden">
-          <div class="relative z-10 opacity-60 grayscale group-hover:grayscale-0 group-hover:opacity-100 transition-all">
-            <div class="w-16 h-16 mx-auto mb-4 bg-slate-200 text-slate-400 rounded-full flex items-center justify-center">
-              <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"></path></svg>
-            </div>
-            <h4 class="font-bold text-slate-800 mb-1">Suara Mahasiswa</h4>
-            <p class="text-xs text-slate-500 mb-3 line-clamp-2">Kirim 3 Aspirasi</p>
-            <span class="inline-block bg-slate-200 text-slate-500 text-[10px] font-bold px-3 py-1 rounded-full"><svg class="w-3 h-3 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg></span>
-          </div>
-        </div>
-
-        <!-- Highlighted Active Badge -->
-        <div class="border-2 border-blue-400 rounded-2xl p-6 text-center shadow-md bg-white relative overflow-hidden">
-          <div class="absolute inset-0 bg-blue-50/30"></div>
-          <div class="relative z-10">
-            <div class="w-16 h-16 mx-auto mb-4 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shadow-inner">
-              <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path></svg>
-            </div>
-            <h4 class="font-bold text-slate-800 mb-1">Si Paling Update</h4>
-            <p class="text-xs text-slate-500 mb-3 line-clamp-2">Rajin Baca Berita</p>
-            <span class="inline-block bg-green-100 text-green-600 text-[10px] font-bold px-2 py-1 rounded-full">
-              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-            </span>
-          </div>
         </div>
 
       </div>
     </div>
+
   </div>
 </template>
 
@@ -217,13 +239,7 @@ const userRole = useState('userRole')
 const firebaseUser = useState<any>('firebaseUser')
 
 const userName = computed(() => {
-  return firebaseUser.value?.displayName || 'Mahasiswa'
+  return firebaseUser.value?.displayName || 'Admin'
 })
 
-const userRoleFormatted = computed(() => {
-  if (userRole.value === 'super_admin') return 'Programmer (Super Admin)'
-  if (userRole.value === 'admin') return 'BPH / Koord (Admin)'
-  if (userRole.value === 'pengurus') return 'Ketua Organisasi'
-  return 'Mahasiswa'
-})
 </script>
