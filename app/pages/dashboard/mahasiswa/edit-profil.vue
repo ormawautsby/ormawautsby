@@ -185,13 +185,41 @@ const onFileChange = (e: Event) => {
   const target = e.target as HTMLInputElement
   const file = target.files?.[0]
   if (file) {
-    if (file.size > 2 * 1024 * 1024) {
-      alert('Ukuran file terlalu besar. Maksimal 2MB.')
+    if (file.size > 5 * 1024 * 1024) {
+      alert('Ukuran file terlalu besar. Maksimal 5MB.')
       return
     }
     const reader = new FileReader()
-    reader.onload = (e) => {
-      previewImage.value = e.target?.result as string
+    reader.onload = (event) => {
+      const img = new Image()
+      img.onload = () => {
+        const canvas = document.createElement('canvas')
+        const MAX_WIDTH = 400
+        const MAX_HEIGHT = 400
+        let width = img.width
+        let height = img.height
+
+        if (width > height) {
+          if (width > MAX_WIDTH) {
+            height *= MAX_WIDTH / width
+            width = MAX_WIDTH
+          }
+        } else {
+          if (height > MAX_HEIGHT) {
+            width *= MAX_HEIGHT / height
+            height = MAX_HEIGHT
+          }
+        }
+
+        canvas.width = width
+        canvas.height = height
+        const ctx = canvas.getContext('2d')
+        ctx?.drawImage(img, 0, 0, width, height)
+        
+        // Kompresi ke format JPEG agar ukurannya sangat kecil (mencegah error payload limit Firestore)
+        previewImage.value = canvas.toDataURL('image/jpeg', 0.7)
+      }
+      img.src = event.target?.result as string
     }
     reader.readAsDataURL(file)
   }
