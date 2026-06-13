@@ -17,6 +17,10 @@
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
           Buat Pengumuman
         </button>
+        <button @click="logout" class="flex-1 md:flex-none bg-red-50 hover:bg-red-100 text-red-600 font-bold py-2 px-4 rounded-xl shadow-sm transition-all flex items-center justify-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+          Keluar
+        </button>
       </div>
     </div>
 
@@ -316,5 +320,18 @@ onMounted(() => {
   fetchNote()
   fetchLogs()
 })
+
+const logout = async () => {
+  try {
+    const { $auth } = useNuxtApp()
+    if ($auth) {
+      const { signOut } = await import('firebase/auth')
+      await signOut($auth)
+    }
+    navigateTo('/')
+  } catch (error) {
+    console.error('Logout error:', error)
+  }
+}
 
 </script>
