@@ -116,6 +116,8 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 
+const { logActivity } = useActivityLog()
+
 const profileState = useState('mahasiswaProfile', () => ({
   nama: 'Mahasiswa',
   foto: null as string | null
@@ -230,7 +232,6 @@ const saveProfile = async () => {
     profileState.value.nama = form.value.nama
     profileState.value.foto = previewImage.value
     
-    const { logActivity } = useActivityLog()
     await logActivity(form.value.nama, currentUserUid.value, 'memperbarui profil mahasiswa')
     
     navigateTo('/dashboard/mahasiswa')

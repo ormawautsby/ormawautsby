@@ -135,6 +135,8 @@ const showModalPassword = ref(false)
 const isEditMode = ref(false)
 const editingUserId = ref<string | null>(null)
 
+const { logActivity } = useActivityLog()
+
 const users = ref<any[]>([])
 const firebaseUser = useState<any>('firebaseUser')
 
@@ -221,7 +223,6 @@ const createUser = async () => {
           updatedAt: new Date().toISOString()
         })
         
-        const { logActivity } = useActivityLog()
         await logActivity(firebaseUser.value?.displayName || 'Admin', firebaseUser.value?.uid || '', 'mengedit profil pengguna', newUser.value.name)
         
         alert('Pengguna berhasil diperbarui!')
@@ -259,7 +260,6 @@ const createUser = async () => {
           createdAt: new Date().toISOString()
         })
         
-        const { logActivity } = useActivityLog()
         await logActivity(firebaseUser.value?.displayName || 'Admin', firebaseUser.value?.uid || '', 'menambahkan pengguna baru', newUser.value.name)
         
         alert('Akun berhasil dibuat dan siap untuk login!')
@@ -309,7 +309,6 @@ const deleteUser = async (user: any) => {
         await deleteDoc(doc($db, 'users', user.id))
         users.value = users.value.filter(u => u.id !== user.id)
         
-        const { logActivity } = useActivityLog()
         await logActivity(firebaseUser.value?.displayName || 'Admin', firebaseUser.value?.uid || '', 'menghapus pengguna', user.name)
         
         alert('Pengguna berhasil dihapus.')
