@@ -26,8 +26,14 @@ export default defineNuxtConfig({
   modules: [
     '@pinia/nuxt',
     '@nuxtjs/tailwindcss',
-    '@nuxt/image'
+    '@nuxt/image',
+    '@nuxtjs/sitemap'
   ],
+
+  site: {
+    url: 'https://ormawa-utsurabaya.web.app',
+    name: 'Ormawa UT Surabaya'
+  },
 
   // Runtime Config for Firebase
   runtimeConfig: {

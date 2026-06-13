@@ -241,7 +241,12 @@
 import { ref } from 'vue'
 import { useRoute } from 'vue-router'
 
-
+useHead({
+  title: 'Kontak & Aspirasi - Ormawa UT Surabaya',
+  meta: [
+    { name: 'description', content: 'Suaramu Berharga. Sampaikan pendapat, ide, kritik, saran, atau laporan Anda langsung kepada kami.' }
+  ]
+})
 
 // ==========================================
 // FORM TYPES & STATE

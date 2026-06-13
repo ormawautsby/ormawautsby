@@ -25,30 +25,42 @@
             <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">Pengguna</th>
             <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">Role</th>
             <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">Organisasi</th>
+            <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">Password</th>
             <th scope="col" class="px-6 py-4 text-right text-xs font-bold text-slate-500 uppercase tracking-wider">Aksi</th>
           </tr>
         </thead>
         <tbody class="bg-white divide-y divide-slate-200">
-          <!-- Data Dummy -->
-          <tr>
+          <tr v-for="user in users" :key="user.id">
             <td class="px-6 py-4 whitespace-nowrap">
               <div class="flex items-center">
                 <div class="h-10 w-10 flex-shrink-0 rounded-full bg-slate-100 flex items-center justify-center text-admiral font-bold">
-                  AM
+                  {{ user.name.substring(0, 2).toUpperCase() }}
                 </div>
                 <div class="ml-4">
-                  <div class="text-sm font-medium text-slate-900">Admin BPH</div>
-                  <div class="text-sm text-slate-500">admin.bph@ormawautsby.com</div>
+                  <div class="text-sm font-medium text-slate-900">{{ user.name }}</div>
+                  <div class="text-sm text-slate-500">{{ user.email }}</div>
                 </div>
               </div>
             </td>
             <td class="px-6 py-4 whitespace-nowrap">
-              <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-purple-100 text-purple-800">
-                Admin
+              <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full"
+                    :class="user.role === 'Admin' ? 'bg-purple-100 text-purple-800' : 'bg-blue-100 text-blue-800'">
+                {{ user.role }}
               </span>
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">
-              Pusat (BPH)
+              {{ user.organisasi }}
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">
+              <div class="flex items-center gap-2">
+                <span class="inline-block font-mono bg-slate-50 px-2 py-1 rounded border border-slate-100 text-slate-700 w-40 overflow-hidden text-ellipsis align-middle">
+                  {{ user.showPassword ? user.password : '••••••••••••' }}
+                </span>
+                <button @click="togglePassword(user)" class="text-slate-400 hover:text-admiral" title="Lihat/Sembunyikan Password">
+                  <svg v-if="!user.showPassword" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                  <svg v-else class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"></path></svg>
+                </button>
+              </div>
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
               <button class="text-lemon-dark hover:text-admiral mr-3">Edit</button>
@@ -72,21 +84,27 @@
         <form @submit.prevent="createUser" class="p-6 space-y-4">
           <div>
             <label class="block text-sm font-medium text-slate-700 mb-1">Nama Lengkap</label>
-            <input type="text" required class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-admiral focus:border-admiral sm:text-sm" placeholder="Contoh: Ketua IMF FEB">
+            <input v-model="newUser.name" type="text" required class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-admiral focus:border-admiral sm:text-sm" placeholder="Contoh: Ketua IMF FEB">
           </div>
           <div>
             <label class="block text-sm font-medium text-slate-700 mb-1">Email (Kode Pengguna)</label>
-            <input type="email" required class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-admiral focus:border-admiral sm:text-sm" placeholder="imffeb@ormawautsby.com">
+            <input v-model="newUser.email" type="email" required class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-admiral focus:border-admiral sm:text-sm" placeholder="imffeb@ormawautsby.com">
           </div>
           <div>
             <label class="block text-sm font-medium text-slate-700 mb-1">Password Awal</label>
-            <input type="text" required class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-admiral focus:border-admiral sm:text-sm" placeholder="Otomatis digenerate atau ketik di sini">
+            <div class="relative">
+              <input v-model="newUser.password" :type="showModalPassword ? 'text' : 'password'" required class="w-full pl-3 pr-10 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-admiral focus:border-admiral sm:text-sm" placeholder="Ketik password di sini">
+              <button type="button" @click="showModalPassword = !showModalPassword" class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-admiral">
+                <svg v-if="!showModalPassword" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                <svg v-else class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"></path></svg>
+              </button>
+            </div>
             <p class="text-xs text-slate-500 mt-1">Berikan password ini kepada pengurus untuk login pertama kali.</p>
           </div>
           <div>
             <label class="block text-sm font-medium text-slate-700 mb-1">Role & Akses</label>
-            <select required class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-admiral focus:border-admiral sm:text-sm">
-              <option value="">Pilih Role...</option>
+            <select v-model="newUser.role" required class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-admiral focus:border-admiral sm:text-sm">
+              <option value="" disabled>Pilih Role...</option>
               <option value="admin">Admin (BPH Utama)</option>
               <option value="pengurus">Pengurus (Ketua IMF/UKM)</option>
             </select>
@@ -109,10 +127,65 @@ definePageMeta({
 })
 
 const isModalOpen = ref(false)
+const showModalPassword = ref(false)
+
+// State dummy untuk tabel
+const users = ref([
+  {
+    id: 1,
+    name: 'Admin BPH',
+    email: 'admin.bph@ormawautsby.com',
+    role: 'Admin',
+    organisasi: 'Pusat (BPH)',
+    password: 'passwordadmin123',
+    showPassword: false
+  }
+])
+
+// State untuk form tambah pengurus
+const newUser = ref({
+  name: '',
+  email: '',
+  password: '',
+  role: ''
+})
+
+const togglePassword = (user: any) => {
+  user.showPassword = !user.showPassword
+}
 
 const createUser = () => {
-  // TODO: Integrasi dengan Firebase Cloud Functions / Admin SDK
-  alert('Simulasi: Akun berhasil dibuat! Silakan berikan Email dan Password kepada pengurus terkait.')
+  if (!newUser.value.name || !newUser.value.email || !newUser.value.password || !newUser.value.role) {
+    alert('Harap isi semua kolom')
+    return
+  }
+
+  let organisasi = 'Unit Kegiatan'
+  if (newUser.value.role === 'admin') {
+    organisasi = 'Pusat (BPH)'
+  }
+
+  // Tambahkan user baru ke dalam array agar tampil di tabel
+  users.value.push({
+    id: Date.now(),
+    name: newUser.value.name,
+    email: newUser.value.email,
+    password: newUser.value.password,
+    role: newUser.value.role === 'admin' ? 'Admin' : 'Pengurus',
+    organisasi: organisasi,
+    showPassword: false
+  })
+
+  alert('Akun berhasil dibuat! Silakan berikan Email dan Password kepada pengurus terkait.')
+  
+  // Tutup modal dan reset form
   isModalOpen.value = false
+  newUser.value = {
+    name: '',
+    email: '',
+    password: '',
+    role: ''
+  }
+  showModalPassword.value = false
 }
 </script>

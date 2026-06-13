@@ -28,5 +28,11 @@
 </template>
 
 <script setup lang="ts">
+useHead({
+  title: 'Profil Organisasi - Ormawa UT Surabaya',
+  meta: [
+    { name: 'description', content: 'Mengenal lebih dekat Universitas Terbuka Surabaya dan kepengurusan Organisasi Kemahasiswaan.' }
+  ]
+})
 </script>
 

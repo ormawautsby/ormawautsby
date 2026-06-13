@@ -136,7 +136,24 @@
 import { computed, h, ref } from 'vue'
 // import { useOrmawaStore } from '@/stores/ormawa' // Uncomment jika store sudah ada
 
-
+useHead({
+  title: 'Pusat Informasi & Aktivitas Mahasiswa - Ormawa UT Surabaya',
+  meta: [
+    { name: 'description', content: 'Sistem Informasi Resmi Ormawa UT Surabaya. Kelola agenda, pantau aktivitas, dan tingkatkan kolaborasi divisi secara terpadu.' }
+  ],
+  script: [
+    {
+      type: 'application/ld+json',
+      innerHTML: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Ormawa UT Surabaya",
+        "url": "https://ormawa-utsurabaya.web.app",
+        "logo": "https://ormawa-utsurabaya.web.app/img/Favicon_bulat_transparan.png"
+      })
+    }
+  ]
+})
 
 // ==========================================
 // TYPES & INTERFACES
