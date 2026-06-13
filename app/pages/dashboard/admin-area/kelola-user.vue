@@ -136,6 +136,7 @@ const isEditMode = ref(false)
 const editingUserId = ref<string | null>(null)
 
 const users = ref<any[]>([])
+const firebaseUser = useState<any>('firebaseUser')
 
 onMounted(async () => {
   try {
@@ -219,6 +220,10 @@ const createUser = async () => {
           prodi: organisasi,
           updatedAt: new Date().toISOString()
         })
+        
+        const { logActivity } = useActivityLog()
+        await logActivity(firebaseUser.value?.displayName || 'Admin', firebaseUser.value?.uid || '', 'mengedit profil pengguna', newUser.value.name)
+        
         alert('Pengguna berhasil diperbarui!')
       } else {
         // Register in Firebase Auth using a secondary app instance so admin is not logged out
@@ -250,8 +255,13 @@ const createUser = async () => {
           password: newUser.value.password, // For demo purposes
           role: newUser.value.role,
           prodi: organisasi,
+          prodi: organisasi,
           createdAt: new Date().toISOString()
         })
+        
+        const { logActivity } = useActivityLog()
+        await logActivity(firebaseUser.value?.displayName || 'Admin', firebaseUser.value?.uid || '', 'menambahkan pengguna baru', newUser.value.name)
+        
         alert('Akun berhasil dibuat dan siap untuk login!')
       }
       
@@ -298,6 +308,10 @@ const deleteUser = async (user: any) => {
         const { doc, deleteDoc } = await import('firebase/firestore')
         await deleteDoc(doc($db, 'users', user.id))
         users.value = users.value.filter(u => u.id !== user.id)
+        
+        const { logActivity } = useActivityLog()
+        await logActivity(firebaseUser.value?.displayName || 'Admin', firebaseUser.value?.uid || '', 'menghapus pengguna', user.name)
+        
         alert('Pengguna berhasil dihapus.')
       }
     } catch (error) {

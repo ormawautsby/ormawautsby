@@ -166,36 +166,16 @@
           </div>
           
           <div class="space-y-6">
-            <!-- Activity Item 1 -->
-            <div class="flex gap-4">
+            <div v-if="globalLogs.length === 0" class="text-slate-500 text-sm">Belum ada aktivitas terekam.</div>
+            
+            <!-- Activity Item -->
+            <div v-for="log in globalLogs" :key="log.id" class="flex gap-4">
               <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center shrink-0">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
               </div>
               <div class="flex-1 pb-4 border-b border-slate-100">
-                <p class="text-sm text-slate-800"><span class="font-bold text-blue-600">UKM Mapala</span> mengunggah Proposal "Ekspedisi Gunung Arjuno".</p>
-                <p class="text-xs text-slate-500 mt-1">10 menit yang lalu</p>
-              </div>
-            </div>
-            
-            <!-- Activity Item 2 -->
-            <div class="flex gap-4">
-              <div class="w-10 h-10 rounded-full bg-green-100 text-green-600 flex items-center justify-center shrink-0">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
-              </div>
-              <div class="flex-1 pb-4 border-b border-slate-100">
-                <p class="text-sm text-slate-800"><span class="font-bold text-green-600">Admin BEM</span> menerbitkan berita "Pekan Olahraga Mahasiswa 2025".</p>
-                <p class="text-xs text-slate-500 mt-1">2 jam yang lalu</p>
-              </div>
-            </div>
-            
-            <!-- Activity Item 3 -->
-            <div class="flex gap-4">
-              <div class="w-10 h-10 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center shrink-0">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-              </div>
-              <div class="flex-1">
-                <p class="text-sm text-slate-800"><span class="font-bold text-orange-600">Sistem</span> mendaftarkan 15 mahasiswa baru dari program studi Manajemen.</p>
-                <p class="text-xs text-slate-500 mt-1">Kemarin, 14:30</p>
+                <p class="text-sm text-slate-800"><span class="font-bold text-blue-600">{{ log.aktorName }}</span> {{ log.aksi }} <span v-if="log.target">"{{ log.target }}"</span>.</p>
+                <p class="text-xs text-slate-500 mt-1">{{ formatTime(log.timestamp) }}</p>
               </div>
             </div>
           </div>
@@ -309,8 +289,32 @@ const debouncedSaveNote = () => {
   }, 1000) // Auto-save after 1s of inactivity
 }
 
+// Global Activity Logs
+const globalLogs = ref<any[]>([])
+
+const formatTime = (isoString: string) => {
+  if (!isoString) return ''
+  const d = new Date(isoString)
+  return d.toLocaleString('id-ID', { dateStyle: 'long', timeStyle: 'short' }) + ' WIB'
+}
+
+const fetchLogs = async () => {
+  try {
+    const { $db } = useNuxtApp()
+    if (!$db) return
+    const { collection, getDocs } = await import('firebase/firestore')
+    const snap = await getDocs(collection($db, 'activityLogs'))
+    const allLogs = snap.docs.map(d => ({ id: d.id, ...d.data() as any }))
+    allLogs.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
+    globalLogs.value = allLogs.slice(0, 5) // ambil 5 terbaru
+  } catch (error) {
+    console.error('Failed to fetch global logs', error)
+  }
+}
+
 onMounted(() => {
   fetchNote()
+  fetchLogs()
 })
 
 </script>

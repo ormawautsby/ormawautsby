@@ -230,6 +230,9 @@ const saveProfile = async () => {
     profileState.value.nama = form.value.nama
     profileState.value.foto = previewImage.value
     
+    const { logActivity } = useActivityLog()
+    await logActivity(form.value.nama, currentUserUid.value, 'memperbarui profil mahasiswa')
+    
     navigateTo('/dashboard/mahasiswa')
   } catch (error) {
     console.error('Gagal menyimpan profil:', error)

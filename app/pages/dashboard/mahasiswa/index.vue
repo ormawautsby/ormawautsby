@@ -95,6 +95,20 @@
           </div>
         </div>
 
+        <!-- Log Aktivitas -->
+        <div class="md:col-span-3 mt-2">
+          <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+            <h3 class="text-xl font-bold text-slate-800 mb-4">Aktivitas Terakhir Anda</h3>
+            <div v-if="logs.length === 0" class="text-slate-500 text-sm">Belum ada aktivitas.</div>
+            <ul v-else class="space-y-3">
+              <li v-for="log in logs" :key="log.id" class="text-sm text-slate-600 border-b border-slate-50 pb-2">
+                Anda <span class="font-bold text-admiral">{{ log.aksi }}</span> <span v-if="log.target">"{{ log.target }}"</span>
+                <span class="text-xs text-slate-400 block mt-1">{{ formatTime(log.timestamp) }}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
       </div>
     </main>
 
@@ -106,9 +120,7 @@
 </template>
 
 <script setup lang="ts">
-// definePageMeta({
-//   middleware: ['auth'] // Aktifkan jika sudah ada proteksi route
-// })
+import { ref, onMounted } from 'vue'
 
 const profileState = useState('mahasiswaProfile', () => ({
   nama: 'Mahasiswa',
@@ -127,4 +139,36 @@ const logout = async () => {
     console.error('Logout error:', error)
   }
 }
+
+const logs = ref<any[]>([])
+
+const formatTime = (isoString: string) => {
+  if (!isoString) return ''
+  const d = new Date(isoString)
+  return d.toLocaleString('id-ID', { dateStyle: 'long', timeStyle: 'short' }) + ' WIB'
+}
+
+onMounted(async () => {
+  try {
+    const { $auth, $db } = useNuxtApp()
+    if (!$auth || !$db) return
+    
+    $auth.onAuthStateChanged(async (user: any) => {
+      if (user) {
+        const { collection, query, where, getDocs } = await import('firebase/firestore')
+        const q = query(
+          collection($db, 'activityLogs'),
+          where('aktorUid', '==', user.uid)
+        )
+        const snap = await getDocs(q)
+        const allLogs = snap.docs.map(d => ({ id: d.id, ...d.data() as any }))
+        // sort by timestamp desc locally to avoid requiring compound index initially
+        allLogs.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
+        logs.value = allLogs.slice(0, 5) // ambil 5 terbaru
+      }
+    })
+  } catch (error) {
+    console.error('Failed to load logs:', error)
+  }
+})
 </script>
