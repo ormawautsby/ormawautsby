@@ -88,8 +88,8 @@ const loginWithGoogle = async () => {
       })
     }
     
-    // Redirect ke dashboard
-    navigateTo('/dashboard')
+    // Redirect ke dashboard mahasiswa
+    navigateTo('/dashboard/mahasiswa')
     
   } catch (error: any) {
     console.error('Login error:', error)

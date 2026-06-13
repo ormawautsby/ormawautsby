@@ -126,12 +126,13 @@ const loginAdmin = async () => {
     firebaseUser.value = result.user
     console.log('Login successful, role:', role)
 
-    // Hanya izinkan admin/super_admin untuk masuk ke admin-area
+    // Redirect berdasarkan role
     if (role === 'admin' || role === 'super_admin' || role === 'pengurus') {
       navigateTo('/dashboard/admin-area')
-      console.log('Navigated to admin area')
+    } else if (role === 'mahasiswa') {
+      navigateTo('/dashboard/mahasiswa')
     } else {
-      errorMessage.value = 'Akun Anda tidak memiliki akses admin.'
+      errorMessage.value = 'Akun Anda tidak memiliki akses yang valid.'
     }
   } catch (error: any) {
     console.error('Login error:', error)
