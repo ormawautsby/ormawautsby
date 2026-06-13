@@ -137,6 +137,22 @@
           <h4 class="font-bold text-slate-800 mb-1 group-hover:text-slate-900 transition-colors">Pengaturan Sistem</h4>
           <p class="text-xs text-slate-500">Konfigurasi Website</p>
         </NuxtLink>
+
+        <!-- Notepad Admin -->
+        <div class="bg-amber-50 rounded-2xl p-5 border border-amber-200 shadow-sm mt-2 flex flex-col h-64">
+          <div class="flex items-center gap-2 mb-3">
+            <svg class="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+            <h3 class="font-bold text-amber-800">Catatan Pribadi</h3>
+            <span v-if="isSavingNote" class="text-xs text-amber-600 ml-auto animate-pulse">Menyimpan...</span>
+            <span v-else-if="noteSaved" class="text-xs text-green-600 ml-auto">Tersimpan</span>
+          </div>
+          <textarea 
+            v-model="adminNote" 
+            @input="debouncedSaveNote"
+            class="flex-1 w-full bg-transparent border-none resize-none focus:ring-0 text-sm text-slate-700 placeholder-amber-300 p-0 outline-none"
+            placeholder="Ketik catatan di sini... (otomatis tersimpan)"
+          ></textarea>
+        </div>
       </div>
 
       <!-- KANAN: Aktivitas & Inbox (3/4 width) -->
@@ -227,7 +243,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref, onMounted } from 'vue'
 
 // Mengaktifkan middleware auth & layout admin pada route ini
 definePageMeta({
@@ -240,6 +256,61 @@ const firebaseUser = useState<any>('firebaseUser')
 
 const userName = computed(() => {
   return firebaseUser.value?.displayName || 'Admin'
+})
+
+// Notepad Logic
+const adminNote = ref('')
+const isSavingNote = ref(false)
+const noteSaved = ref(false)
+let saveTimeout: any = null
+
+const fetchNote = async () => {
+  try {
+    const { $db } = useNuxtApp()
+    if (!$db || !firebaseUser.value?.uid) return
+    const { doc, getDoc } = await import('firebase/firestore')
+    
+    const docRef = doc($db, 'users', firebaseUser.value.uid)
+    const docSnap = await getDoc(docRef)
+    if (docSnap.exists() && docSnap.data().personalNote) {
+      adminNote.value = docSnap.data().personalNote
+    }
+  } catch (e) {
+    console.error('Error fetching note', e)
+  }
+}
+
+const saveNoteToDb = async () => {
+  if (!firebaseUser.value?.uid) return
+  isSavingNote.value = true
+  noteSaved.value = false
+  try {
+    const { $db } = useNuxtApp()
+    const { doc, setDoc } = await import('firebase/firestore')
+    const docRef = doc($db, 'users', firebaseUser.value.uid)
+    
+    // Gunakan setDoc dengan { merge: true } agar tidak merusak data user lain
+    await setDoc(docRef, { personalNote: adminNote.value }, { merge: true })
+    
+    noteSaved.value = true
+    setTimeout(() => { noteSaved.value = false }, 2000)
+  } catch (e) {
+    console.error('Error saving note', e)
+  } finally {
+    isSavingNote.value = false
+  }
+}
+
+const debouncedSaveNote = () => {
+  if (saveTimeout) clearTimeout(saveTimeout)
+  noteSaved.value = false
+  saveTimeout = setTimeout(() => {
+    saveNoteToDb()
+  }, 1000) // Auto-save after 1s of inactivity
+}
+
+onMounted(() => {
+  fetchNote()
 })
 
 </script>
