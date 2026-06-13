@@ -116,12 +116,12 @@
         </NuxtLink>
 
         <!-- User Module -->
-        <NuxtLink to="/dashboard/admin-area/kelola-user" class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all group flex flex-col">
+        <NuxtLink v-if="userRole === 'super_admin'" to="/dashboard/admin-area/kelola-user" class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all group flex flex-col">
           <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
           </div>
           <h4 class="font-bold text-slate-800 mb-1 group-hover:text-emerald-600 transition-colors">Akses & Pengguna</h4>
-          <p class="text-xs text-slate-500">Role Admin, BEM, HIMA</p>
+          <p class="text-xs text-slate-500">Khusus Super Admin</p>
         </NuxtLink>
 
         <!-- E-Proposal Module -->
@@ -241,6 +241,8 @@ const firebaseUser = useState<any>('firebaseUser')
 const userName = computed(() => {
   return firebaseUser.value?.displayName || 'Admin'
 })
+
+const userRole = useState<string>('userRole')
 
 // Notepad Logic
 const adminNote = ref('')

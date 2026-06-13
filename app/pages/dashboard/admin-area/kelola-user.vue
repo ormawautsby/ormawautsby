@@ -139,8 +139,15 @@ const { logActivity } = useActivityLog()
 
 const users = ref<any[]>([])
 const firebaseUser = useState<any>('firebaseUser')
+const userRole = useState<string>('userRole')
 
 onMounted(async () => {
+  if (userRole.value !== 'super_admin') {
+    alert('Akses Ditolak: Halaman ini khusus untuk Super Admin.')
+    navigateTo('/dashboard/admin-area')
+    return
+  }
+
   try {
     const { $db } = useNuxtApp()
     if (!$db) return
