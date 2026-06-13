@@ -1,5 +1,5 @@
 <template>
-  <div class="p-8 max-w-7xl mx-auto">
+  <div class="p-4 sm:p-8 w-full px-4 sm:px-6 lg:px-12">
     <div class="mb-8 flex items-center justify-between">
       <div>
         <NuxtLink to="/dashboard/admin-area" class="text-sm font-medium text-slate-500 hover:text-admiral mb-2 flex items-center gap-1">

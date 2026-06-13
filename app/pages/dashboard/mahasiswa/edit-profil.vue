@@ -2,9 +2,9 @@
   <div class="min-h-screen bg-slate-50 font-sans text-slate-800 flex flex-col">
     <!-- Custom Header for Mahasiswa Dashboard -->
     <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="w-full mx-auto px-4 sm:px-6 lg:px-12 h-16 flex items-center justify-between">
         <div class="flex items-center gap-3">
-          <img src="/img/Favicon.png" alt="Logo" class="h-8 w-auto" />
+          <img src="/img/Favicon_bulat_transparan.png" alt="Logo" class="h-10 w-auto drop-shadow-sm" />
           <span class="font-bold text-admiral text-lg">Portal Mahasiswa</span>
         </div>
         <div class="flex items-center gap-4">

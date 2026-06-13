@@ -3,7 +3,7 @@
     <!-- Logo Area -->
     <div class="h-20 flex items-center px-6 border-b border-slate-100">
       <div class="flex items-center gap-3">
-        <img src="/img/Favicon.png" alt="Logo" class="h-10 w-auto" />
+        <img src="/img/Favicon_bulat_transparan.png" alt="Logo" class="h-10 w-auto drop-shadow-sm" />
         <div>
           <h1 class="text-admiral font-bold tracking-tight text-lg leading-tight">ORMAWA</h1>
           <p class="text-[10px] text-slate-500 font-medium uppercase tracking-widest">Mahasiswa Hub</p>
