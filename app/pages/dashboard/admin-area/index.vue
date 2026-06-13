@@ -242,8 +242,6 @@ const userName = computed(() => {
   return firebaseUser.value?.displayName || 'Admin'
 })
 
-const userRole = useState<string>('userRole')
-
 // Notepad Logic
 const adminNote = ref('')
 const isSavingNote = ref(false)
