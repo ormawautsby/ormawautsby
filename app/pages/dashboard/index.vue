@@ -11,22 +11,21 @@
       <div class="relative max-w-4xl mx-auto flex flex-col items-center justify-center text-center">
         <!-- Hero Text -->
         <div class="w-full space-y-6 flex flex-col items-center">
-          <div class="flex flex-wrap items-center justify-center gap-4 mb-4">
-            <img src="/img/Favicon_bulat_transparan.png" alt="Logo Ormawa" class="h-14 w-auto rounded-full shadow-lg" loading="lazy" />
-            <div class="inline-block px-3 py-1 bg-slate-800 border border-slate-700 text-lemon text-xs font-bold uppercase tracking-wider rounded-full shadow-sm">
-              Sistem Informasi Resmi
+          <div class="flex flex-wrap items-center justify-center mb-6">
+            <div class="inline-block px-5 py-2 bg-slate-800 border border-slate-700 text-lemon text-sm font-bold uppercase tracking-widest rounded-full shadow-md">
+              Website resmi Ormawa ut surabaya
             </div>
           </div>
           <h2 class="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight">
-            Pusat Kegiatan & <br/> 
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-lemon to-lemon-light">Aktivitas Mahasiswa</span>
+            Tempat Kreasi & <br/> 
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-lemon to-lemon-light">Kepemimpinan Mahasiswa</span>
           </h2>
           <p class="text-slate-300 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto">
-            Kelola agenda, pantau aktivitas, dan tingkatkan kolaborasi divisi secara terpadu dan profesional melalui portal organisasi.
+            Jadilah bagian dari pergerakan mahasiswa yang aktif dan inovatif. Temukan ruang untuk mengembangkan potensi, merajut kolaborasi, dan mencetak prestasi bersama Ormawa Universitas Terbuka Surabaya.
           </p>
           <div class="flex flex-wrap justify-center gap-4 pt-4">
             <button class="px-6 py-3 bg-lemon text-admiral font-bold rounded-lg hover:bg-lemon-dark transition-all transform hover:-translate-y-0.5 shadow-[0_4px_14px_0_rgba(255,204,0,0.39)] focus:ring-2 focus:ring-offset-2 focus:ring-offset-admiral focus:ring-lemon">
-              Jelajahi Agenda
+              Lihat Kegiatan Kami
             </button>
             <button class="px-6 py-3 bg-slate-800 text-white font-semibold rounded-lg border border-slate-700 hover:bg-slate-700 hover:border-slate-600 transition-all focus:ring-2 focus:ring-offset-2 focus:ring-offset-admiral focus:ring-white">
               Pelajari Lebih Lanjut
@@ -69,7 +68,7 @@
         <!-- Text Column -->
         <div class="flex-1 space-y-6">
           <div>
-            <h4 class="text-admiral font-bold tracking-widest text-xs lg:text-sm uppercase mb-2">Sambutan Direktur UT Surabaya</h4>
+            <h4 class="text-admiral font-bold tracking-widest text-xs lg:text-sm uppercase mb-2">Sambutan Ibu Direktur</h4>
             <h2 class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-slate-900 leading-tight">
               Bersama Membangun Kualitas Mahasiswa
             </h2>
