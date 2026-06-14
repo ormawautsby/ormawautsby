@@ -11,9 +11,7 @@
           <h1 class="text-3xl md:text-4xl font-extrabold mt-1">Ormawa UT Surabaya</h1>
           <p class="text-slate-400 text-sm mt-2 max-w-xl">Mengenal lebih dekat Universitas Terbuka Surabaya dan kepengurusan Organisasi Kemahasiswaan.</p>
         </div>
-        <div class="flex items-center gap-4">
-          <img src="/img/Favicon.png" alt="Logo Ormawa" class="h-14 w-auto rounded-full shadow-lg" />
-        </div>
+
       </div>
     </section>
 
