@@ -1,20 +1,26 @@
 <template>
-  <div class="min-h-screen flex items-center justify-center bg-slate-50 py-12 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-md w-full space-y-8 bg-white p-8 rounded-2xl shadow-xl border border-slate-100">
+  <div 
+    class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-cover bg-center bg-no-repeat relative"
+    style="background-image: url('/img/acarautsurabaya.png');"
+  >
+    <!-- Dark overlay for better readability -->
+    <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-[2px]"></div>
+
+    <div class="max-w-md w-full space-y-8 bg-white/95 backdrop-blur-md p-8 rounded-2xl shadow-2xl border border-white/20 relative z-10">
       <div class="text-center">
-        <img class="mx-auto h-16 w-auto" src="/img/Favicon.png" alt="Logo Ormawa" />
+        <img class="mx-auto h-16 w-auto" src="/img/Favicon_bulat_transparan.png" alt="Logo Ormawa" />
         <h2 class="mt-6 text-3xl font-extrabold text-admiral">
           Portal Login
         </h2>
         <p class="mt-2 text-sm text-slate-500">
-          Masuk sebagai Admin, Pengurus, atau Mahasiswa
+          Masuk sebagai Admin
         </p>
       </div>
 
       <form class="mt-8 space-y-6" @submit.prevent="loginAdmin">
-        <div class="rounded-md shadow-sm space-y-4">
+        <div class="rounded-md shadow-sm space-y-2">
           <div>
-            <label for="email-address" class="block text-sm font-medium text-slate-700">Alamat Email</label>
+            <label for="email-address" class="block text-sm font-medium text-slate-700">Email Resmi</label>
             <input 
               id="email-address" 
               name="email" 
@@ -23,11 +29,11 @@
               required 
               v-model="email"
               class="mt-1 appearance-none relative block w-full px-3 py-2 border border-slate-300 placeholder-slate-400 text-slate-900 rounded-lg focus:outline-none focus:ring-admiral focus:border-admiral focus:z-10 sm:text-sm" 
-              placeholder="admin@ormawautsby.com"
+              placeholder="Contoh: ukmp3ib@ormawautsby.com"
             />
           </div>
           <div>
-            <label for="password" class="block text-sm font-medium text-slate-700">Password</label>
+            <label for="password" class="block text-sm font-medium text-slate-700">Kata Sandi</label>
             <div class="mt-1 relative">
               <input 
                 id="password" 
@@ -83,7 +89,7 @@
             <div class="w-full border-t border-slate-300"></div>
           </div>
           <div class="relative flex justify-center text-sm">
-            <span class="px-2 bg-white text-slate-500">atau lanjutkan dengan</span>
+            <span class="px-2 bg-white text-slate-500">Mahasiswa Umum</span>
           </div>
         </div>
 

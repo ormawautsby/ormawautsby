@@ -187,47 +187,17 @@
             WASPADA
           </NuxtLink>
 
-          <!-- Masuk Dropdown -->
-          <div class="relative group py-2">
-            <button 
-              class="px-4 py-2 rounded-full text-xs font-bold text-admiral bg-lemon hover:bg-lemon-dark transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 flex items-center gap-1.5 border border-lemon-dark"
-            >
-              <!-- Login Icon -->
-              <svg class="w-3.5 h-3.5 text-admiral" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path>
-              </svg>
-              Masuk
-              <svg class="w-3 h-3 text-admiral group-hover:rotate-180 transition-transform duration-300 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
-              </svg>
-            </button>
-
-            <!-- Dropdown Menu Masuk -->
-            <div class="absolute right-0 mt-2 w-56 bg-white border border-slate-200 rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 py-2">
-              <div class="px-4 py-2 text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">
-                Pilih Kategori Login
-              </div>
-              <NuxtLink to="/login/mahasiswa" class="flex items-center gap-3 px-4 py-3 text-sm text-slate-700 hover:bg-slate-50 hover:text-admiral transition-all font-medium border-b border-slate-50">
-                <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"></path>
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path>
-                </svg>
-                <div class="flex flex-col">
-                  <span>Mahasiswa</span>
-                  <span class="text-[10px] text-slate-400 font-normal">Gunakan Akun Google</span>
-                </div>
-              </NuxtLink>
-              <NuxtLink to="/login/admin" class="flex items-center gap-3 px-4 py-3 text-sm text-slate-700 hover:bg-slate-50 hover:text-admiral transition-all font-medium">
-                <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
-                </svg>
-                <div class="flex flex-col">
-                  <span>Admin & Pengurus</span>
-                  <span class="text-[10px] text-slate-400 font-normal">Email & Password</span>
-                </div>
-              </NuxtLink>
-            </div>
-          </div>
+          <!-- Masuk Link -->
+          <NuxtLink 
+            to="/login/admin"
+            class="px-4 py-2 rounded-full text-xs font-bold text-admiral bg-lemon hover:bg-lemon-dark transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 flex items-center gap-1.5 border border-lemon-dark ml-2"
+          >
+            <!-- Login Icon -->
+            <svg class="w-3.5 h-3.5 text-admiral" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path>
+            </svg>
+            Masuk
+          </NuxtLink>
         </div>
 
         <!-- Mobile Menu Button -->
@@ -465,52 +435,17 @@
           WASPADA
         </NuxtLink>
 
-        <!-- Masuk Dropdown (Mobile) -->
-        <div>
-          <button 
-            @click="toggleMobileMasuk" 
-            class="flex justify-between items-center w-full py-3 px-4 rounded-xl bg-lemon text-sm font-bold text-admiral hover:bg-lemon-dark shadow border border-lemon-dark"
-          >
-            <div class="flex items-center gap-2">
-              <svg class="w-4 h-4 text-admiral" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path>
-              </svg>
-              Masuk
-            </div>
-            <svg class="w-4 h-4 transition-transform duration-200" :class="isMobileMasukOpen ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
-            </svg>
-          </button>
-          
-          <div v-show="isMobileMasukOpen" class="mt-2 space-y-2">
-            <NuxtLink 
-              to="/login/mahasiswa" 
-              @click="isMobileMenuOpen = false" 
-              class="flex items-center justify-between px-4 py-3 bg-slate-50 rounded-lg border border-slate-200"
-            >
-              <div class="flex flex-col">
-                <span class="text-sm font-semibold text-slate-700">Mahasiswa</span>
-                <span class="text-[10px] text-slate-500">Gunakan Akun Google</span>
-              </div>
-              <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-              </svg>
-            </NuxtLink>
-            <NuxtLink 
-              to="/login/admin" 
-              @click="isMobileMenuOpen = false" 
-              class="flex items-center justify-between px-4 py-3 bg-slate-50 rounded-lg border border-slate-200"
-            >
-              <div class="flex flex-col">
-                <span class="text-sm font-semibold text-slate-700">Admin & Pengurus</span>
-                <span class="text-[10px] text-slate-500">Email dan Password</span>
-              </div>
-              <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-              </svg>
-            </NuxtLink>
-          </div>
-        </div>
+        <!-- Masuk Link (Mobile) -->
+        <NuxtLink 
+          to="/login/admin"
+          @click="isMobileMenuOpen = false" 
+          class="flex justify-center items-center w-full py-3 px-4 rounded-xl bg-lemon text-sm font-bold text-admiral hover:bg-lemon-dark shadow border border-lemon-dark gap-2"
+        >
+          <svg class="w-4 h-4 text-admiral" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path>
+          </svg>
+          Masuk
+        </NuxtLink>
       </div>
     </div>
   </nav>
