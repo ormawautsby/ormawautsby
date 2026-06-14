@@ -6,12 +6,12 @@
     <!-- Hero Section -->
     <section class="relative bg-admiral text-white py-20 px-6 md:px-12 overflow-hidden">
       <!-- Background Image -->
-      <img src="/img/Background ormawa.png" alt="Background" class="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-overlay" loading="lazy" />
+      <img src="/img/Background-landingpage.png" alt="Background" class="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-overlay" loading="lazy" />
       
-      <div class="relative max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12">
+      <div class="relative max-w-4xl mx-auto flex flex-col items-center justify-center text-center">
         <!-- Hero Text -->
-        <div class="flex-1 space-y-6">
-          <div class="flex flex-wrap items-center gap-4 mb-4">
+        <div class="w-full space-y-6 flex flex-col items-center">
+          <div class="flex flex-wrap items-center justify-center gap-4 mb-4">
             <img src="/img/Favicon_bulat_transparan.png" alt="Logo Ormawa" class="h-14 w-auto rounded-full shadow-lg" loading="lazy" />
             <div class="inline-block px-3 py-1 bg-slate-800 border border-slate-700 text-lemon text-xs font-bold uppercase tracking-wider rounded-full shadow-sm">
               Sistem Informasi Resmi
@@ -21,36 +21,16 @@
             Pusat Kegiatan & <br/> 
             <span class="text-transparent bg-clip-text bg-gradient-to-r from-lemon to-lemon-light">Aktivitas Mahasiswa</span>
           </h2>
-          <p class="text-slate-300 text-lg md:text-xl leading-relaxed max-w-2xl">
+          <p class="text-slate-300 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto">
             Kelola agenda, pantau aktivitas, dan tingkatkan kolaborasi divisi secara terpadu dan profesional melalui portal organisasi.
           </p>
-          <div class="flex flex-wrap gap-4 pt-4">
+          <div class="flex flex-wrap justify-center gap-4 pt-4">
             <button class="px-6 py-3 bg-lemon text-admiral font-bold rounded-lg hover:bg-lemon-dark transition-all transform hover:-translate-y-0.5 shadow-[0_4px_14px_0_rgba(255,204,0,0.39)] focus:ring-2 focus:ring-offset-2 focus:ring-offset-admiral focus:ring-lemon">
               Jelajahi Agenda
             </button>
             <button class="px-6 py-3 bg-slate-800 text-white font-semibold rounded-lg border border-slate-700 hover:bg-slate-700 hover:border-slate-600 transition-all focus:ring-2 focus:ring-offset-2 focus:ring-offset-admiral focus:ring-white">
               Pelajari Lebih Lanjut
             </button>
-          </div>
-        </div>
-        
-        <!-- Hero Graphic (Mock Dashboard Preview) -->
-        <div class="flex-1 w-full flex justify-center md:justify-end">
-          <div class="relative w-full max-w-md aspect-square bg-slate-800 rounded-2xl border border-slate-700 shadow-2xl overflow-hidden p-6 flex flex-col gap-4">
-            <div class="flex gap-2 items-center border-b border-slate-700 pb-4">
-              <div class="w-3 h-3 rounded-full bg-red-400"></div>
-              <div class="w-3 h-3 rounded-full bg-lemon"></div>
-              <div class="w-3 h-3 rounded-full bg-green-400"></div>
-              <div class="ml-2 text-xs text-slate-400 font-mono">Live Dashboard Overview</div>
-            </div>
-            <!-- Mock UI Elements -->
-            <div class="flex-1 flex gap-4">
-               <div class="w-1/3 bg-slate-700/50 rounded-xl animate-pulse"></div>
-               <div class="w-2/3 flex flex-col gap-4">
-                 <div class="h-1/2 bg-slate-700/50 rounded-xl animate-pulse" style="animation-delay: 0.2s"></div>
-                 <div class="h-1/2 bg-slate-700/50 rounded-xl animate-pulse" style="animation-delay: 0.4s"></div>
-               </div>
-            </div>
           </div>
         </div>
       </div>
@@ -65,6 +45,46 @@
           </div>
           <h3 class="text-3xl font-extrabold text-admiral mb-1">{{ stat.value }}</h3>
           <p class="text-sm text-slate-500 font-medium">{{ stat.label }}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sambutan Direktur Section -->
+    <section class="max-w-5xl mx-auto px-6 md:px-12 py-16 mb-8">
+      <div class="flex flex-col md:flex-row items-center gap-12 lg:gap-20">
+        <!-- Photo Column -->
+        <div class="flex-shrink-0 relative group">
+          <!-- Yellow Glow / Drop Shadow -->
+          <div class="absolute -inset-2 bg-lemon opacity-40 blur-xl rounded-3xl transition-opacity group-hover:opacity-60"></div>
+          <div class="relative w-64 md:w-72 lg:w-80 aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl border-4 border-white bg-slate-200">
+            <!-- Replace this src with the actual image of the director -->
+            <img 
+              :src="'/img/direktur.png'" 
+              alt="Prof. Dr. Suparti, M.Pd" 
+              class="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+        
+        <!-- Text Column -->
+        <div class="flex-1 space-y-6">
+          <div>
+            <h4 class="text-admiral font-bold tracking-widest text-xs lg:text-sm uppercase mb-2">Sambutan Direktur UT Surabaya</h4>
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-slate-900 leading-tight">
+              Bersama Membangun Kualitas Mahasiswa
+            </h2>
+          </div>
+          
+          <div class="border-l-4 border-lemon pl-6 py-2 my-8">
+            <p class="text-slate-600 text-lg md:text-xl italic leading-relaxed">
+              "Universitas Terbuka Surabaya mendukung penuh keberadaan Ormawa sebagai sarana pengembangan kreativitas dan kepemimpinan. Organisasi ini dibentuk dari mahasiswa, oleh mahasiswa, dan untuk mahasiswa. Teruslah berkarya untuk almamater dan bangsa."
+            </p>
+          </div>
+          
+          <div>
+            <p class="text-admiral font-bold text-lg">Prof. Dr. Suparti, M.Pd</p>
+            <p class="text-slate-500 text-sm">Direktur Universitas Terbuka Surabaya</p>
+          </div>
         </div>
       </div>
     </section>
