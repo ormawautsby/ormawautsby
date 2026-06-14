@@ -157,7 +157,7 @@ import { computed, h, ref } from 'vue'
 // import { useOrmawaStore } from '@/stores/ormawa' // Uncomment jika store sudah ada
 
 useHead({
-  title: 'Pusat Informasi & Aktivitas Mahasiswa - Ormawa UT Surabaya',
+  title: 'Ormawa UT Surabaya - Website Resmi Organisasi Mahasiswa',
   meta: [
     { name: 'description', content: 'Sistem Informasi Resmi Ormawa UT Surabaya. Kelola agenda, pantau aktivitas, dan tingkatkan kolaborasi divisi secara terpadu.' }
   ],

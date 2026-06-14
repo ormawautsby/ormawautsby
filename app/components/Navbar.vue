@@ -6,7 +6,7 @@
     <!-- Top Yellow Bar -->
     <div class="h-12 md:h-14 w-full bg-[#FFD700]"></div>
     
-    <nav class="bg-white/95 backdrop-blur border-b border-slate-200/80 shadow-sm transition-all">
+    <nav class="bg-white border-b border-slate-200/80 shadow-sm transition-all">
       <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-12">
         <div class="flex items-center justify-between md:justify-start md:gap-6 lg:gap-8 h-20 md:h-24 py-2">
         
