@@ -263,7 +263,6 @@ const createUser = async () => {
           password: newUser.value.password, // For demo purposes
           role: newUser.value.role,
           prodi: organisasi,
-          prodi: organisasi,
           createdAt: new Date().toISOString()
         })
         
