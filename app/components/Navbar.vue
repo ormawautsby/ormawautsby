@@ -1,15 +1,18 @@
 <template>
-  <header class="sticky top-0 z-50">
+  <header 
+    class="sticky top-0 z-50 transition-transform duration-300 ease-in-out"
+    :class="isScrolled ? '-translate-y-12 md:-translate-y-14' : 'translate-y-0'"
+  >
     <!-- Top Yellow Bar -->
-    <div class="h-10 w-full bg-[#FFD700]"></div>
+    <div class="h-12 md:h-14 w-full bg-[#FFD700]"></div>
     
     <nav class="bg-white/95 backdrop-blur border-b border-slate-200/80 shadow-sm transition-all">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-16">
+      <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-12">
+        <div class="flex items-center justify-between md:justify-start md:gap-6 lg:gap-8 h-20 md:h-24 py-2">
         
         <!-- Logo Brand -->
-        <NuxtLink to="/dashboard" class="flex items-center gap-3 cursor-pointer group">
-          <img src="/img/Favicon-2.png" alt="Logo Ormawa" class="h-16 w-auto object-contain group-hover:scale-105 transition-all duration-300" />
+        <NuxtLink to="/dashboard" class="flex items-center gap-3 cursor-pointer">
+          <img src="/img/logo-ormawa-navbar.png" alt="Logo Ormawa" class="h-16 md:h-20 w-auto object-contain mix-blend-multiply brightness-[1.08] contrast-[1.15]" />
         </NuxtLink>
         
         <!-- Desktop Navigation -->
@@ -18,10 +21,10 @@
           <NuxtLink 
             to="/dashboard" 
             :class="[
-              'flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-semibold transition-all duration-200',
+              'flex items-center gap-2 px-3 py-2 rounded-lg text-base font-semibold transition-all duration-200',
               isActiveLink('/dashboard') 
-                ? 'bg-slate-100 text-admiral shadow-sm border border-slate-200/50' 
-                : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
+                ? 'text-slate-900 bg-transparent hover:bg-slate-100' 
+                : 'text-slate-900 hover:bg-slate-100 hover:text-slate-900'
             ]"
           >
             <!-- Home Icon -->
@@ -36,10 +39,10 @@
             <NuxtLink 
               to="/profil" 
               :class="[
-                'flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-semibold transition-all duration-200 cursor-pointer',
+                'flex items-center gap-2 px-3 py-2 rounded-lg text-base font-semibold transition-all duration-200 cursor-pointer',
                 isActiveLink('/profil') 
-                  ? 'bg-slate-100 text-admiral shadow-sm border border-slate-200/50' 
-                  : 'text-slate-600 group-hover:bg-slate-100 group-hover:text-slate-900'
+                  ? 'text-slate-900 bg-transparent group-hover:bg-slate-100' 
+                  : 'text-slate-900 group-hover:bg-slate-100 group-hover:text-slate-900'
               ]"
             >
               <!-- User Icon -->
@@ -55,16 +58,16 @@
 
             <!-- Dropdown Menu -->
             <div class="absolute left-1/2 -translate-x-1/2 mt-2 w-52 bg-white border border-slate-200 rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 py-2">
-              <NuxtLink to="/profil/tentang-ut" class="block px-4 py-2.5 text-sm text-slate-600 hover:bg-slate-50 hover:text-admiral transition-all font-medium">
+              <NuxtLink to="/profil/tentang-ut" class="block px-4 py-2.5 text-sm text-slate-900 hover:bg-slate-50 hover:text-slate-900 transition-all font-medium">
                 Tentang UT Surabaya
               </NuxtLink>
-              <NuxtLink to="/profil/tentang-ormawa" class="block px-4 py-2.5 text-sm text-slate-600 hover:bg-slate-50 hover:text-admiral transition-all font-medium">
+              <NuxtLink to="/profil/tentang-ormawa" class="block px-4 py-2.5 text-sm text-slate-900 hover:bg-slate-50 hover:text-slate-900 transition-all font-medium">
                 Tentang Ormawa
               </NuxtLink>
-              <NuxtLink to="/profil/visi-misi" class="block px-4 py-2.5 text-sm text-slate-600 hover:bg-slate-50 hover:text-admiral transition-all font-medium">
+              <NuxtLink to="/profil/visi-misi" class="block px-4 py-2.5 text-sm text-slate-900 hover:bg-slate-50 hover:text-slate-900 transition-all font-medium">
                 Visi & Misi
               </NuxtLink>
-              <NuxtLink to="/profil/struktur-pengurus" class="block px-4 py-2.5 text-sm text-slate-600 hover:bg-slate-50 hover:text-admiral transition-all font-medium">
+              <NuxtLink to="/profil/struktur-pengurus" class="block px-4 py-2.5 text-sm text-slate-900 hover:bg-slate-50 hover:text-slate-900 transition-all font-medium">
                 Struktur Pengurus
               </NuxtLink>
             </div>
@@ -75,10 +78,10 @@
             <NuxtLink 
               to="/zona-kampus" 
               :class="[
-                'flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-semibold transition-all duration-200 cursor-pointer',
+                'flex items-center gap-2 px-3 py-2 rounded-lg text-base font-semibold transition-all duration-200 cursor-pointer',
                 isActiveLink('/zona-kampus') 
-                  ? 'bg-slate-100 text-admiral shadow-sm border border-slate-200/50' 
-                  : 'text-slate-600 group-hover:bg-slate-100 group-hover:text-slate-900'
+                  ? 'text-slate-900 bg-transparent group-hover:bg-slate-100' 
+                  : 'text-slate-900 group-hover:bg-slate-100 group-hover:text-slate-900'
               ]"
             >
               <!-- Graduation Cap Icon -->
@@ -99,22 +102,22 @@
               <div class="px-4 py-2 text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">
                 Kegiatan
               </div>
-              <NuxtLink to="/zona-kampus/akademik" class="block px-4 py-2.5 text-sm text-slate-600 hover:bg-slate-50 hover:text-admiral transition-all font-medium pl-6">
+              <NuxtLink to="/zona-kampus/akademik" class="block px-4 py-2.5 text-sm text-slate-900 hover:bg-slate-50 hover:text-slate-900 transition-all font-medium pl-6">
                 Akademik
               </NuxtLink>
-              <NuxtLink to="/zona-kampus/non-akademik" class="block px-4 py-2.5 text-sm text-slate-600 hover:bg-slate-50 hover:text-admiral transition-all font-medium pl-6 border-b border-slate-50">
+              <NuxtLink to="/zona-kampus/non-akademik" class="block px-4 py-2.5 text-sm text-slate-900 hover:bg-slate-50 hover:text-slate-900 transition-all font-medium pl-6 border-b border-slate-50">
                 Non Akademik
               </NuxtLink>
               <div class="px-4 py-2 text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1 mt-1">
                 Pendaftaran
               </div>
-              <NuxtLink to="/zona-kampus/ukm" class="block px-4 py-2.5 text-sm text-slate-600 hover:bg-slate-50 hover:text-admiral transition-all font-medium pl-6">
+              <NuxtLink to="/zona-kampus/ukm" class="block px-4 py-2.5 text-sm text-slate-900 hover:bg-slate-50 hover:text-slate-900 transition-all font-medium pl-6">
                 Unit Kreatifitas Mahasiswa (UKM)
               </NuxtLink>
-              <NuxtLink to="/zona-kampus/imf" class="block px-4 py-2.5 text-sm text-slate-600 hover:bg-slate-50 hover:text-admiral transition-all font-medium pl-6 border-b border-slate-50">
+              <NuxtLink to="/zona-kampus/imf" class="block px-4 py-2.5 text-sm text-slate-900 hover:bg-slate-50 hover:text-slate-900 transition-all font-medium pl-6 border-b border-slate-50">
                 Iam Fakultas (IMF/Hima)
               </NuxtLink>
-              <NuxtLink to="/zona-kampus/cari-teman" class="block px-4 py-2.5 text-sm text-slate-600 hover:bg-slate-50 hover:text-admiral transition-all font-medium mt-1">
+              <NuxtLink to="/zona-kampus/cari-teman" class="block px-4 py-2.5 text-sm text-slate-900 hover:bg-slate-50 hover:text-slate-900 transition-all font-medium mt-1">
                 Cari teman
               </NuxtLink>
             </div>
@@ -125,10 +128,10 @@
             <NuxtLink 
               to="/media" 
               :class="[
-                'flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-semibold transition-all duration-200 cursor-pointer',
+                'flex items-center gap-2 px-3 py-2 rounded-lg text-base font-semibold transition-all duration-200 cursor-pointer',
                 isActiveLink('/media') 
-                  ? 'bg-slate-100 text-admiral shadow-sm border border-slate-200/50' 
-                  : 'text-slate-600 group-hover:bg-slate-100 group-hover:text-slate-900'
+                  ? 'text-slate-900 bg-transparent group-hover:bg-slate-100' 
+                  : 'text-slate-900 group-hover:bg-slate-100 group-hover:text-slate-900'
               ]"
             >
               <!-- Newspaper Icon -->
@@ -144,56 +147,56 @@
 
             <!-- Dropdown Menu Media -->
             <div class="absolute left-1/2 -translate-x-1/2 mt-2 w-52 bg-white border border-slate-200 rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 py-2">
-              <NuxtLink to="/media/artikel" class="block px-4 py-2.5 text-sm text-slate-600 hover:bg-slate-50 hover:text-admiral transition-all font-medium">
+              <NuxtLink to="/media/artikel" class="block px-4 py-2.5 text-sm text-slate-900 hover:bg-slate-50 hover:text-slate-900 transition-all font-medium">
                 Artikel dan Berita
               </NuxtLink>
-              <NuxtLink to="/media/perlombaan" class="block px-4 py-2.5 text-sm text-slate-600 hover:bg-slate-50 hover:text-admiral transition-all font-medium border-b border-slate-50">
+              <NuxtLink to="/media/perlombaan" class="block px-4 py-2.5 text-sm text-slate-900 hover:bg-slate-50 hover:text-slate-900 transition-all font-medium border-b border-slate-50">
                 Informasi perlombaan
               </NuxtLink>
-              <NuxtLink to="/media/laporan" class="block px-4 py-2.5 text-sm text-slate-600 hover:bg-slate-50 hover:text-admiral transition-all font-medium border-b border-slate-50">
+              <NuxtLink to="/media/laporan" class="block px-4 py-2.5 text-sm text-slate-900 hover:bg-slate-50 hover:text-slate-900 transition-all font-medium border-b border-slate-50">
                 Laporan kegiatan
               </NuxtLink>
-              <NuxtLink to="/media/social-media" class="block px-4 py-2.5 text-sm text-slate-600 hover:bg-slate-50 hover:text-admiral transition-all font-medium">
+              <NuxtLink to="/media/social-media" class="block px-4 py-2.5 text-sm text-slate-900 hover:bg-slate-50 hover:text-slate-900 transition-all font-medium">
                 Social Media Ormawa
               </NuxtLink>
             </div>
           </div>
 
           <!-- Kontak -->
-          <NuxtLink 
-            to="/kontak" 
-            :class="[
-              'flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-semibold transition-all duration-200',
-              isActiveLink('/kontak') 
-                ? 'bg-slate-100 text-admiral shadow-sm border border-slate-200/50' 
-                : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
-            ]"
-          >
-            <!-- Headset Icon -->
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 1c-4.97 0-9 4.03-9 9v7a3 3 0 003 3h1a2 2 0 002-2v-3a2 2 0 00-2-2H5v-3c0-3.87 3.13-7 7-7s7 3.13 7 7v3h-1a2 2 0 00-2 2v3a2 2 0 002 2h1a3 3 0 003-3v-7c0-4.97-4.03-9-9-9z"></path>
-            </svg>
-            Kontak
-          </NuxtLink>
-          <!-- WASPADA Button -->
-          <NuxtLink 
-            to="/waspada" 
-            class="px-4 py-2 rounded-full text-xs font-bold text-white bg-red-600 hover:bg-red-700 transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 flex items-center gap-1.5 border border-red-500"
-          >
-            <!-- Shield Icon -->
-            <svg class="w-3.5 h-3.5 text-white animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
-            </svg>
-            WASPADA
-          </NuxtLink>
+          <div class="relative group py-2">
+            <NuxtLink 
+              to="/kontak"
+              class="px-5 py-2.5 rounded-full text-sm font-bold text-slate-900 bg-red-500 hover:bg-red-600 transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 flex items-center gap-2 border border-red-600 cursor-pointer"
+            >
+              <!-- Headset Icon -->
+              <svg class="w-4 h-4 text-slate-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 1c-4.97 0-9 4.03-9 9v7a3 3 0 003 3h1a2 2 0 002-2v-3a2 2 0 00-2-2H5v-3c0-3.87 3.13-7 7-7s7 3.13 7 7v3h-1a2 2 0 00-2 2v3a2 2 0 002 2h1a3 3 0 003-3v-7c0-4.97-4.03-9-9-9z"></path>
+              </svg>
+              Kontak
+              <!-- Chevron Down -->
+              <svg class="w-3 h-3 text-slate-900 group-hover:rotate-180 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </NuxtLink>
+
+            <!-- Dropdown Menu Kontak -->
+            <div class="absolute left-1/2 -translate-x-1/2 mt-2 w-48 bg-white border border-slate-200 rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 py-2">
+              <NuxtLink to="/kontak/aspirasi" class="block px-4 py-2.5 text-sm text-slate-900 hover:bg-slate-50 hover:text-slate-900 transition-all font-medium border-b border-slate-50">
+                Aspirasi
+              </NuxtLink>
+              <NuxtLink to="/kontak/pelaporan" class="block px-4 py-2.5 text-sm text-slate-900 hover:bg-slate-50 hover:text-slate-900 transition-all font-medium">
+                Pelaporan
+              </NuxtLink>
+            </div>
+          </div>
 
           <!-- Masuk Link -->
           <NuxtLink 
             to="/login/admin"
-            class="px-4 py-2 rounded-full text-xs font-bold text-admiral bg-lemon hover:bg-lemon-dark transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 flex items-center gap-1.5 border border-lemon-dark ml-2"
+            class="px-5 py-2.5 rounded-full text-sm font-bold text-slate-900 bg-lemon hover:bg-lemon-dark transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 flex items-center gap-2 border border-lemon-dark ml-2"
           >
             <!-- Login Icon -->
-            <svg class="w-3.5 h-3.5 text-admiral" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-3.5 h-3.5 text-slate-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path>
             </svg>
             Masuk
@@ -201,7 +204,7 @@
         </div>
 
         <!-- Mobile Menu Button -->
-        <button @click="toggleMobileMenu" class="md:hidden text-slate-600 hover:text-admiral focus:outline-none p-1">
+        <button @click="toggleMobileMenu" class="md:hidden text-slate-900 hover:text-slate-900 focus:outline-none p-1">
           <svg v-if="!isMobileMenuOpen" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
           </svg>
@@ -222,8 +225,8 @@
           :class="[
             'flex items-center gap-3 px-4 py-3 text-sm font-semibold rounded-xl transition-all',
             isActiveLink('/dashboard') 
-              ? 'bg-slate-100 text-admiral' 
-              : 'text-slate-700 hover:bg-slate-50'
+              ? 'bg-slate-100 text-slate-900' 
+              : 'text-slate-900 hover:bg-slate-50'
           ]"
         >
           Beranda
@@ -236,8 +239,8 @@
             :class="[
               'flex items-center justify-between w-full px-4 py-3 text-sm font-semibold rounded-xl transition-all text-left',
               isActiveLink('/profil') 
-                ? 'bg-slate-100 text-admiral' 
-                : 'text-slate-700 hover:bg-slate-50'
+                ? 'bg-slate-100 text-slate-900' 
+                : 'text-slate-900 hover:bg-slate-50'
             ]"
           >
             <span>Profil</span>
@@ -251,28 +254,28 @@
             <NuxtLink 
               to="/profil/tentang-ut" 
               @click="isMobileMenuOpen = false" 
-              class="block px-4 py-2 text-xs font-semibold text-slate-600 hover:text-admiral rounded-lg hover:bg-slate-50"
+              class="block px-4 py-2 text-xs font-semibold text-slate-900 hover:text-slate-900 rounded-lg hover:bg-slate-50"
             >
               Tentang UT
             </NuxtLink>
             <NuxtLink 
               to="/profil/tentang-ormawa" 
               @click="isMobileMenuOpen = false" 
-              class="block px-4 py-2 text-xs font-semibold text-slate-600 hover:text-admiral rounded-lg hover:bg-slate-50"
+              class="block px-4 py-2 text-xs font-semibold text-slate-900 hover:text-slate-900 rounded-lg hover:bg-slate-50"
             >
               Tentang Ormawa
             </NuxtLink>
             <NuxtLink 
               to="/profil/visi-misi" 
               @click="isMobileMenuOpen = false" 
-              class="block px-4 py-2 text-xs font-semibold text-slate-600 hover:text-admiral rounded-lg hover:bg-slate-50"
+              class="block px-4 py-2 text-xs font-semibold text-slate-900 hover:text-slate-900 rounded-lg hover:bg-slate-50"
             >
               Visi & Misi
             </NuxtLink>
             <NuxtLink 
               to="/profil/struktur-pengurus" 
               @click="isMobileMenuOpen = false" 
-              class="block px-4 py-2 text-xs font-semibold text-slate-600 hover:text-admiral rounded-lg hover:bg-slate-50"
+              class="block px-4 py-2 text-xs font-semibold text-slate-900 hover:text-slate-900 rounded-lg hover:bg-slate-50"
             >
               Struktur Pengurus
             </NuxtLink>
@@ -286,8 +289,8 @@
             :class="[
               'flex items-center justify-between w-full px-4 py-3 text-sm font-semibold rounded-xl transition-all text-left',
               isActiveLink('/zona-kampus') 
-                ? 'bg-slate-100 text-admiral' 
-                : 'text-slate-700 hover:bg-slate-50'
+                ? 'bg-slate-100 text-slate-900' 
+                : 'text-slate-900 hover:bg-slate-50'
             ]"
           >
             <span>Zona Kampus</span>
@@ -304,14 +307,14 @@
             <NuxtLink 
               to="/zona-kampus/akademik" 
               @click="isMobileMenuOpen = false" 
-              class="block px-4 py-2 text-xs font-semibold text-slate-600 hover:text-admiral rounded-lg hover:bg-slate-50 ml-2"
+              class="block px-4 py-2 text-xs font-semibold text-slate-900 hover:text-slate-900 rounded-lg hover:bg-slate-50 ml-2"
             >
               Akademik
             </NuxtLink>
             <NuxtLink 
               to="/zona-kampus/non-akademik" 
               @click="isMobileMenuOpen = false" 
-              class="block px-4 py-2 text-xs font-semibold text-slate-600 hover:text-admiral rounded-lg hover:bg-slate-50 ml-2 mb-2"
+              class="block px-4 py-2 text-xs font-semibold text-slate-900 hover:text-slate-900 rounded-lg hover:bg-slate-50 ml-2 mb-2"
             >
               Non Akademik
             </NuxtLink>
@@ -321,21 +324,21 @@
             <NuxtLink 
               to="/zona-kampus/ukm" 
               @click="isMobileMenuOpen = false" 
-              class="block px-4 py-2 text-xs font-semibold text-slate-600 hover:text-admiral rounded-lg hover:bg-slate-50 ml-2"
+              class="block px-4 py-2 text-xs font-semibold text-slate-900 hover:text-slate-900 rounded-lg hover:bg-slate-50 ml-2"
             >
               Unit Kreatifitas Mahasiswa (UKM)
             </NuxtLink>
             <NuxtLink 
               to="/zona-kampus/imf" 
               @click="isMobileMenuOpen = false" 
-              class="block px-4 py-2 text-xs font-semibold text-slate-600 hover:text-admiral rounded-lg hover:bg-slate-50 ml-2 mb-2"
+              class="block px-4 py-2 text-xs font-semibold text-slate-900 hover:text-slate-900 rounded-lg hover:bg-slate-50 ml-2 mb-2"
             >
               Iam Fakultas (IMF/Hima)
             </NuxtLink>
             <NuxtLink 
               to="/zona-kampus/cari-teman" 
               @click="isMobileMenuOpen = false" 
-              class="block px-4 py-2 text-xs font-semibold text-slate-600 hover:text-admiral rounded-lg hover:bg-slate-50"
+              class="block px-4 py-2 text-xs font-semibold text-slate-900 hover:text-slate-900 rounded-lg hover:bg-slate-50"
             >
               Cari teman
             </NuxtLink>
@@ -349,8 +352,8 @@
             :class="[
               'flex items-center justify-between w-full px-4 py-3 text-sm font-semibold rounded-xl transition-all text-left',
               isActiveLink('/media') 
-                ? 'bg-slate-100 text-admiral' 
-                : 'text-slate-700 hover:bg-slate-50'
+                ? 'bg-slate-100 text-slate-900' 
+                : 'text-slate-900 hover:bg-slate-50'
             ]"
           >
             <span>Media</span>
@@ -364,47 +367,69 @@
             <NuxtLink 
               to="/media/artikel" 
               @click="isMobileMenuOpen = false" 
-              class="block px-4 py-2 text-xs font-semibold text-slate-600 hover:text-admiral rounded-lg hover:bg-slate-50"
+              class="block px-4 py-2 text-xs font-semibold text-slate-900 hover:text-slate-900 rounded-lg hover:bg-slate-50"
             >
               Artikel dan Berita
             </NuxtLink>
             <NuxtLink 
               to="/media/perlombaan" 
               @click="isMobileMenuOpen = false" 
-              class="block px-4 py-2 text-xs font-semibold text-slate-600 hover:text-admiral rounded-lg hover:bg-slate-50"
+              class="block px-4 py-2 text-xs font-semibold text-slate-900 hover:text-slate-900 rounded-lg hover:bg-slate-50"
             >
               Informasi perlombaan
             </NuxtLink>
             <NuxtLink 
               to="/media/laporan" 
               @click="isMobileMenuOpen = false" 
-              class="block px-4 py-2 text-xs font-semibold text-slate-600 hover:text-admiral rounded-lg hover:bg-slate-50"
+              class="block px-4 py-2 text-xs font-semibold text-slate-900 hover:text-slate-900 rounded-lg hover:bg-slate-50"
             >
               Laporan kegiatan
             </NuxtLink>
             <NuxtLink 
               to="/media/social-media" 
               @click="isMobileMenuOpen = false" 
-              class="block px-4 py-2 text-xs font-semibold text-slate-600 hover:text-admiral rounded-lg hover:bg-slate-50"
+              class="block px-4 py-2 text-xs font-semibold text-slate-900 hover:text-slate-900 rounded-lg hover:bg-slate-50"
             >
               Social Media Ormawa
             </NuxtLink>
           </div>
         </div>
 
-        <!-- Kontak -->
-        <NuxtLink 
-          to="/kontak" 
-          @click="isMobileMenuOpen = false" 
-          :class="[
-            'flex items-center gap-3 px-4 py-3 text-sm font-semibold rounded-xl transition-all',
-            isActiveLink('/kontak') 
-              ? 'bg-slate-100 text-admiral' 
-              : 'text-slate-700 hover:bg-slate-50'
-          ]"
-        >
-          Kontak
-        </NuxtLink>
+        <!-- Kontak Expandable Section -->
+        <div>
+          <button 
+            @click="toggleMobileKontak" 
+            class="flex items-center justify-between w-full px-5 py-3 text-sm font-bold rounded-full bg-red-500 text-slate-900 hover:bg-red-600 transition-all text-left shadow-md border border-red-600 my-2"
+          >
+            <span class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-slate-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 1c-4.97 0-9 4.03-9 9v7a3 3 0 003 3h1a2 2 0 002-2v-3a2 2 0 00-2-2H5v-3c0-3.87 3.13-7 7-7s7 3.13 7 7v3h-1a2 2 0 00-2 2v3a2 2 0 002 2h1a3 3 0 003-3v-7c0-4.97-4.03-9-9-9z"></path>
+              </svg>
+              Kontak
+            </span>
+            <svg class="w-4 h-4 transition-transform duration-200" :class="isMobileKontakOpen ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          
+          <!-- Submenu -->
+          <div v-show="isMobileKontakOpen" class="pl-6 mt-1 space-y-1 border-l border-slate-100 ml-4">
+            <NuxtLink 
+              to="/kontak/aspirasi" 
+              @click="isMobileMenuOpen = false" 
+              class="block px-4 py-2 text-xs font-semibold text-slate-900 hover:text-slate-900 rounded-lg hover:bg-slate-50"
+            >
+              Aspirasi
+            </NuxtLink>
+            <NuxtLink 
+              to="/kontak/pelaporan" 
+              @click="isMobileMenuOpen = false" 
+              class="block px-4 py-2 text-xs font-semibold text-slate-900 hover:text-slate-900 rounded-lg hover:bg-slate-50"
+            >
+              Pelaporan
+            </NuxtLink>
+          </div>
+        </div>
 
         <!-- Market -->
         <NuxtLink 
@@ -413,8 +438,8 @@
           :class="[
             'flex items-center gap-3 px-4 py-3 text-sm font-semibold rounded-xl transition-all',
             isActiveLink('/market') 
-              ? 'bg-slate-100 text-admiral' 
-              : 'text-slate-700 hover:bg-slate-50'
+              ? 'bg-slate-100 text-slate-900' 
+              : 'text-slate-900 hover:bg-slate-50'
           ]"
         >
           Market
@@ -423,25 +448,14 @@
 
       <!-- Action Buttons in Mobile Menu -->
       <div class="px-6 py-4 mt-2 border-t border-slate-100 flex flex-col gap-3">
-        <!-- WASPADA -->
-        <NuxtLink 
-          to="/waspada" 
-          @click="isMobileMenuOpen = false" 
-          class="flex justify-center items-center gap-2 w-full py-3 rounded-xl bg-red-600 text-sm font-bold text-white hover:bg-red-700 shadow border border-red-500"
-        >
-          <svg class="w-4 h-4 text-white animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
-          </svg>
-          WASPADA
-        </NuxtLink>
 
         <!-- Masuk Link (Mobile) -->
         <NuxtLink 
           to="/login/admin"
           @click="isMobileMenuOpen = false" 
-          class="flex justify-center items-center w-full py-3 px-4 rounded-xl bg-lemon text-sm font-bold text-admiral hover:bg-lemon-dark shadow border border-lemon-dark gap-2"
+          class="flex justify-center items-center w-full py-3 px-4 rounded-xl bg-lemon text-sm font-bold text-slate-900 hover:bg-lemon-dark shadow border border-lemon-dark gap-2"
         >
-          <svg class="w-4 h-4 text-admiral" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-4 h-4 text-slate-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path>
           </svg>
           Masuk
@@ -453,15 +467,30 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
+const isScrolled = ref(false)
+
+const handleScroll = () => {
+  isScrolled.value = window.scrollY > 0
+}
+
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll)
+})
+
 const isMobileMenuOpen = ref(false)
 const isMobileProfilOpen = ref(false)
 const isMobileMasukOpen = ref(false)
 const isMobileZonaKampusOpen = ref(false)
 const isMobileMediaOpen = ref(false)
+const isMobileKontakOpen = ref(false)
 
 const toggleMobileMenu = () => {
   isMobileMenuOpen.value = !isMobileMenuOpen.value
@@ -483,6 +512,10 @@ const toggleMobileMedia = () => {
   isMobileMediaOpen.value = !isMobileMediaOpen.value
 }
 
+const toggleMobileKontak = () => {
+  isMobileKontakOpen.value = !isMobileKontakOpen.value
+}
+
 const isActiveLink = (link: string) => {
   if (link === '/profil') {
     return route.path.startsWith('/profil') || route.path.startsWith('/profile')
@@ -492,6 +525,9 @@ const isActiveLink = (link: string) => {
   }
   if (link === '/media') {
     return route.path.startsWith('/media')
+  }
+  if (link === '/kontak') {
+    return route.path.startsWith('/kontak')
   }
   return route.path === link
 }
