@@ -12,7 +12,7 @@
         
         <!-- Logo Brand -->
         <NuxtLink to="/dashboard" class="flex items-center gap-3 cursor-pointer">
-          <img src="/img/logo-ormawa-navbar.png" alt="Logo Ormawa" class="h-16 md:h-20 w-auto object-contain mix-blend-multiply brightness-[1.08] contrast-[1.15]" />
+          <img src="/img/Logo-ormawa-navbar.png" alt="Logo Ormawa" class="h-16 md:h-20 w-auto object-contain mix-blend-multiply brightness-[1.08] contrast-[1.15]" />
         </NuxtLink>
         
         <!-- Desktop Navigation -->

@@ -6,7 +6,7 @@
     <!-- Hero Section -->
     <section class="relative bg-admiral text-white py-20 px-6 md:px-12 overflow-hidden">
       <!-- Background Image -->
-      <img src="/img/Background-landingpage.png" alt="Background" class="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-overlay" loading="lazy" />
+      <img src="/img/background-landingpage.png" alt="Background" class="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-overlay" loading="lazy" />
       
       <div class="relative max-w-4xl mx-auto flex flex-col items-center justify-center text-center">
         <!-- Hero Text -->
