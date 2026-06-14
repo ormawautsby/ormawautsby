@@ -17,8 +17,8 @@
             </div>
           </div>
           <h2 class="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight">
-            Tempat Kreasi & <br/> 
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-lemon to-lemon-light">Kepemimpinan Mahasiswa</span>
+            KKB <br/> 
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-lemon to-lemon-light">Kreasi Kolaborasi Berprestasi</span>
           </h2>
           <p class="text-slate-300 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto">
             Jadilah bagian dari pergerakan mahasiswa yang aktif dan inovatif. Temukan ruang untuk mengembangkan potensi, merajut kolaborasi, dan mencetak prestasi bersama Ormawa Universitas Terbuka Surabaya.
@@ -90,15 +90,9 @@
 
     <!-- Upcoming Agenda Preview Section -->
     <section class="max-w-6xl mx-auto px-6 md:px-12 py-12 mb-12">
-      <div class="flex justify-between items-end mb-8 border-b border-gray-200 pb-4">
-        <div>
-          <h2 class="text-3xl font-bold text-admiral tracking-tight">Agenda Terdekat</h2>
-          <p class="text-slate-500 mt-1">Pantau kegiatan terbaru dari organisasi</p>
-        </div>
-        <NuxtLink to="/agenda" class="text-slate-600 hover:text-admiral font-semibold text-sm flex items-center gap-1 group transition-colors">
-          Lihat Semua 
-          <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-        </NuxtLink>
+      <div class="text-center mb-10">
+        <h2 class="text-2xl md:text-3xl font-extrabold text-admiral tracking-tight">Agenda Terdekat</h2>
+        <p class="text-slate-500 mt-2">Pantau kegiatan terbaru dari organisasi</p>
       </div>
 
       <!-- Agenda Cards Grid -->
@@ -145,7 +139,167 @@
           </div>
         </article>
       </div>
+      
+      <div class="mt-10 text-center">
+        <NuxtLink to="/agenda" class="inline-flex items-center gap-2 text-admiral font-bold hover:text-blue-700 transition-colors group text-sm md:text-base">
+          Lihat Semua Agenda
+          <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+        </NuxtLink>
+      </div>
     </section>
+
+    <!-- Highlight Kegiatan Section -->
+    <section class="max-w-6xl mx-auto px-6 md:px-12 py-12">
+      <div class="text-center mb-10">
+        <h2 class="text-2xl md:text-3xl font-extrabold text-admiral tracking-tight">Highlight Kegiatan</h2>
+        <div class="w-16 h-1 bg-lemon mx-auto mt-4 rounded-full"></div>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+        
+        <!-- Card 1 -->
+        <div class="relative rounded-2xl overflow-hidden group aspect-[16/9] cursor-pointer shadow-md hover:shadow-xl transition-all duration-300">
+          <img src="/img/background-landingpage.png" alt="Highlight" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+          <div class="absolute bottom-0 left-0 w-full p-6 flex flex-col justify-end">
+            <span class="bg-lemon text-admiral text-xs font-bold px-3 py-1 rounded-full w-max mb-3 shadow-sm">Laporan Utama</span>
+            <h3 class="text-white font-bold text-lg md:text-xl leading-tight mb-2 group-hover:text-lemon transition-colors">Pelantikan Pengurus Ormawa Periode 2025/2027</h3>
+            <p class="text-slate-300 text-xs md:text-sm line-clamp-2">Momentum bersejarah regenerasi kepemimpinan mahasiswa Universitas Terbuka Surabaya...</p>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="relative rounded-2xl overflow-hidden group aspect-[16/9] cursor-pointer shadow-md hover:shadow-xl transition-all duration-300">
+          <img src="/img/background-landingpage.png" alt="Highlight" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+          <div class="absolute bottom-0 left-0 w-full p-6 flex flex-col justify-end">
+            <span class="bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full w-max mb-3 shadow-sm">Kolaborasi</span>
+            <h3 class="text-white font-bold text-lg md:text-xl leading-tight mb-2 group-hover:text-lemon transition-colors">UTricity Care Salurkan Donasi Rp42 Juta untuk Korban Banjir Sumatera, Wujud Solidaritas 33 Ormawa UT</h3>
+            <p class="text-slate-300 text-xs md:text-sm line-clamp-2">Melalui gerakan kolaboratif bertajuk UTricity Care Peduli Sumatera, gabungan organisasi mahasiswa UT...</p>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="relative rounded-2xl overflow-hidden group aspect-[16/9] cursor-pointer shadow-md hover:shadow-xl transition-all duration-300">
+          <img src="/img/background-landingpage.png" alt="Highlight" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+          <div class="absolute bottom-0 left-0 w-full p-6 flex flex-col justify-end">
+            <span class="bg-emerald-500 text-white text-xs font-bold px-3 py-1 rounded-full w-max mb-3 shadow-sm">Prestasi</span>
+            <h3 class="text-white font-bold text-lg md:text-xl leading-tight mb-2 group-hover:text-lemon transition-colors">Mahasiswa UT Surabaya Sabet Medali Emas di Ajang Inovasi Nasional</h3>
+            <p class="text-slate-300 text-xs md:text-sm line-clamp-2">Karya teknologi tepat guna berhasil mengharumkan nama almamater di kancah perlombaan tingkat nasional...</p>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="relative rounded-2xl overflow-hidden group aspect-[16/9] cursor-pointer shadow-md hover:shadow-xl transition-all duration-300">
+          <img src="/img/background-landingpage.png" alt="Highlight" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+          <div class="absolute bottom-0 left-0 w-full p-6 flex flex-col justify-end">
+            <span class="bg-purple-500 text-white text-xs font-bold px-3 py-1 rounded-full w-max mb-3 shadow-sm">Seminar</span>
+            <h3 class="text-white font-bold text-lg md:text-xl leading-tight mb-2 group-hover:text-lemon transition-colors">Webinar Kepemimpinan Digital di Era AI 2025</h3>
+            <p class="text-slate-300 text-xs md:text-sm line-clamp-2">Membekali mahasiswa dengan keahlian kepemimpinan yang adaptif terhadap perkembangan kecerdasan buatan...</p>
+          </div>
+        </div>
+
+      </div>
+      
+      <div class="mt-10 text-center">
+        <NuxtLink to="/kegiatan" class="inline-flex items-center gap-2 text-admiral font-bold hover:text-blue-700 transition-colors group text-sm md:text-base">
+          Lihat Semua Kegiatan 
+          <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+        </NuxtLink>
+      </div>
+    </section>
+
+    <!-- Prestasi Mahasiswa Section -->
+    <section class="max-w-7xl mx-auto px-6 md:px-12 pb-16">
+      <div class="text-center mb-10">
+        <h2 class="text-2xl md:text-3xl font-extrabold text-admiral tracking-tight">Prestasi Mahasiswa</h2>
+      </div>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <!-- Card 1 -->
+        <div class="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow border-t-4 border-lemon p-4 flex flex-col items-center text-center">
+          <div class="w-full aspect-video md:aspect-square lg:aspect-[4/3] rounded-xl overflow-hidden mb-4 bg-slate-100">
+            <img src="/img/background-landingpage.png" alt="Prestasi 1" class="w-full h-full object-cover" loading="lazy" />
+          </div>
+          <h3 class="text-blue-600 font-bold text-base md:text-lg mb-1">Juara 2 Debat B. Inggris</h3>
+          <p class="text-slate-700 text-xs md:text-sm mb-1">Tiara Azzahra & Matilda F.</p>
+          <p class="text-slate-400 text-[10px] tracking-wider uppercase mt-auto pt-2">DISPORSENI NASIONAL UT 2025</p>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow border-t-4 border-lemon p-4 flex flex-col items-center text-center">
+          <div class="w-full aspect-video md:aspect-square lg:aspect-[4/3] rounded-xl overflow-hidden mb-4 bg-slate-100">
+            <img src="/img/background-landingpage.png" alt="Prestasi 2" class="w-full h-full object-cover" loading="lazy" />
+          </div>
+          <h3 class="text-blue-600 font-bold text-base md:text-lg mb-1">Juara 1 Karya Tulis Ilmiah</h3>
+          <p class="text-slate-700 text-xs md:text-sm mb-1">Angga Permana G & Sujarwo</p>
+          <p class="text-slate-400 text-[10px] tracking-wider uppercase mt-auto pt-2">DISPORSENI NASIONAL UT 2025</p>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow border-t-4 border-lemon p-4 flex flex-col items-center text-center">
+          <div class="w-full aspect-video md:aspect-square lg:aspect-[4/3] rounded-xl overflow-hidden mb-4 bg-slate-100">
+            <img src="/img/background-landingpage.png" alt="Prestasi 3" class="w-full h-full object-cover" loading="lazy" />
+          </div>
+          <h3 class="text-blue-600 font-bold text-base md:text-lg mb-1">Juara 3 Olimpiade Ekonomi</h3>
+          <p class="text-slate-700 text-xs md:text-sm mb-1">Yusup M, Eka Aulia, & M Rafi</p>
+          <p class="text-slate-400 text-[10px] tracking-wider uppercase mt-auto pt-2">DISPORSENI NASIONAL UT 2025</p>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow border-t-4 border-lemon p-4 flex flex-col items-center text-center">
+          <div class="w-full aspect-video md:aspect-square lg:aspect-[4/3] rounded-xl overflow-hidden mb-4 bg-slate-100">
+            <img src="/img/background-landingpage.png" alt="Prestasi 4" class="w-full h-full object-cover" loading="lazy" />
+          </div>
+          <h3 class="text-blue-600 font-bold text-base md:text-lg mb-1">Juara 3 MTQ</h3>
+          <p class="text-slate-700 text-xs md:text-sm mb-1">Ahmad Sodikin</p>
+          <p class="text-slate-400 text-[10px] tracking-wider uppercase mt-auto pt-2">DISPORSENI NASIONAL UT 2025</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Kata Mereka Section -->
+    <section class="bg-slate-50 py-16">
+      <div class="max-w-5xl mx-auto px-6 md:px-12">
+        <div class="text-center mb-12">
+          <h2 class="text-2xl md:text-3xl font-extrabold text-admiral tracking-tight">Kata Mereka</h2>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+          
+          <!-- Testimonial 1 -->
+          <div class="bg-white rounded-2xl p-8 text-center shadow-sm hover:shadow-md transition-shadow border-b-4 border-lemon">
+            <div class="w-20 h-20 mx-auto mb-6 rounded-full p-1 border-2 border-dashed border-lemon">
+              <img src="/img/ZAENAL ARIFIN.jpg" alt="Aditya Pratama" class="w-full h-full object-cover rounded-full" loading="lazy" />
+            </div>
+            <p class="text-slate-500 italic text-sm md:text-base mb-6 leading-relaxed">
+              "Ormawa UT Surabaya memberikan saya kesempatan untuk berkembang dan belajar banyak hal di luar akademik."
+            </p>
+            <h4 class="text-admiral font-bold text-lg mb-1">Aditya Pratama</h4>
+            <p class="text-slate-400 text-xs md:text-sm">Prodi Akuntansi, Angkatan '24.2</p>
+          </div>
+
+          <!-- Testimonial 2 -->
+          <div class="bg-white rounded-2xl p-8 text-center shadow-sm hover:shadow-md transition-shadow border-b-4 border-lemon">
+            <div class="w-20 h-20 mx-auto mb-6 rounded-full p-1 border-2 border-dashed border-lemon">
+              <img src="/img/background-landingpage.png" alt="Kanza Salsabila" class="w-full h-full object-cover rounded-full" loading="lazy" />
+            </div>
+            <p class="text-slate-500 italic text-sm md:text-base mb-6 leading-relaxed">
+              "Lingkungannya sangat positif dan suportif. Saya senang bisa bertemu teman-teman hebat di sini."
+            </p>
+            <h4 class="text-admiral font-bold text-lg mb-1">Kanza Salsabila</h4>
+            <p class="text-slate-400 text-xs md:text-sm">Teknologi Pangan, Angkatan 2023.1</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
 
     <Footer />
   </main>
