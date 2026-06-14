@@ -4,7 +4,7 @@
     <Navbar />
 
     <!-- Hero Section -->
-    <section class="relative bg-admiral text-white py-20 px-6 md:px-12 overflow-hidden">
+    <section class="relative bg-admiral text-white pt-20 pb-28 md:pb-36 px-6 md:px-12 overflow-hidden">
       <!-- Background Image -->
       <img src="/img/background-landingpage.png" alt="Background" class="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-overlay" loading="lazy" />
       
@@ -33,10 +33,25 @@
           </div>
         </div>
       </div>
+
+      <!-- Animated Wave Divider -->
+      <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-[0]">
+        <svg class="relative block w-[calc(100%+1.3px)] h-[50px] md:h-[80px] lg:h-[120px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28" preserveAspectRatio="none">
+          <defs>
+            <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+          </defs>
+          <g class="parallax">
+            <use href="#gentle-wave" x="48" y="0" fill="rgba(249, 250, 251, 0.7)" />
+            <use href="#gentle-wave" x="48" y="3" fill="rgba(249, 250, 251, 0.5)" />
+            <use href="#gentle-wave" x="48" y="5" fill="rgba(249, 250, 251, 0.3)" />
+            <use href="#gentle-wave" x="48" y="7" fill="#f9fafb" />
+          </g>
+        </svg>
+      </div>
     </section>
 
     <!-- Stats Section -->
-    <section class="max-w-6xl mx-auto px-6 md:px-12 py-12 -mt-12 relative z-10">
+    <section class="max-w-6xl mx-auto px-6 md:px-12 pb-12 -mt-4 relative z-10">
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
         <div v-for="stat in stats" :key="stat.label" class="bg-white p-6 rounded-2xl shadow-md border border-gray-100 flex flex-col items-center text-center hover:shadow-lg transition-all group">
           <div class="w-14 h-14 rounded-full bg-slate-50 text-admiral flex items-center justify-center mb-4 group-hover:bg-admiral group-hover:text-lemon transition-colors">
@@ -430,3 +445,29 @@ const getCategoryPattern = (category: EventCategory) => {
   return patterns[category] || patterns.Meeting
 }
 </script>
+
+<style scoped>
+.parallax > use {
+  animation: move-forever 25s cubic-bezier(.55,.5,.45,.5) infinite;
+}
+.parallax > use:nth-child(1) {
+  animation-delay: -2s;
+  animation-duration: 7s;
+}
+.parallax > use:nth-child(2) {
+  animation-delay: -3s;
+  animation-duration: 10s;
+}
+.parallax > use:nth-child(3) {
+  animation-delay: -4s;
+  animation-duration: 13s;
+}
+.parallax > use:nth-child(4) {
+  animation-delay: -5s;
+  animation-duration: 20s;
+}
+@keyframes move-forever {
+  0% { transform: translate3d(-90px,0,0); }
+  100% { transform: translate3d(85px,0,0); }
+}
+</style>
