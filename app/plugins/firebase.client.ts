@@ -1,7 +1,22 @@
 import { initializeApp, getApps } from 'firebase/app'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
-import type { User } from 'firebase/auth'
+import type { User, Auth } from 'firebase/auth'
 import { getFirestore, doc, getDoc } from 'firebase/firestore'
+import type { Firestore } from 'firebase/firestore'
+
+declare module '#app' {
+  interface NuxtApp {
+    $auth: Auth
+    $db: Firestore
+  }
+}
+
+declare module 'vue' {
+  interface ComponentCustomProperties {
+    $auth: Auth
+    $db: Firestore
+  }
+}
 
 export default defineNuxtPlugin((nuxtApp) => {
   const config = useRuntimeConfig()
