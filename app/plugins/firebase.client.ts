@@ -10,7 +10,6 @@ declare module '#app' {
     $db: Firestore
   }
 }
-
 declare module 'vue' {
   interface ComponentCustomProperties {
     $auth: Auth
