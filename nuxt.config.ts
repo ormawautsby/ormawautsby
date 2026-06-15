@@ -3,13 +3,13 @@ export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
 
-  // Mode SPA — menghasilkan satu index.html yang cocok untuk Firebase Hosting
-  ssr: false,
+  // Aktifkan SSR agar rute API server bisa berjalan
+  ssr: true,
 
   nitro: {
-    prerender: {
-      crawlLinks: false,
-      routes: []
+    preset: 'firebase',
+    firebase: {
+      gen: 2
     }
   },
 
