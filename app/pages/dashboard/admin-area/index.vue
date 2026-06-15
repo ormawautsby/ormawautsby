@@ -142,6 +142,21 @@
           <p class="text-xs text-slate-500">Konfigurasi Website</p>
         </NuxtLink>
 
+        <!-- WebAuthn Registration Module -->
+        <div class="bg-indigo-50 rounded-2xl p-5 border border-indigo-200 shadow-sm mt-2 flex flex-col items-center text-center">
+          <div class="w-12 h-12 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center mb-2">
+            <!-- Fingerprint Icon -->
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4"></path></svg>
+          </div>
+          <h4 class="font-bold text-indigo-800 mb-1">Keamanan Biometrik</h4>
+          <p class="text-xs text-indigo-600 mb-3">Login instan dengan sidik jari/Face ID.</p>
+          <button @click="registerPasskey" :disabled="isRegisteringPasskey" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2.5 px-4 rounded-xl shadow-sm transition-all text-sm disabled:opacity-70">
+            <span v-if="isRegisteringPasskey">Mendaftarkan...</span>
+            <span v-else>Daftarkan Perangkat Ini</span>
+          </button>
+          <p v-if="passkeyMessage" class="text-xs mt-2 font-semibold" :class="passkeyError ? 'text-red-600' : 'text-green-600'">{{ passkeyMessage }}</p>
+        </div>
+
         <!-- Notepad Admin -->
         <div class="bg-amber-50 rounded-2xl p-5 border border-amber-200 shadow-sm mt-2 flex flex-col h-64">
           <div class="flex items-center gap-2 mb-3">
@@ -228,6 +243,7 @@
 
 <script setup lang="ts">
 import { computed, ref, onMounted } from 'vue'
+import { startRegistration } from '@simplewebauthn/browser'
 
 // Mengaktifkan middleware auth & layout admin pada route ini
 definePageMeta({
@@ -239,8 +255,80 @@ const userRole = useState('userRole')
 const firebaseUser = useState<any>('firebaseUser')
 
 const userName = computed(() => {
-  return firebaseUser.value?.displayName || 'Admin'
+  return firebaseUser.value?.displayName || firebaseUser.value?.email?.split('@')[0] || 'Admin'
 })
+
+// WebAuthn Passkey Registration Logic
+const isRegisteringPasskey = ref(false)
+const passkeyMessage = ref('')
+const passkeyError = ref(false)
+
+const registerPasskey = async () => {
+  if (!firebaseUser.value?.uid || !firebaseUser.value?.email) {
+    passkeyError.value = true
+    passkeyMessage.value = 'Data user tidak lengkap.'
+    return
+  }
+
+  isRegisteringPasskey.value = true
+  passkeyMessage.value = ''
+  passkeyError.value = false
+
+  try {
+    // 1. Dapatkan opsi pendaftaran dari server
+    const response = await fetch('/api/webauthn/generate-registration', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ 
+        email: firebaseUser.value.email,
+        uid: firebaseUser.value.uid
+      })
+    })
+
+    if (!response.ok) throw new Error('Gagal mendapatkan konfigurasi sidik jari dari server.')
+    const options = await response.json()
+
+    // 2. Tampilkan prompt sidik jari bawaan OS (Browser API)
+    let attResp;
+    try {
+      attResp = await startRegistration(options)
+    } catch (error: any) {
+      if (error.name === 'NotAllowedError') {
+         throw new Error('Proses dibatalkan atau sensor sidik jari belum diatur di perangkat ini.')
+      }
+      throw error
+    }
+
+    // 3. Kirim hasil pendaftaran ke server untuk divalidasi
+    const verificationResp = await fetch('/api/webauthn/verify-registration', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        uid: firebaseUser.value.uid,
+        registrationResponse: attResp
+      })
+    })
+
+    if (!verificationResp.ok) {
+      const err = await verificationResp.json()
+      throw new Error(err.message || 'Verifikasi server gagal.')
+    }
+    const verification = await verificationResp.json()
+
+    if (verification.verified) {
+      passkeyMessage.value = 'Hore! Perangkat ini berhasil didaftarkan.'
+    } else {
+      throw new Error('Server menolak pendaftaran.')
+    }
+
+  } catch (error: any) {
+    console.error('Error registering passkey:', error)
+    passkeyError.value = true
+    passkeyMessage.value = error.message || 'Gagal mendaftarkan sidik jari.'
+  } finally {
+    isRegisteringPasskey.value = false
+  }
+}
 
 // Notepad Logic
 const adminNote = ref('')

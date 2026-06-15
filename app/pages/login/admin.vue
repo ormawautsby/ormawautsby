@@ -86,6 +86,24 @@
             <span v-else>Masuk Admin</span>
           </button>
         </div>
+
+        <!-- Tombol Biometrik -->
+        <div class="pt-2">
+          <button 
+            type="button" 
+            @click="loginWithPasskey"
+            :disabled="isPasskeyLoading"
+            class="w-full flex items-center justify-center gap-2 py-3 px-4 border border-indigo-200 text-sm font-bold rounded-xl text-indigo-700 bg-indigo-50 hover:bg-indigo-100 hover:border-indigo-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all shadow-sm disabled:opacity-70 disabled:cursor-not-allowed"
+          >
+            <svg v-if="isPasskeyLoading" class="animate-spin h-5 w-5 text-indigo-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            <svg v-else class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4"></path></svg>
+            <span v-if="isPasskeyLoading">Memindai...</span>
+            <span v-else>Masuk dengan Sidik Jari</span>
+          </button>
+        </div>
       </form>
       
       <!-- PEMBATAS -->
@@ -170,6 +188,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
+import { startAuthentication } from '@simplewebauthn/browser'
 
 // Admin State
 const email = ref('')
@@ -290,6 +309,89 @@ const loginAdmin = async () => {
     }
   } finally {
     isAdminLoading.value = false
+  }
+}
+
+// Action: Login Sidik Jari (WebAuthn)
+const isPasskeyLoading = ref(false)
+const loginWithPasskey = async () => {
+  errorMessage.value = ''
+  isPasskeyLoading.value = true
+  
+  try {
+    const { $auth, $db } = useNuxtApp()
+    const { signInWithCustomToken } = await import('firebase/auth')
+    const { doc, getDoc } = await import('firebase/firestore')
+
+    // 1. Dapatkan opsi authentication dari server
+    const response = await fetch('/api/webauthn/generate-authentication', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' }
+    })
+    
+    if (!response.ok) throw new Error('Gagal menghubungi server keamanan.')
+    const { options, sessionId } = await response.json()
+
+    // 2. Tampilkan prompt sidik jari bawaan OS (Biometric Sensor)
+    let asseResp;
+    try {
+      asseResp = await startAuthentication(options)
+    } catch (error: any) {
+      if (error.name === 'NotAllowedError') {
+        throw new Error('Proses dibatalkan atau sidik jari tidak cocok.')
+      }
+      throw error
+    }
+
+    // 3. Verifikasi hasil pindaian ke server
+    const verificationResp = await fetch('/api/webauthn/verify-authentication', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        sessionId,
+        authenticationResponse: asseResp
+      })
+    })
+
+    if (!verificationResp.ok) {
+      const err = await verificationResp.json()
+      throw new Error(err.message || 'Verifikasi sidik jari ditolak server.')
+    }
+    
+    // 4. Server merilis tiket masuk (Custom Token)
+    const verification = await verificationResp.json()
+    if (verification.verified && verification.token) {
+      // 5. Login ke Firebase menggunakan Custom Token
+      const result = await signInWithCustomToken($auth, verification.token)
+
+      // Cek role
+      const userDocRef = doc($db, 'users', result.user.uid)
+      const userDocSnap = await getDoc(userDocRef)
+      let role = 'mahasiswa'
+      if (userDocSnap.exists()) {
+        role = (userDocSnap.data().role || '').trim()
+      }
+
+      const userRole = useState('userRole')
+      const firebaseUser = useState('firebaseUser')
+      userRole.value = role
+      firebaseUser.value = result.user
+
+      if (role === 'admin' || role === 'super_admin' || role === 'pengurus') {
+        navigateTo('/dashboard/admin-area')
+      } else {
+        navigateTo('/dashboard/mahasiswa')
+      }
+
+    } else {
+      throw new Error('Verifikasi gagal di tahap akhir.')
+    }
+
+  } catch (error: any) {
+    console.error('Passkey Login Error:', error)
+    errorMessage.value = error.message || 'Login sidik jari gagal.'
+  } finally {
+    isPasskeyLoading.value = false
   }
 }
 
