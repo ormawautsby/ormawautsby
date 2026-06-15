@@ -13,10 +13,11 @@
           Portal Login
         </h2>
         <p class="mt-2 text-sm text-slate-500">
-          Masuk sebagai Admin
+          Masuk sebagai Admin atau Pengurus
         </p>
       </div>
 
+      <!-- FORM ADMIN -->
       <form class="mt-8 space-y-6" @submit.prevent="loginAdmin">
         <div class="rounded-md shadow-sm space-y-2">
           <div>
@@ -58,7 +59,7 @@
           </div>
         </div>
 
-        <!-- Pesan Error -->
+        <!-- Pesan Error Admin -->
         <div v-if="errorMessage" class="rounded-md bg-red-50 p-4 border border-red-200">
           <div class="flex">
             <div class="flex-shrink-0">
@@ -78,38 +79,87 @@
         <div>
           <button 
             type="submit" 
-            class="w-full flex justify-center py-3 px-4 border border-transparent text-sm font-semibold rounded-xl text-white bg-admiral hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-admiral transition-all shadow-md hover:shadow-lg"
+            :disabled="isAdminLoading"
+            class="w-full flex justify-center py-3 px-4 border border-transparent text-sm font-semibold rounded-xl text-white bg-admiral hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-admiral transition-all shadow-md hover:shadow-lg disabled:opacity-70 disabled:cursor-not-allowed"
           >
-            Masuk
+            <span v-if="isAdminLoading">Memproses...</span>
+            <span v-else>Masuk Admin</span>
+          </button>
+        </div>
+      </form>
+      
+      <!-- PEMBATAS -->
+      <div class="relative mt-8">
+        <div class="absolute inset-0 flex items-center">
+          <div class="w-full border-t border-slate-300"></div>
+        </div>
+        <div class="relative flex justify-center text-sm">
+          <span class="px-3 bg-white text-slate-500 font-medium">Atau Login Mahasiswa</span>
+        </div>
+      </div>
+
+      <!-- FORM MAHASISWA (MAGIC LINK) -->
+      <div class="space-y-4">
+        <p class="text-xs text-center text-slate-500">Masukkan email Gmail Anda untuk menerima persetujuan login di inbox Anda.</p>
+        
+        <form @submit.prevent="sendLoginLink" v-if="!linkSent && !isVerifying">
+          <div class="relative flex items-center group">
+            <!-- Icon Email -->
+            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none transition-colors group-focus-within:text-admiral">
+              <svg class="h-5 w-5 text-slate-400 group-focus-within:text-admiral transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+            </div>
+            
+            <input 
+              v-model="mhsEmail" 
+              type="email" 
+              required 
+              class="appearance-none block w-full pl-11 pr-[88px] py-3.5 border border-slate-200 placeholder-slate-400 text-slate-900 rounded-xl bg-slate-50 hover:bg-white focus:bg-white focus:outline-none focus:ring-2 focus:ring-admiral focus:border-admiral sm:text-sm transition-all duration-300 shadow-inner" 
+              placeholder="nama@gmail.com" 
+            />
+            
+            <button 
+              type="submit" 
+              :disabled="isLoadingMahasiswa"
+              class="absolute right-1.5 top-1.5 bottom-1.5 flex items-center justify-center px-4 rounded-lg text-sm font-bold text-slate-900 bg-[#FFD700] hover:bg-[#FACC15] hover:shadow-md focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-admiral disabled:opacity-70 disabled:cursor-not-allowed transition-all"
+            >
+              <svg v-if="isLoadingMahasiswa" class="animate-spin h-4 w-4 text-slate-800" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              <span v-else>Kirim</span>
+            </button>
+          </div>
+        </form>
+
+        <!-- Pesan Sukses Mhs -->
+        <div v-if="linkSent" class="rounded-lg bg-green-50 p-4 border border-green-200 text-center animate-fadeIn">
+          <h3 class="text-sm font-bold text-green-800 mb-1">Cek Inbox Email Anda!</h3>
+          <p class="text-xs text-green-700 leading-relaxed">
+            Kami telah mengirimkan tombol persetujuan login ke <br><strong class="text-green-900">{{ mhsEmail }}</strong>
+          </p>
+          <button @click="linkSent = false" class="mt-3 text-[11px] font-semibold text-green-700 hover:text-green-900 underline">
+            Ganti Email / Kirim Ulang
           </button>
         </div>
 
-        <div class="relative mt-6">
-          <div class="absolute inset-0 flex items-center">
-            <div class="w-full border-t border-slate-300"></div>
-          </div>
-          <div class="relative flex justify-center text-sm">
-            <span class="px-2 bg-white text-slate-500">Mahasiswa Umum</span>
-          </div>
+        <!-- Pesan Verifikasi Mhs -->
+        <div v-if="isVerifying" class="rounded-lg bg-blue-50 p-4 border border-blue-200 text-center animate-fadeIn">
+          <svg class="animate-spin mx-auto h-6 w-6 text-blue-500 mb-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          <p class="text-xs font-semibold text-blue-800">Memverifikasi Persetujuan Login...</p>
         </div>
 
-        <button 
-          type="button"
-          @click="loginWithGoogle" 
-          class="w-full mt-6 flex justify-center items-center gap-3 py-3 px-4 border border-slate-300 rounded-xl shadow-sm bg-white text-sm font-semibold text-slate-700 hover:bg-slate-50 hover:shadow-md transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-admiral"
-        >
-          <!-- Google Icon -->
-          <svg class="w-5 h-5" viewBox="0 0 24 24">
-            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-          </svg>
-          Masuk dengan Google
-        </button>
-      </form>
+        <!-- Pesan Error Mahasiswa -->
+        <div v-if="errorMahasiswa" class="rounded-md bg-red-50 p-3 border border-red-200 text-xs text-red-700 text-center">
+          {{ errorMahasiswa }}
+        </div>
+      </div>
       
-      <div class="text-center mt-4">
+      <div class="text-center mt-6">
         <NuxtLink to="/dashboard" class="text-sm font-medium text-slate-500 hover:text-admiral transition-colors">
           Kembali ke Beranda
         </NuxtLink>
@@ -119,15 +169,86 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 
+// Admin State
 const email = ref('')
 const password = ref('')
 const showPassword = ref(false)
 const errorMessage = ref('')
+const isAdminLoading = ref(false)
 
+// Mahasiswa State
+const mhsEmail = ref('')
+const errorMahasiswa = ref('')
+const isLoadingMahasiswa = ref(false)
+const linkSent = ref(false)
+const isVerifying = ref(false)
+
+// Lifecycle
+onMounted(async () => {
+  const { $auth, $db } = useNuxtApp()
+  if (!$auth) return
+
+  try {
+    const { isSignInWithEmailLink, signInWithEmailLink } = await import('firebase/auth')
+    const { doc, getDoc, setDoc } = await import('firebase/firestore')
+
+    // Mengecek apakah ada parameter persetujuan magic link dari inbox
+    if (isSignInWithEmailLink($auth, window.location.href)) {
+      isVerifying.value = true
+      
+      // Ambil email dari cache browser
+      let savedEmail = window.localStorage.getItem('emailForSignIn')
+      
+      // Jika kosong (browser berbeda/incognito), coba ambil otomatis dari parameter URL
+      if (!savedEmail) {
+        const urlParams = new URLSearchParams(window.location.search)
+        savedEmail = urlParams.get('userEmail')
+      }
+
+      if (!savedEmail) {
+        savedEmail = window.prompt('Tautan terdeteksi. Silakan masukkan ulang email Anda untuk konfirmasi keamanan:')
+      }
+
+      if (savedEmail) {
+        try {
+          const result = await signInWithEmailLink($auth, savedEmail, window.location.href)
+          window.localStorage.removeItem('emailForSignIn')
+
+          // Periksa dokumen firestore
+          const userDocRef = doc($db, 'users', result.user.uid)
+          const userDocSnap = await getDoc(userDocRef)
+          
+          if (!userDocSnap.exists()) {
+            await setDoc(userDocRef, {
+              uid: result.user.uid,
+              email: result.user.email,
+              nama: result.user.email?.split('@')[0] || 'Mahasiswa',
+              role: 'mahasiswa',
+              createdAt: new Date().toISOString()
+            })
+          }
+          
+          navigateTo('/dashboard/mahasiswa')
+        } catch (error: any) {
+          console.error('Error saat verifikasi link:', error)
+          errorMahasiswa.value = 'Tautan login tidak valid, sudah digunakan, atau telah kedaluwarsa.'
+        }
+      } else {
+        errorMahasiswa.value = 'Email diperlukan untuk menyelesaikan proses login.'
+      }
+      isVerifying.value = false
+    }
+  } catch (err) {
+    console.error('Firebase Error:', err)
+  }
+})
+
+// Action: Login Admin
 const loginAdmin = async () => {
   errorMessage.value = ''
+  isAdminLoading.value = true
   try {
     const { $auth, $db } = useNuxtApp()
     const { signInWithEmailAndPassword } = await import('firebase/auth')
@@ -135,28 +256,24 @@ const loginAdmin = async () => {
 
     if (!$auth) {
       errorMessage.value = 'Firebase tidak dikonfigurasi. Periksa .env Anda.'
+      isAdminLoading.value = false
       return
     }
 
     const result = await signInWithEmailAndPassword($auth, email.value, password.value)
 
-    // Ambil role dari Firestore setelah login berhasil
     const userDocRef = doc($db, 'users', result.user.uid)
     const userDocSnap = await getDoc(userDocRef)
     let role = 'mahasiswa'
     if (userDocSnap.exists()) {
       role = (userDocSnap.data().role || '').trim()
     }
-    console.log('Fetched role from Firestore:', role)
 
-    // Update state global agar middleware dapat membaca role
     const userRole = useState('userRole')
     const firebaseUser = useState('firebaseUser')
     userRole.value = role
     firebaseUser.value = result.user
-    console.log('Login successful, role:', role)
 
-    // Redirect berdasarkan role
     if (role === 'admin' || role === 'super_admin' || role === 'pengurus') {
       navigateTo('/dashboard/admin-area')
     } else if (role === 'mahasiswa') {
@@ -166,62 +283,49 @@ const loginAdmin = async () => {
     }
   } catch (error: any) {
     console.error('Login error:', error)
-    // Tampilkan pesan yang lebih user-friendly untuk error umum
     if (error.code === 'auth/invalid-credential' || error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
       errorMessage.value = 'Email atau password salah.'
     } else {
       errorMessage.value = error.message || 'Terjadi kesalahan saat login.'
     }
+  } finally {
+    isAdminLoading.value = false
   }
 }
 
-const loginWithGoogle = async () => {
-  errorMessage.value = ''
+// Action: Kirim Link Mahasiswa
+const sendLoginLink = async () => {
+  if (!mhsEmail.value) return
+  
+  isLoadingMahasiswa.value = true
+  errorMahasiswa.value = ''
+  
   try {
-    const { $auth, $db } = useNuxtApp()
-    const { GoogleAuthProvider, signInWithPopup } = await import('firebase/auth')
-    const { doc, getDoc, setDoc } = await import('firebase/firestore')
+    const { $auth } = useNuxtApp()
+    const { sendSignInLinkToEmail } = await import('firebase/auth')
     
-    if (!$auth) {
-      errorMessage.value = 'Firebase tidak dikonfigurasi. Periksa .env Anda.'
-      return
+    if (!$auth) throw new Error('Konfigurasi Firebase belum siap.')
+
+    const actionCodeSettings = {
+      // Menyisipkan parameter email ke dalam URL agar sistem tidak perlu bertanya lagi
+      url: window.location.origin + window.location.pathname + '?userEmail=' + encodeURIComponent(mhsEmail.value),
+      handleCodeInApp: true,
     }
 
-    const provider = new GoogleAuthProvider()
-    const result = await signInWithPopup($auth, provider)
+    await sendSignInLinkToEmail($auth, mhsEmail.value, actionCodeSettings)
     
-    const userDocRef = doc($db, 'users', result.user.uid)
-    const userDocSnap = await getDoc(userDocRef)
-    let role = 'mahasiswa'
-    
-    if (!userDocSnap.exists()) {
-      await setDoc(userDocRef, {
-        uid: result.user.uid,
-        email: result.user.email,
-        nama: result.user.displayName || '',
-        role: 'mahasiswa',
-        createdAt: new Date().toISOString()
-      })
-    } else {
-      role = (userDocSnap.data().role || '').trim()
-    }
-
-    const userRole = useState('userRole')
-    const firebaseUser = useState('firebaseUser')
-    userRole.value = role
-    firebaseUser.value = result.user
-
-    if (role === 'admin' || role === 'super_admin' || role === 'pengurus') {
-      navigateTo('/dashboard/admin-area')
-    } else if (role === 'mahasiswa') {
-      navigateTo('/dashboard/mahasiswa')
-    } else {
-      errorMessage.value = 'Akun Anda tidak memiliki akses yang valid.'
-    }
+    window.localStorage.setItem('emailForSignIn', mhsEmail.value)
+    linkSent.value = true
     
   } catch (error: any) {
-    console.error('Login error:', error)
-    errorMessage.value = error.message || 'Terjadi kesalahan saat login.'
+    console.error('Error mengirim email link:', error)
+    if (error.code === 'auth/unauthorized-continue-uri') {
+       errorMahasiswa.value = 'Domain website belum diizinkan di Firebase Console.'
+    } else {
+       errorMahasiswa.value = error.message || 'Gagal mengirim tautan persetujuan.'
+    }
+  } finally {
+    isLoadingMahasiswa.value = false
   }
 }
 </script>
