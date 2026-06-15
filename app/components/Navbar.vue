@@ -20,6 +20,7 @@
           <!-- Beranda -->
           <NuxtLink 
             to="/dashboard" 
+            @click="handleBerandaClick"
             :class="[
               'flex items-center gap-2 px-3 py-2 rounded-lg text-base font-semibold transition-all duration-200',
               isActiveLink('/dashboard') 
@@ -36,10 +37,10 @@
 
           <!-- Profil (Dropdown) -->
           <div class="relative group py-2">
-            <NuxtLink 
-              to="/profil" 
+            <button 
+              type="button"
               :class="[
-                'flex items-center gap-2 px-3 py-2 rounded-lg text-base font-semibold transition-all duration-200 cursor-pointer',
+                'flex items-center gap-2 px-3 py-2 rounded-lg text-base font-semibold transition-all duration-200 cursor-pointer focus:outline-none',
                 isActiveLink('/profil') 
                   ? 'text-slate-900 bg-transparent group-hover:bg-slate-100' 
                   : 'text-slate-900 group-hover:bg-slate-100 group-hover:text-slate-900'
@@ -54,7 +55,7 @@
               <svg class="w-3 h-3 text-slate-400 group-hover:rotate-180 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
               </svg>
-            </NuxtLink>
+            </button>
 
             <!-- Dropdown Menu -->
             <div class="absolute left-1/2 -translate-x-1/2 mt-2 w-52 bg-white border border-slate-200 rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 py-2">
@@ -75,10 +76,10 @@
 
           <!-- Zona Kampus -->
           <div class="relative group py-2">
-            <NuxtLink 
-              to="/zona-kampus" 
+            <button 
+              type="button"
               :class="[
-                'flex items-center gap-2 px-3 py-2 rounded-lg text-base font-semibold transition-all duration-200 cursor-pointer',
+                'flex items-center gap-2 px-3 py-2 rounded-lg text-base font-semibold transition-all duration-200 cursor-pointer focus:outline-none',
                 isActiveLink('/zona-kampus') 
                   ? 'text-slate-900 bg-transparent group-hover:bg-slate-100' 
                   : 'text-slate-900 group-hover:bg-slate-100 group-hover:text-slate-900'
@@ -95,7 +96,7 @@
               <svg class="w-3 h-3 text-slate-400 group-hover:rotate-180 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
               </svg>
-            </NuxtLink>
+            </button>
 
             <!-- Dropdown Menu Zona Kampus -->
             <div class="absolute left-1/2 -translate-x-1/2 mt-2 w-64 bg-white border border-slate-200 rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 py-2">
@@ -125,10 +126,10 @@
 
           <!-- Media -->
           <div class="relative group py-2">
-            <NuxtLink 
-              to="/media" 
+            <button 
+              type="button"
               :class="[
-                'flex items-center gap-2 px-3 py-2 rounded-lg text-base font-semibold transition-all duration-200 cursor-pointer',
+                'flex items-center gap-2 px-3 py-2 rounded-lg text-base font-semibold transition-all duration-200 cursor-pointer focus:outline-none',
                 isActiveLink('/media') 
                   ? 'text-slate-900 bg-transparent group-hover:bg-slate-100' 
                   : 'text-slate-900 group-hover:bg-slate-100 group-hover:text-slate-900'
@@ -143,7 +144,7 @@
               <svg class="w-3 h-3 text-slate-400 group-hover:rotate-180 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
               </svg>
-            </NuxtLink>
+            </button>
 
             <!-- Dropdown Menu Media -->
             <div class="absolute left-1/2 -translate-x-1/2 mt-2 w-52 bg-white border border-slate-200 rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 py-2">
@@ -164,9 +165,9 @@
 
           <!-- Kontak -->
           <div class="relative group py-2">
-            <NuxtLink 
-              to="/kontak"
-              class="px-5 py-2.5 rounded-full text-sm font-bold text-slate-900 bg-red-500 hover:bg-red-600 transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 flex items-center gap-2 border border-red-600 cursor-pointer"
+            <button 
+              type="button"
+              class="px-5 py-2.5 rounded-full text-sm font-bold text-slate-900 bg-red-500 hover:bg-red-600 transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 flex items-center gap-2 border border-red-600 cursor-pointer focus:outline-none"
             >
               <!-- Headset Icon -->
               <svg class="w-4 h-4 text-slate-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -177,7 +178,7 @@
               <svg class="w-3 h-3 text-slate-900 group-hover:rotate-180 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
               </svg>
-            </NuxtLink>
+            </button>
 
             <!-- Dropdown Menu Kontak -->
             <div class="absolute left-1/2 -translate-x-1/2 mt-2 w-48 bg-white border border-slate-200 rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 py-2">
@@ -221,7 +222,7 @@
         <!-- Beranda -->
         <NuxtLink 
           to="/dashboard" 
-          @click="isMobileMenuOpen = false" 
+          @click="() => { isMobileMenuOpen = false; handleBerandaClick(); }" 
           :class="[
             'flex items-center gap-3 px-4 py-3 text-sm font-semibold rounded-xl transition-all',
             isActiveLink('/dashboard') 
@@ -514,6 +515,12 @@ const toggleMobileMedia = () => {
 
 const toggleMobileKontak = () => {
   isMobileKontakOpen.value = !isMobileKontakOpen.value
+}
+
+const handleBerandaClick = () => {
+  if (route.path === '/dashboard') {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
 }
 
 const isActiveLink = (link: string) => {
