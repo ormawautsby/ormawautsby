@@ -13,7 +13,10 @@
     "rewrites": [
       {
         "source": "**",
-        "function": "server"
+        "run": {
+          "serviceId": "server",
+          "region": "us-central1"
+        }
       }
     ]
   }
