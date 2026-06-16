@@ -126,9 +126,9 @@
 
 <script setup lang="ts">
 // Data BPH (tanpa Wakil Ketua)
-const ketua = { title: 'Ketua Umum', name: 'Daviter', nim: '043219082', photo: '' }
-const sekretaris = { title: 'Sekretaris Umum', name: 'Abimayu', nim: '043219211', photo: '' }
-const bendahara = { title: 'Bendahara Umum', name: 'Milano', nim: '043219355', photo: '' }
+const ketua = { title: 'Ketua Umum', name: 'Mas bro Davit', nim: '043219082', photo: '' }
+const sekretaris = { title: 'Sekretaris Umum', name: 'Mas bro Abi', nim: '043219211', photo: '' }
+const bendahara = { title: 'Bendahara Umum', name: 'Mbak bro Milan', nim: '043219355', photo: '' }
 
 // Data Koordinator Bidang beserta Anggotanya (Bisa kamu ganti & tambah sendiri disini)
 const bidangList = [
