@@ -73,6 +73,7 @@
       <!-- Divider & Copyright -->
       <div class="border-t border-blue-400/30 mt-12 pt-6 text-center text-xs font-medium text-blue-200">
         &copy; Universitas Terbuka 1984 - 2026
+        <NuxtLink to="/sandbox" class="text-blue-200/5 hover:text-white transition duration-300 ml-1 px-2" title="Developer Sandbox">.</NuxtLink>
       </div>
     </div>
 
