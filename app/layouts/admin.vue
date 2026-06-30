@@ -1,13 +1,30 @@
 <template>
-  <div class="min-h-screen bg-admin-bg font-sans selection:bg-admin-accent/30 text-admin-text">
-    
-    <!-- Sidebar (Fixed Left) -->
-    <AdminSidebar />
+  <div class="h-screen flex flex-col font-sans bg-white overflow-hidden text-slate-700">
 
-    <!-- Main Wrapper -->
-    <div class="flex flex-col min-h-screen">
-      <!-- Page Content Area -->
-      <main class="flex-1 ml-64 p-8 bg-slate-50 relative">
+    <!-- Top Navigation Bar (style sandbox) -->
+    <header class="h-16 border-b border-slate-200 flex items-center justify-between px-4 shrink-0 bg-white z-20">
+      <div class="flex items-center gap-4">
+        <!-- Logo -->
+        <div class="w-60 flex items-center gap-3">
+          <img src="/img/Favicon_bulat_transparan.png" alt="Logo" class="h-9 w-auto drop-shadow-sm" />
+          <div>
+            <span class="text-lg font-bold text-emerald-600 tracking-tight">ORMAWA</span>
+            <p class="text-[10px] text-slate-400 font-medium uppercase tracking-widest leading-none">Admin Panel</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- User Profile (style sandbox) -->
+      <AdminHeaderProfile />
+    </header>
+
+    <!-- Main Content Area with Sidebar -->
+    <div class="flex flex-1 overflow-hidden relative">
+      <!-- Sidebar -->
+      <AdminSidebar />
+
+      <!-- Page Content -->
+      <main class="flex-1 overflow-y-auto bg-slate-50 p-6 md:p-8">
         <slot />
       </main>
     </div>
@@ -15,24 +32,13 @@
 </template>
 
 <script setup lang="ts">
-// Admin Layout Wrapper
-// Memastikan semua halaman di dalam /dashboard/admin-area terbungkus layout ini
+// Admin Layout - Sandbox Style
 </script>
 
 <style>
-/* Global scrollbar styling for admin area */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-::-webkit-scrollbar-track {
-  background: #151521;
-}
-::-webkit-scrollbar-thumb {
-  background: #2b2b40;
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #3f3f5a;
-}
+/* Scrollbar styling untuk area admin */
+.admin-scroll::-webkit-scrollbar { width: 6px; }
+.admin-scroll::-webkit-scrollbar-track { background: #f8fafc; }
+.admin-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 9999px; }
+.admin-scroll::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
 </style>

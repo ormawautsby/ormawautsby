@@ -316,15 +316,7 @@
                     </button>
                   </nav>
                   
-                  <nav class="flex flex-col space-y-1">
-                    <button @click="activeSubTab['Zona Kampus'] = 'Cari Teman'" :class="[
-                      'flex items-center justify-between px-4 py-3 text-sm font-medium rounded-xl transition-colors w-full',
-                      activeSubTab['Zona Kampus'] === 'Cari Teman' ? 'text-indigo-600 bg-indigo-50' : 'text-slate-600 hover:bg-slate-50'
-                    ]">
-                      Cari Teman
-                      <svg v-if="activeSubTab['Zona Kampus'] === 'Cari Teman'" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                    </button>
-                  </nav>
+
                 </div>
               </div>
 

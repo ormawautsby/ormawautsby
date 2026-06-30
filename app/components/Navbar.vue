@@ -118,9 +118,6 @@
               <NuxtLink to="/zona-kampus/imf" class="block px-4 py-2.5 text-sm text-slate-900 hover:bg-slate-50 hover:text-slate-900 transition-all font-medium pl-6 border-b border-slate-50">
                 Iam Fakultas (IMF/Hima)
               </NuxtLink>
-              <NuxtLink to="/zona-kampus/cari-teman" class="block px-4 py-2.5 text-sm text-slate-900 hover:bg-slate-50 hover:text-slate-900 transition-all font-medium mt-1">
-                Cari teman
-              </NuxtLink>
             </div>
           </div>
 
@@ -335,13 +332,6 @@
               class="block px-4 py-2 text-xs font-semibold text-slate-900 hover:text-slate-900 rounded-lg hover:bg-slate-50 ml-2 mb-2"
             >
               Iam Fakultas (IMF/Hima)
-            </NuxtLink>
-            <NuxtLink 
-              to="/zona-kampus/cari-teman" 
-              @click="isMobileMenuOpen = false" 
-              class="block px-4 py-2 text-xs font-semibold text-slate-900 hover:text-slate-900 rounded-lg hover:bg-slate-50"
-            >
-              Cari teman
             </NuxtLink>
           </div>
         </div>

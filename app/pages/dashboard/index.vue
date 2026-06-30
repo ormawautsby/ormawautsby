@@ -110,50 +110,80 @@
         <p class="text-slate-500 mt-2">Pantau kegiatan terbaru dari organisasi</p>
       </div>
 
-      <!-- Agenda Cards Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <article v-for="event in upcomingEvents" :key="event.id" class="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:border-gray-200 transition-all transform hover:-translate-y-1 overflow-hidden flex flex-col group cursor-pointer">
-          <!-- Card Header Image/Pattern -->
-          <div class="h-36 relative overflow-hidden bg-slate-100">
-            <div class="absolute inset-0 opacity-80 mix-blend-multiply transition-transform duration-700 group-hover:scale-105" :class="getCategoryPattern(event.category)"></div>
-            <!-- Overlay Gradient -->
-            <div class="absolute inset-0 bg-gradient-to-t from-admiral/60 to-transparent"></div>
-            <div class="absolute top-4 right-4">
-              <span class="px-3 py-1 text-xs font-bold rounded-full shadow-md backdrop-blur-sm" :class="event.status === 'Upcoming' ? 'bg-lemon text-admiral' : 'bg-white/90 text-slate-700'">
+      <!-- Agenda Full-Screen Carousel -->
+      <div class="relative">
+        <!-- Carousel Track -->
+        <div ref="carouselRef" class="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide scroll-smooth">
+          <article 
+            v-for="event in upcomingEvents" 
+            :key="event.id" 
+            class="relative flex-shrink-0 w-full snap-start rounded-2xl overflow-hidden group cursor-pointer"
+            style="min-height: 420px;"
+          >
+            <!-- Background Pattern -->
+            <div class="absolute inset-0 transition-transform duration-700 group-hover:scale-105" :class="getCategoryPattern(event.category)"></div>
+            <!-- Overlay -->
+            <div class="absolute inset-0 bg-gradient-to-br from-black/60 via-black/30 to-transparent"></div>
+
+            <!-- Status Badge -->
+            <div class="absolute top-6 right-6 z-10">
+              <span class="px-4 py-1.5 text-sm font-bold rounded-full shadow-lg backdrop-blur-sm" :class="event.status === 'Upcoming' ? 'bg-lemon text-admiral' : 'bg-white/90 text-slate-700'">
                 {{ event.status }}
               </span>
             </div>
-            <!-- Category Tag on Image -->
-            <div class="absolute bottom-4 left-4">
-              <span class="text-xs font-bold px-2.5 py-1 bg-admiral/80 text-white rounded-md backdrop-blur-sm border border-slate-700/50">
+
+            <!-- Category Badge -->
+            <div class="absolute top-6 left-6 z-10">
+              <span class="text-sm font-bold px-4 py-1.5 bg-admiral/80 text-white rounded-full backdrop-blur-sm border border-slate-700/50">
                 {{ event.category }}
               </span>
             </div>
-          </div>
-          
-          <!-- Card Body -->
-          <div class="p-6 flex-1 flex flex-col">
-            <div class="flex items-center gap-2 mb-3 text-slate-500">
-               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-               <time class="text-xs font-bold uppercase tracking-wider">{{ formatDate(event.date) }}</time>
-            </div>
-            <h3 class="text-xl font-bold text-admiral mb-2 line-clamp-2 group-hover:text-slate-700 transition-colors">{{ event.title }}</h3>
-            <p class="text-slate-600 text-sm mb-6 line-clamp-3 flex-1 leading-relaxed">{{ event.description }}</p>
-            
-            <div class="mt-auto pt-4 border-t border-gray-100 flex items-center justify-between">
-              <div class="flex -space-x-2">
-                <!-- Mock Avatars for Participants -->
-                <div class="w-8 h-8 rounded-full bg-slate-200 border-2 border-white flex items-center justify-center text-xs font-bold text-slate-500">A</div>
-                <div class="w-8 h-8 rounded-full bg-slate-300 border-2 border-white flex items-center justify-center text-xs font-bold text-slate-500">B</div>
-                <div class="w-8 h-8 rounded-full bg-slate-100 border-2 border-white flex items-center justify-center text-xs font-bold text-slate-500">+</div>
+
+            <!-- Content -->
+            <div class="absolute bottom-0 left-0 right-0 p-8 md:p-12 z-10">
+              <div class="flex items-center gap-2 mb-4 text-white/70">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                <time class="text-sm font-bold uppercase tracking-wider">{{ formatDate(event.date) }}</time>
               </div>
-              <span class="text-admiral group-hover:text-yellow-500 font-bold text-sm flex items-center gap-1 transition-colors">
-                Detail <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-              </span>
+              <h3 class="text-3xl md:text-4xl font-extrabold text-white mb-3 leading-tight">{{ event.title }}</h3>
+              <p class="text-white/80 text-base md:text-lg leading-relaxed max-w-2xl mb-6">{{ event.description }}</p>
+              <div class="flex items-center gap-6">
+                <div class="flex -space-x-2">
+                  <div class="w-9 h-9 rounded-full bg-white/20 border-2 border-white/50 flex items-center justify-center text-sm font-bold text-white">A</div>
+                  <div class="w-9 h-9 rounded-full bg-white/30 border-2 border-white/50 flex items-center justify-center text-sm font-bold text-white">B</div>
+                  <div class="w-9 h-9 rounded-full bg-white/20 border-2 border-white/50 flex items-center justify-center text-sm font-bold text-white">+</div>
+                </div>
+                <span class="text-white font-bold text-sm flex items-center gap-2 bg-white/10 hover:bg-white/20 backdrop-blur-sm px-5 py-2.5 rounded-full border border-white/20 transition-all">
+                  Lihat Detail
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                </span>
+              </div>
             </div>
-          </div>
-        </article>
+          </article>
+        </div>
+
+        <!-- Prev Button -->
+        <button @click="prevSlide" class="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-white/20 hover:bg-white/40 backdrop-blur-sm border border-white/30 rounded-full flex items-center justify-center text-white transition-all hover:scale-110 shadow-lg">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path></svg>
+        </button>
+
+        <!-- Next Button -->
+        <button @click="nextSlide" class="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-white/20 hover:bg-white/40 backdrop-blur-sm border border-white/30 rounded-full flex items-center justify-center text-white transition-all hover:scale-110 shadow-lg">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+        </button>
+
+        <!-- Dot Indicators -->
+        <div class="flex justify-center gap-2 mt-5">
+          <button
+            v-for="(event, index) in upcomingEvents"
+            :key="event.id"
+            @click="goToSlide(index)"
+            class="transition-all duration-300 rounded-full"
+            :class="currentSlide === index ? 'w-8 h-2.5 bg-admiral' : 'w-2.5 h-2.5 bg-slate-300 hover:bg-slate-400'"
+          ></button>
+        </div>
       </div>
+
       
       <div class="mt-10 text-center">
         <NuxtLink to="/agenda" class="inline-flex items-center gap-2 text-admiral font-bold hover:text-blue-700 transition-colors group text-sm md:text-base">
@@ -324,6 +354,33 @@
 import { computed, h, ref } from 'vue'
 // import { useOrmawaStore } from '@/stores/ormawa' // Uncomment jika store sudah ada
 
+// ==========================================
+// CAROUSEL STATE
+// ==========================================
+const carouselRef = ref<HTMLElement | null>(null)
+const currentSlide = ref(0)
+
+const goToSlide = (index: number) => {
+  currentSlide.value = index
+  if (carouselRef.value) {
+    const slideWidth = carouselRef.value.offsetWidth
+    carouselRef.value.scrollTo({ left: slideWidth * index, behavior: 'smooth' })
+  }
+}
+
+const prevSlide = () => {
+  const total = upcomingEvents.value.length
+  const prev = (currentSlide.value - 1 + total) % total
+  goToSlide(prev)
+}
+
+const nextSlide = () => {
+  const total = upcomingEvents.value.length
+  const next = (currentSlide.value + 1) % total
+  goToSlide(next)
+}
+
+
 useHead({
   title: 'Ormawa UT Surabaya - Website Resmi Organisasi Mahasiswa',
   meta: [
@@ -395,6 +452,30 @@ const mockEvents: AgendaEvent[] = [
     date: '2024-08-20T07:00:00',
     description: 'Penyaluran bantuan, edukasi kesehatan, serta perbaikan fasilitas desa di wilayah mitra binaan BEM.',
     category: 'Social',
+    status: 'Upcoming'
+  },
+  {
+    id: 'e4',
+    title: 'Rapat Koordinasi Divisi Semester Ganjil',
+    date: '2024-09-05T13:00:00',
+    description: 'Rapat pleno seluruh divisi untuk menyelaraskan program kerja, target, dan anggaran semester ganjil 2024/2025.',
+    category: 'Meeting',
+    status: 'Upcoming'
+  },
+  {
+    id: 'e5',
+    title: 'Seminar Nasional Mahasiswa Berprestasi',
+    date: '2024-09-18T09:00:00',
+    description: 'Seminar inspiratif menghadirkan mahasiswa berprestasi nasional sebagai narasumber untuk berbagi pengalaman dan strategi sukses.',
+    category: 'Workshop',
+    status: 'Upcoming'
+  },
+  {
+    id: 'e6',
+    title: 'Festival Budaya & Seni Mahasiswa UT',
+    date: '2024-10-10T10:00:00',
+    description: 'Perayaan keberagaman budaya melalui pentas seni, pameran karya, dan lomba kreasi budaya antar mahasiswa UT Surabaya.',
+    category: 'Competition',
     status: 'Upcoming'
   }
 ]
@@ -469,5 +550,14 @@ const getCategoryPattern = (category: EventCategory) => {
 @keyframes move-forever {
   0% { transform: translate3d(-90px,0,0); }
   100% { transform: translate3d(85px,0,0); }
+}
+
+/* Sembunyikan scrollbar tapi tetap bisa di-scroll */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 </style>
