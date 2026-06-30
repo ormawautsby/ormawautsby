@@ -8,7 +8,7 @@
       <div class="hero-overlay"></div>
       <!-- Content -->
       <div class="hero-content">
-        <h1 class="hero-title">PROFIL ORMAWA</h1>
+        <h1 class="hero-title">TENTANG ORMAWA</h1>
         <p class="hero-subtitle">Mengenal Lebih Dekat Organisasi Mahasiswa UT Surabaya</p>
       </div>
     </div>
