@@ -1,4 +1,4 @@
 <script setup lang="ts">
-// Redirect otomatis dari halaman utama (/) ke (/dashboard)
-await navigateTo('/dashboard')
+// Redirect halaman utama (/) ke landing page publik
+await navigateTo('/beranda')
 </script>

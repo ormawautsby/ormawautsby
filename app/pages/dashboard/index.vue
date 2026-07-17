@@ -1,563 +1,94 @@
 <template>
-  <main class="min-h-screen bg-gray-50 font-sans text-slate-800">
-    <!-- 1. NAVIGATION BAR -->
-    <Navbar />
+  <div>
+    <div class="mb-8">
+      <h1 class="text-2xl font-extrabold text-slate-800">Dashboard</h1>
+      <p class="text-sm text-slate-500 mt-1">
+        Selamat datang di panel admin Ormawa UT Surabaya.
+      </p>
+    </div>
 
-    <!-- Hero Section -->
-    <section class="relative bg-admiral text-white pt-20 pb-28 md:pb-36 px-6 md:px-12 overflow-hidden">
-      <!-- Background Image -->
-      <img src="/img/background-landingpage.png" alt="Background" class="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-overlay" />
-      
-      <div class="relative max-w-4xl mx-auto flex flex-col items-center justify-center text-center">
-        <!-- Hero Text -->
-        <div class="w-full space-y-6 flex flex-col items-center">
-          <div class="flex flex-wrap items-center justify-center mb-6">
-            <div class="inline-block px-5 py-2 bg-slate-800 border border-slate-700 text-lemon text-sm font-bold uppercase tracking-widest rounded-full shadow-md">
-              Website resmi Ormawa ut surabaya
-            </div>
-          </div>
-          <h2 class="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight">
-            KKB <br/> 
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-lemon to-lemon-light">Kreasi Kolaborasi Berprestasi</span>
-          </h2>
-          <p class="text-slate-300 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto">
-            Jadilah bagian dari pergerakan mahasiswa yang aktif dan inovatif. Temukan ruang untuk mengembangkan potensi, merajut kolaborasi, dan mencetak prestasi bersama Ormawa Universitas Terbuka Surabaya.
-          </p>
-          <div class="flex flex-wrap justify-center gap-4 pt-4">
-            <button class="px-6 py-3 bg-lemon text-admiral font-bold rounded-lg hover:bg-lemon-dark transition-all transform hover:-translate-y-0.5 shadow-[0_4px_14px_0_rgba(255,204,0,0.39)] focus:ring-2 focus:ring-offset-2 focus:ring-offset-admiral focus:ring-lemon">
-              Lihat Kegiatan Kami
-            </button>
-            <button class="px-6 py-3 bg-slate-800 text-white font-semibold rounded-lg border border-slate-700 hover:bg-slate-700 hover:border-slate-600 transition-all focus:ring-2 focus:ring-offset-2 focus:ring-offset-admiral focus:ring-white">
-              Pelajari Lebih Lanjut
-            </button>
-          </div>
-        </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div
+        v-for="card in summaryCards"
+        :key="card.label"
+        class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:shadow-md transition-shadow"
+      >
+        <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">{{ card.label }}</p>
+        <p class="text-3xl font-extrabold text-slate-800 mt-2">{{ card.value }}</p>
+        <p class="text-sm text-slate-500 mt-1">{{ card.description }}</p>
       </div>
+    </div>
 
-      <!-- Animated Wave Divider -->
-      <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-[0]">
-        <svg class="relative block w-[calc(100%+1.3px)] h-[50px] md:h-[80px] lg:h-[120px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28" preserveAspectRatio="none">
-          <defs>
-            <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
-          </defs>
-          <g class="parallax">
-            <use href="#gentle-wave" x="48" y="0" fill="rgba(249, 250, 251, 0.7)" />
-            <use href="#gentle-wave" x="48" y="3" fill="rgba(249, 250, 251, 0.5)" />
-            <use href="#gentle-wave" x="48" y="5" fill="rgba(249, 250, 251, 0.3)" />
-            <use href="#gentle-wave" x="48" y="7" fill="#f9fafb" />
-          </g>
-        </svg>
-      </div>
-    </section>
-
-    <!-- Stats Section -->
-    <section class="max-w-6xl mx-auto px-6 md:px-12 pb-12 -mt-4 relative z-10">
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-        <div v-for="stat in stats" :key="stat.label" class="bg-white p-6 rounded-2xl shadow-md border border-gray-100 flex flex-col items-center text-center hover:shadow-lg transition-all group">
-          <div class="w-14 h-14 rounded-full bg-slate-50 text-admiral flex items-center justify-center mb-4 group-hover:bg-admiral group-hover:text-lemon transition-colors">
-            <component :is="stat.icon" />
-          </div>
-          <h3 class="text-3xl font-extrabold text-admiral mb-1">{{ stat.value }}</h3>
-          <p class="text-sm text-slate-500 font-medium">{{ stat.label }}</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Sambutan Direktur Section -->
-    <section class="max-w-5xl mx-auto px-6 md:px-12 py-16 mb-8">
-      <div class="flex flex-col md:flex-row items-center gap-12 lg:gap-20">
-        <!-- Photo Column -->
-        <div class="flex-shrink-0 relative group">
-          <!-- Yellow Glow / Drop Shadow -->
-          <div class="absolute -inset-2 bg-lemon opacity-40 blur-xl rounded-3xl transition-opacity group-hover:opacity-60"></div>
-          <div class="relative w-64 md:w-72 lg:w-80 aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl border-4 border-white bg-slate-200">
-            <!-- Replace this src with the actual image of the director -->
-            <img 
-              :src="'/img/direktur.png'" 
-              alt="Prof. Dr. Suparti, M.Pd" 
-              class="w-full h-full object-cover"
-            />
-          </div>
-        </div>
-        
-        <!-- Text Column -->
-        <div class="flex-1 space-y-6">
-          <div>
-            <h4 class="text-admiral font-bold tracking-widest text-xs lg:text-sm uppercase mb-2">Sambutan Ibu Direktur</h4>
-            <h2 class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-slate-900 leading-tight">
-              Bersama Membangun Kualitas Mahasiswa
-            </h2>
-          </div>
-          
-          <div class="border-l-4 border-lemon pl-6 py-2 my-8">
-            <p class="text-slate-600 text-lg md:text-xl italic leading-relaxed">
-              "Universitas Terbuka Surabaya mendukung penuh keberadaan Ormawa sebagai sarana pengembangan kreativitas dan kepemimpinan. Organisasi ini dibentuk dari mahasiswa, oleh mahasiswa, dan untuk mahasiswa. Teruslah berkarya untuk almamater dan bangsa."
-            </p>
-          </div>
-          
-          <div>
-            <p class="text-admiral font-bold text-lg">Prof. Dr. Suparti, M.Pd</p>
-            <p class="text-slate-500 text-sm">Direktur Universitas Terbuka Surabaya</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Upcoming Agenda Preview Section -->
-    <section class="max-w-6xl mx-auto px-6 md:px-12 py-12 mb-12">
-      <div class="text-center mb-10">
-        <h2 class="text-2xl md:text-3xl font-extrabold text-admiral tracking-tight">Agenda Terdekat</h2>
-        <p class="text-slate-500 mt-2">Pantau kegiatan terbaru dari organisasi</p>
-      </div>
-
-      <!-- Agenda Full-Screen Carousel -->
-      <div class="relative">
-        <!-- Carousel Track -->
-        <div ref="carouselRef" class="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide scroll-smooth">
-          <article 
-            v-for="event in upcomingEvents" 
-            :key="event.id" 
-            class="relative flex-shrink-0 w-full snap-start rounded-2xl overflow-hidden group cursor-pointer"
-            style="min-height: 420px;"
-          >
-            <!-- Background Pattern -->
-            <div class="absolute inset-0 transition-transform duration-700 group-hover:scale-105" :class="getCategoryPattern(event.category)"></div>
-            <!-- Overlay -->
-            <div class="absolute inset-0 bg-gradient-to-br from-black/60 via-black/30 to-transparent"></div>
-
-            <!-- Status Badge -->
-            <div class="absolute top-6 right-6 z-10">
-              <span class="px-4 py-1.5 text-sm font-bold rounded-full shadow-lg backdrop-blur-sm" :class="event.status === 'Upcoming' ? 'bg-lemon text-admiral' : 'bg-white/90 text-slate-700'">
-                {{ event.status }}
-              </span>
-            </div>
-
-            <!-- Category Badge -->
-            <div class="absolute top-6 left-6 z-10">
-              <span class="text-sm font-bold px-4 py-1.5 bg-admiral/80 text-white rounded-full backdrop-blur-sm border border-slate-700/50">
-                {{ event.category }}
-              </span>
-            </div>
-
-            <!-- Content -->
-            <div class="absolute bottom-0 left-0 right-0 p-8 md:p-12 z-10">
-              <div class="flex items-center gap-2 mb-4 text-white/70">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                <time class="text-sm font-bold uppercase tracking-wider">{{ formatDate(event.date) }}</time>
-              </div>
-              <h3 class="text-3xl md:text-4xl font-extrabold text-white mb-3 leading-tight">{{ event.title }}</h3>
-              <p class="text-white/80 text-base md:text-lg leading-relaxed max-w-2xl mb-6">{{ event.description }}</p>
-              <div class="flex items-center gap-6">
-                <div class="flex -space-x-2">
-                  <div class="w-9 h-9 rounded-full bg-white/20 border-2 border-white/50 flex items-center justify-center text-sm font-bold text-white">A</div>
-                  <div class="w-9 h-9 rounded-full bg-white/30 border-2 border-white/50 flex items-center justify-center text-sm font-bold text-white">B</div>
-                  <div class="w-9 h-9 rounded-full bg-white/20 border-2 border-white/50 flex items-center justify-center text-sm font-bold text-white">+</div>
-                </div>
-                <span class="text-white font-bold text-sm flex items-center gap-2 bg-white/10 hover:bg-white/20 backdrop-blur-sm px-5 py-2.5 rounded-full border border-white/20 transition-all">
-                  Lihat Detail
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                </span>
-              </div>
-            </div>
-          </article>
-        </div>
-
-        <!-- Prev Button -->
-        <button @click="prevSlide" class="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-white/20 hover:bg-white/40 backdrop-blur-sm border border-white/30 rounded-full flex items-center justify-center text-white transition-all hover:scale-110 shadow-lg">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path></svg>
-        </button>
-
-        <!-- Next Button -->
-        <button @click="nextSlide" class="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-white/20 hover:bg-white/40 backdrop-blur-sm border border-white/30 rounded-full flex items-center justify-center text-white transition-all hover:scale-110 shadow-lg">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
-        </button>
-
-        <!-- Dot Indicators -->
-        <div class="flex justify-center gap-2 mt-5">
-          <button
-            v-for="(event, index) in upcomingEvents"
-            :key="event.id"
-            @click="goToSlide(index)"
-            class="transition-all duration-300 rounded-full"
-            :class="currentSlide === index ? 'w-8 h-2.5 bg-admiral' : 'w-2.5 h-2.5 bg-slate-300 hover:bg-slate-400'"
-          ></button>
-        </div>
-      </div>
-
-      
-      <div class="mt-10 text-center">
-        <NuxtLink to="/agenda" class="inline-flex items-center gap-2 text-admiral font-bold hover:text-blue-700 transition-colors group text-sm md:text-base">
-          Lihat Semua Agenda
-          <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+    <div class="mt-8 bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+      <h2 class="text-lg font-bold text-slate-800 mb-2">Akses Cepat</h2>
+      <p class="text-sm text-slate-500 mb-4">
+        Gunakan menu di sidebar untuk mengelola konten dan data sistem.
+      </p>
+      <div class="flex flex-wrap gap-3">
+        <NuxtLink
+          v-for="link in quickLinks"
+          :key="link.to"
+          :to="link.to"
+          class="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-semibold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 rounded-xl transition-colors"
+        >
+          {{ link.label }}
         </NuxtLink>
       </div>
-    </section>
-
-    <!-- Highlight Kegiatan Section -->
-    <section class="max-w-6xl mx-auto px-6 md:px-12 py-12">
-      <div class="text-center mb-10">
-        <h2 class="text-2xl md:text-3xl font-extrabold text-admiral tracking-tight">Highlight Kegiatan</h2>
-        <div class="w-16 h-1 bg-lemon mx-auto mt-4 rounded-full"></div>
-      </div>
-      
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-        
-        <!-- Card 1 -->
-        <div class="relative rounded-2xl overflow-hidden group aspect-[16/9] cursor-pointer shadow-md hover:shadow-xl transition-all duration-300">
-          <img src="/img/background-landingpage.png" alt="Highlight" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
-          <div class="absolute bottom-0 left-0 w-full p-6 flex flex-col justify-end">
-            <span class="bg-lemon text-admiral text-xs font-bold px-3 py-1 rounded-full w-max mb-3 shadow-sm">Laporan Utama</span>
-            <h3 class="text-white font-bold text-lg md:text-xl leading-tight mb-2 group-hover:text-lemon transition-colors">Pelantikan Pengurus Ormawa Periode 2025/2027</h3>
-            <p class="text-slate-300 text-xs md:text-sm line-clamp-2">Momentum bersejarah regenerasi kepemimpinan mahasiswa Universitas Terbuka Surabaya...</p>
-          </div>
-        </div>
-
-        <!-- Card 2 -->
-        <div class="relative rounded-2xl overflow-hidden group aspect-[16/9] cursor-pointer shadow-md hover:shadow-xl transition-all duration-300">
-          <img src="/img/background-landingpage.png" alt="Highlight" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
-          <div class="absolute bottom-0 left-0 w-full p-6 flex flex-col justify-end">
-            <span class="bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full w-max mb-3 shadow-sm">Kolaborasi</span>
-            <h3 class="text-white font-bold text-lg md:text-xl leading-tight mb-2 group-hover:text-lemon transition-colors">UTricity Care Salurkan Donasi Rp42 Juta untuk Korban Banjir Sumatera, Wujud Solidaritas 33 Ormawa UT</h3>
-            <p class="text-slate-300 text-xs md:text-sm line-clamp-2">Melalui gerakan kolaboratif bertajuk UTricity Care Peduli Sumatera, gabungan organisasi mahasiswa UT...</p>
-          </div>
-        </div>
-
-        <!-- Card 3 -->
-        <div class="relative rounded-2xl overflow-hidden group aspect-[16/9] cursor-pointer shadow-md hover:shadow-xl transition-all duration-300">
-          <img src="/img/background-landingpage.png" alt="Highlight" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
-          <div class="absolute bottom-0 left-0 w-full p-6 flex flex-col justify-end">
-            <span class="bg-emerald-500 text-white text-xs font-bold px-3 py-1 rounded-full w-max mb-3 shadow-sm">Prestasi</span>
-            <h3 class="text-white font-bold text-lg md:text-xl leading-tight mb-2 group-hover:text-lemon transition-colors">Mahasiswa UT Surabaya Sabet Medali Emas di Ajang Inovasi Nasional</h3>
-            <p class="text-slate-300 text-xs md:text-sm line-clamp-2">Karya teknologi tepat guna berhasil mengharumkan nama almamater di kancah perlombaan tingkat nasional...</p>
-          </div>
-        </div>
-
-        <!-- Card 4 -->
-        <div class="relative rounded-2xl overflow-hidden group aspect-[16/9] cursor-pointer shadow-md hover:shadow-xl transition-all duration-300">
-          <img src="/img/background-landingpage.png" alt="Highlight" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
-          <div class="absolute bottom-0 left-0 w-full p-6 flex flex-col justify-end">
-            <span class="bg-purple-500 text-white text-xs font-bold px-3 py-1 rounded-full w-max mb-3 shadow-sm">Seminar</span>
-            <h3 class="text-white font-bold text-lg md:text-xl leading-tight mb-2 group-hover:text-lemon transition-colors">Webinar Kepemimpinan Digital di Era AI 2025</h3>
-            <p class="text-slate-300 text-xs md:text-sm line-clamp-2">Membekali mahasiswa dengan keahlian kepemimpinan yang adaptif terhadap perkembangan kecerdasan buatan...</p>
-          </div>
-        </div>
-
-      </div>
-      
-      <div class="mt-10 text-center">
-        <NuxtLink to="/kegiatan" class="inline-flex items-center gap-2 text-admiral font-bold hover:text-blue-700 transition-colors group text-sm md:text-base">
-          Lihat Semua Kegiatan 
-          <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-        </NuxtLink>
-      </div>
-    </section>
-
-    <!-- Prestasi Mahasiswa Section -->
-    <section class="max-w-7xl mx-auto px-6 md:px-12 pb-16">
-      <div class="text-center mb-10">
-        <h2 class="text-2xl md:text-3xl font-extrabold text-admiral tracking-tight">Prestasi Mahasiswa</h2>
-      </div>
-      
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        
-        <!-- Card 1 -->
-        <div class="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow border-t-4 border-lemon p-4 flex flex-col items-center text-center">
-          <div class="w-full aspect-video md:aspect-square lg:aspect-[4/3] rounded-xl overflow-hidden mb-4 bg-slate-100">
-            <img src="/img/background-landingpage.png" alt="Prestasi 1" class="w-full h-full object-cover" loading="lazy" />
-          </div>
-          <h3 class="text-blue-600 font-bold text-base md:text-lg mb-1">Juara 2 Debat B. Inggris</h3>
-          <p class="text-slate-700 text-xs md:text-sm mb-1">Tiara Azzahra & Matilda F.</p>
-          <p class="text-slate-400 text-[10px] tracking-wider uppercase mt-auto pt-2">DISPORSENI NASIONAL UT 2025</p>
-        </div>
-
-        <!-- Card 2 -->
-        <div class="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow border-t-4 border-lemon p-4 flex flex-col items-center text-center">
-          <div class="w-full aspect-video md:aspect-square lg:aspect-[4/3] rounded-xl overflow-hidden mb-4 bg-slate-100">
-            <img src="/img/background-landingpage.png" alt="Prestasi 2" class="w-full h-full object-cover" loading="lazy" />
-          </div>
-          <h3 class="text-blue-600 font-bold text-base md:text-lg mb-1">Juara 1 Karya Tulis Ilmiah</h3>
-          <p class="text-slate-700 text-xs md:text-sm mb-1">Angga Permana G & Sujarwo</p>
-          <p class="text-slate-400 text-[10px] tracking-wider uppercase mt-auto pt-2">DISPORSENI NASIONAL UT 2025</p>
-        </div>
-
-        <!-- Card 3 -->
-        <div class="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow border-t-4 border-lemon p-4 flex flex-col items-center text-center">
-          <div class="w-full aspect-video md:aspect-square lg:aspect-[4/3] rounded-xl overflow-hidden mb-4 bg-slate-100">
-            <img src="/img/background-landingpage.png" alt="Prestasi 3" class="w-full h-full object-cover" loading="lazy" />
-          </div>
-          <h3 class="text-blue-600 font-bold text-base md:text-lg mb-1">Juara 3 Olimpiade Ekonomi</h3>
-          <p class="text-slate-700 text-xs md:text-sm mb-1">Yusup M, Eka Aulia, & M Rafi</p>
-          <p class="text-slate-400 text-[10px] tracking-wider uppercase mt-auto pt-2">DISPORSENI NASIONAL UT 2025</p>
-        </div>
-
-        <!-- Card 4 -->
-        <div class="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow border-t-4 border-lemon p-4 flex flex-col items-center text-center">
-          <div class="w-full aspect-video md:aspect-square lg:aspect-[4/3] rounded-xl overflow-hidden mb-4 bg-slate-100">
-            <img src="/img/background-landingpage.png" alt="Prestasi 4" class="w-full h-full object-cover" loading="lazy" />
-          </div>
-          <h3 class="text-blue-600 font-bold text-base md:text-lg mb-1">Juara 3 MTQ</h3>
-          <p class="text-slate-700 text-xs md:text-sm mb-1">Ahmad Sodikin</p>
-          <p class="text-slate-400 text-[10px] tracking-wider uppercase mt-auto pt-2">DISPORSENI NASIONAL UT 2025</p>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- Kata Mereka Section -->
-    <section class="bg-slate-50 py-16">
-      <div class="max-w-5xl mx-auto px-6 md:px-12">
-        <div class="text-center mb-12">
-          <h2 class="text-2xl md:text-3xl font-extrabold text-admiral tracking-tight">Kata Mereka</h2>
-        </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-          
-          <!-- Testimonial 1 -->
-          <div class="bg-white rounded-2xl p-8 text-center shadow-sm hover:shadow-md transition-shadow border-b-4 border-lemon">
-            <div class="w-20 h-20 mx-auto mb-6 rounded-full p-1 border-2 border-dashed border-lemon">
-              <img src="/img/ZAENAL ARIFIN.jpg" alt="Aditya Pratama" class="w-full h-full object-cover rounded-full" loading="lazy" />
-            </div>
-            <p class="text-slate-500 italic text-sm md:text-base mb-6 leading-relaxed">
-              "Ormawa UT Surabaya memberikan saya kesempatan untuk berkembang dan belajar banyak hal di luar akademik."
-            </p>
-            <h4 class="text-admiral font-bold text-lg mb-1">Aditya Pratama</h4>
-            <p class="text-slate-400 text-xs md:text-sm">Prodi Akuntansi, Angkatan '24.2</p>
-          </div>
-
-          <!-- Testimonial 2 -->
-          <div class="bg-white rounded-2xl p-8 text-center shadow-sm hover:shadow-md transition-shadow border-b-4 border-lemon">
-            <div class="w-20 h-20 mx-auto mb-6 rounded-full p-1 border-2 border-dashed border-lemon">
-              <img src="/img/background-landingpage.png" alt="Kanza Salsabila" class="w-full h-full object-cover rounded-full" loading="lazy" />
-            </div>
-            <p class="text-slate-500 italic text-sm md:text-base mb-6 leading-relaxed">
-              "Lingkungannya sangat positif dan suportif. Saya senang bisa bertemu teman-teman hebat di sini."
-            </p>
-            <h4 class="text-admiral font-bold text-lg mb-1">Kanza Salsabila</h4>
-            <p class="text-slate-400 text-xs md:text-sm">Teknologi Pangan, Angkatan 2023.1</p>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-
-
-    <Footer />
-  </main>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { computed, h, ref } from 'vue'
-// import { useOrmawaStore } from '@/stores/ormawa' // Uncomment jika store sudah ada
+import { computed } from 'vue'
+import type { UserRole } from '~/types/database.types'
 
-// ==========================================
-// CAROUSEL STATE
-// ==========================================
-const carouselRef = ref<HTMLElement | null>(null)
-const currentSlide = ref(0)
-
-const goToSlide = (index: number) => {
-  currentSlide.value = index
-  if (carouselRef.value) {
-    const slideWidth = carouselRef.value.offsetWidth
-    carouselRef.value.scrollTo({ left: slideWidth * index, behavior: 'smooth' })
-  }
-}
-
-const prevSlide = () => {
-  const total = upcomingEvents.value.length
-  const prev = (currentSlide.value - 1 + total) % total
-  goToSlide(prev)
-}
-
-const nextSlide = () => {
-  const total = upcomingEvents.value.length
-  const next = (currentSlide.value + 1) % total
-  goToSlide(next)
-}
-
-
-useHead({
-  title: 'Ormawa UT Surabaya - Website Resmi Organisasi Mahasiswa',
-  meta: [
-    { name: 'description', content: 'Sistem Informasi Resmi Ormawa UT Surabaya. Kelola agenda, pantau aktivitas, dan tingkatkan kolaborasi divisi secara terpadu.' }
-  ],
-  script: [
-    {
-      type: 'application/ld+json',
-      innerHTML: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "Ormawa UT Surabaya",
-        "url": "https://ormawa-utsurabaya.web.app",
-        "logo": "https://ormawa-utsurabaya.web.app/img/Favicon_bulat_transparan.png"
-      })
-    }
-  ]
+definePageMeta({
+  layout: 'admin',
+  middleware: 'auth',
 })
 
-// ==========================================
-// TYPES & INTERFACES
-// ==========================================
-type EventCategory = 'Workshop' | 'Competition' | 'Social' | 'Meeting'
-type EventStatus = 'Upcoming' | 'Passed' | 'Ongoing'
+useHead({ title: 'Dashboard — Admin Panel Ormawa' })
 
-interface AgendaEvent {
-  id: string
-  title: string
-  date: string
-  description: string
-  category: EventCategory
-  status: EventStatus
-}
-
-interface StatItem {
+interface SummaryCard {
   label: string
-  value: string | number
-  icon: any
+  value: string
+  description: string
 }
 
-// ==========================================
-// STATE MANAGEMENT & PINIA INTEGRATION
-// ==========================================
-// Contoh integrasi asli dengan Pinia:
-// const store = useOrmawaStore()
-// const upcomingEvents = computed(() => store.events.filter(e => e.status === 'Upcoming').slice(0, 3))
+interface QuickLink {
+  label: string
+  to: string
+}
 
-// Mock State untuk presentasi Landing Page
-const mockEvents: AgendaEvent[] = [
-  {
-    id: 'e1',
-    title: 'Pelatihan Kepemimpinan Mahasiswa 2024 (LDKM)',
-    date: '2024-07-15T09:00:00',
-    description: 'Kegiatan tahunan wajib untuk melatih jiwa kepemimpinan mahasiswa baru dan persiapan regenerasi pengurus masa bakti selanjutnya.',
-    category: 'Workshop',
-    status: 'Upcoming'
-  },
-  {
-    id: 'e2',
-    title: 'Lomba Inovasi Teknologi Nasional',
-    date: '2024-08-01T08:00:00',
-    description: 'Kompetisi menulis karya ilmiah dan inovasi dengan tema "Teknologi Tepat Guna di Era Society 5.0".',
-    category: 'Competition',
-    status: 'Upcoming'
-  },
-  {
-    id: 'e3',
-    title: 'Bakti Sosial & Desa Binaan',
-    date: '2024-08-20T07:00:00',
-    description: 'Penyaluran bantuan, edukasi kesehatan, serta perbaikan fasilitas desa di wilayah mitra binaan BEM.',
-    category: 'Social',
-    status: 'Upcoming'
-  },
-  {
-    id: 'e4',
-    title: 'Rapat Koordinasi Divisi Semester Ganjil',
-    date: '2024-09-05T13:00:00',
-    description: 'Rapat pleno seluruh divisi untuk menyelaraskan program kerja, target, dan anggaran semester ganjil 2024/2025.',
-    category: 'Meeting',
-    status: 'Upcoming'
-  },
-  {
-    id: 'e5',
-    title: 'Seminar Nasional Mahasiswa Berprestasi',
-    date: '2024-09-18T09:00:00',
-    description: 'Seminar inspiratif menghadirkan mahasiswa berprestasi nasional sebagai narasumber untuk berbagi pengalaman dan strategi sukses.',
-    category: 'Workshop',
-    status: 'Upcoming'
-  },
-  {
-    id: 'e6',
-    title: 'Festival Budaya & Seni Mahasiswa UT',
-    date: '2024-10-10T10:00:00',
-    description: 'Perayaan keberagaman budaya melalui pentas seni, pameran karya, dan lomba kreasi budaya antar mahasiswa UT Surabaya.',
-    category: 'Competition',
-    status: 'Upcoming'
-  }
+const userRole = useState<string | null>('userRole')
+
+const normalizedRole = computed<UserRole | null>(() => {
+  const raw: string | null = userRole.value
+  if (!raw) return null
+  const upper: string = raw.toUpperCase()
+  if (upper === 'SUPER_ADMIN') return 'SUPER_ADMIN'
+  if (upper === 'ADMIN') return 'ADMIN'
+  return null
+})
+
+const summaryCards: SummaryCard[] = [
+  { label: 'Artikel', value: '—', description: 'Total artikel terdaftar' },
+  { label: 'Organisasi', value: '—', description: 'HM & UKM aktif' },
+  { label: 'Pengguna', value: '—', description: 'Admin terdaftar' },
 ]
 
-const upcomingEvents = computed(() => mockEvents)
+const quickLinks = computed<QuickLink[]>(() => {
+  const links: QuickLink[] = [
+    { label: 'Kelola Artikel', to: '/dashboard/articles' },
+  ]
 
-// ==========================================
-// INLINE ICONS (Render Functions)
-// ==========================================
-const UsersIcon = () => h('svg', { fill: 'none', stroke: 'currentColor', viewBox: '0 0 24 24', class: 'w-7 h-7' }, [
-  h('path', { 'stroke-linecap': 'round', 'stroke-linejoin': 'round', 'stroke-width': '2', d: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z' })
-])
-const CalendarIcon = () => h('svg', { fill: 'none', stroke: 'currentColor', viewBox: '0 0 24 24', class: 'w-7 h-7' }, [
-  h('path', { 'stroke-linecap': 'round', 'stroke-linejoin': 'round', 'stroke-width': '2', d: 'M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z' })
-])
-const DocumentIcon = () => h('svg', { fill: 'none', stroke: 'currentColor', viewBox: '0 0 24 24', class: 'w-7 h-7' }, [
-  h('path', { 'stroke-linecap': 'round', 'stroke-linejoin': 'round', 'stroke-width': '2', d: 'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z' })
-])
-const AwardIcon = () => h('svg', { fill: 'none', stroke: 'currentColor', viewBox: '0 0 24 24', class: 'w-7 h-7' }, [
-  h('path', { 'stroke-linecap': 'round', 'stroke-linejoin': 'round', 'stroke-width': '2', d: 'M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z' })
-])
-
-// ==========================================
-// DATA MAPS
-// ==========================================
-const stats: StatItem[] = [
-  { label: 'Anggota Aktif', value: '1,240', icon: UsersIcon },
-  { label: 'Agenda Tahun Ini', value: '45+', icon: CalendarIcon },
-  { label: 'Proposal & LPJ', value: '120', icon: DocumentIcon },
-  { label: 'Penghargaan', value: '15', icon: AwardIcon },
-]
-
-// ==========================================
-// UTILITIES
-// ==========================================
-const formatDate = (dateString: string) => {
-  const date = new Date(dateString)
-  return new Intl.DateTimeFormat('id-ID', { day: '2-digit', month: 'short', year: 'numeric' }).format(date)
-}
-
-const getCategoryPattern = (category: EventCategory) => {
-  const patterns: Record<EventCategory, string> = {
-    Workshop: 'bg-blue-500',
-    Competition: 'bg-orange-500',
-    Social: 'bg-emerald-500',
-    Meeting: 'bg-slate-500'
+  if (normalizedRole.value === 'SUPER_ADMIN') {
+    links.unshift(
+      { label: 'Kelola Organisasi', to: '/dashboard/organizations' },
+      { label: 'Kelola Pengguna', to: '/dashboard/users' },
+    )
   }
-  return patterns[category] || patterns.Meeting
-}
+
+  return links
+})
 </script>
-
-<style scoped>
-.parallax > use {
-  animation: move-forever 25s cubic-bezier(.55,.5,.45,.5) infinite;
-}
-.parallax > use:nth-child(1) {
-  animation-delay: -2s;
-  animation-duration: 7s;
-}
-.parallax > use:nth-child(2) {
-  animation-delay: -3s;
-  animation-duration: 10s;
-}
-.parallax > use:nth-child(3) {
-  animation-delay: -4s;
-  animation-duration: 13s;
-}
-.parallax > use:nth-child(4) {
-  animation-delay: -5s;
-  animation-duration: 20s;
-}
-@keyframes move-forever {
-  0% { transform: translate3d(-90px,0,0); }
-  100% { transform: translate3d(85px,0,0); }
-}
-
-/* Sembunyikan scrollbar tapi tetap bisa di-scroll */
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
-}
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-</style>

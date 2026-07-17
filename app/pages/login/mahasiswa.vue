@@ -44,7 +44,7 @@
         </div>
 
         <div class="text-center mt-4">
-          <NuxtLink to="/dashboard" class="text-sm font-medium text-slate-500 hover:text-admiral transition-colors">
+          <NuxtLink to="/beranda" class="text-sm font-medium text-slate-500 hover:text-admiral transition-colors">
             Kembali ke Beranda
           </NuxtLink>
         </div>

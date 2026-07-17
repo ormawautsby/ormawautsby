@@ -21,28 +21,32 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import type { User } from 'firebase/auth'
+import type { UserRole } from '~/types/database.types'
 
-const profileOpen = ref(false)
-const firebaseUser = useState<any>('firebaseUser')
-const userRole = useState('userRole')
+const profileOpen = ref<boolean>(false)
+const firebaseUser = useState<User | null>('firebaseUser')
+const userRole = useState<string | null>('userRole')
 
-const userName = computed(() =>
+const userName = computed<string>(() =>
   firebaseUser.value?.displayName || firebaseUser.value?.email?.split('@')[0] || 'Admin'
 )
 
-const initials = computed(() => {
-  const name = userName.value
+const initials = computed<string>(() => {
+  const name: string = userName.value
   return name.split(' ').map((n: string) => n[0]).slice(0, 2).join('').toUpperCase()
 })
 
-const roleLabel = computed(() => {
-  const role = userRole.value
-  if (role === 'super_admin') return 'Super Admin'
-  if (role === 'admin') return 'Admin'
+const roleLabel = computed<string>(() => {
+  const role: string | null = userRole.value
+  if (!role) return 'Pengurus'
+  const upperRole: string = role.toUpperCase()
+  if (upperRole === 'SUPER_ADMIN') return 'Super Admin'
+  if (upperRole === 'ADMIN') return 'Admin'
   return 'Pengurus'
 })
 
-const logout = async () => {
+const logout = async (): Promise<void> => {
   const { $auth } = useNuxtApp()
   if ($auth) {
     const { signOut } = await import('firebase/auth')

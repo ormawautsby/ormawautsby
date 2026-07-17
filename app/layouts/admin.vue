@@ -14,8 +14,19 @@
         </div>
       </div>
 
-      <!-- User Profile (style sandbox) -->
-      <AdminHeaderProfile />
+      <!-- User Profile + Logout -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <button
+          @click="logout"
+          class="inline-flex items-center gap-2 rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm font-semibold text-red-600 transition hover:bg-red-100"
+        >
+          <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+          </svg>
+          Keluar
+        </button>
+        <AdminHeaderProfile />
+      </div>
     </header>
 
     <!-- Main Content Area with Sidebar -->
@@ -32,7 +43,15 @@
 </template>
 
 <script setup lang="ts">
-// Admin Layout - Sandbox Style
+const logout = async () => {
+  const { $auth } = useNuxtApp()
+
+  if ($auth) {
+    const { signOut } = await import('firebase/auth')
+    await signOut($auth)
+    await navigateTo('/login/admin')
+  }
+}
 </script>
 
 <style>

@@ -199,7 +199,7 @@
       
       <!-- Footer -->
       <div class="text-center mt-8">
-        <NuxtLink to="/dashboard" class="inline-flex items-center gap-1.5 text-xs font-bold text-slate-400 hover:text-admiral transition-colors group">
+        <NuxtLink to="/beranda" class="inline-flex items-center gap-1.5 text-xs font-bold text-slate-400 hover:text-admiral transition-colors group">
           <svg class="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
           Kembali ke Beranda
         </NuxtLink>
@@ -306,11 +306,16 @@ const loginAdmin = async () => {
 
     const result = await signInWithEmailAndPassword($auth, email.value, password.value)
 
-    const userDocRef = doc($db, 'users', result.user.uid)
-    const userDocSnap = await getDoc(userDocRef)
     let role = 'mahasiswa'
-    if (userDocSnap.exists()) {
-      role = (userDocSnap.data().role || '').trim()
+    try {
+      const userDocRef = doc($db, 'users', result.user.uid)
+      const userDocSnap = await getDoc(userDocRef)
+      if (userDocSnap.exists()) {
+        role = String(userDocSnap.data().role || 'mahasiswa').trim().toLowerCase()
+      }
+    } catch (readError) {
+      console.warn('Gagal membaca dokumen user saat login:', readError)
+      role = 'mahasiswa'
     }
 
     const userRole = useState('userRole')
@@ -319,7 +324,7 @@ const loginAdmin = async () => {
     firebaseUser.value = result.user
 
     if (role === 'admin' || role === 'super_admin' || role === 'pengurus') {
-      navigateTo('/dashboard/admin-area')
+      navigateTo('/dashboard')
     } else if (role === 'mahasiswa') {
       navigateTo('/dashboard/mahasiswa')
     } else {
@@ -403,7 +408,7 @@ const loginWithPasskey = async () => {
       firebaseUser.value = result.user
 
       if (role === 'admin' || role === 'super_admin' || role === 'pengurus') {
-        navigateTo('/dashboard/admin-area')
+        navigateTo('/dashboard')
       } else {
         navigateTo('/dashboard/mahasiswa')
       }

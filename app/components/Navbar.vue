@@ -11,7 +11,7 @@
         <div class="flex items-center justify-between md:justify-start md:gap-6 lg:gap-8 h-20 md:h-24 py-2">
         
         <!-- Logo Brand -->
-        <NuxtLink to="/dashboard" class="flex items-center gap-3 cursor-pointer">
+        <NuxtLink to="/beranda" class="flex items-center gap-3 cursor-pointer">
           <img src="/img/Logo-ormawa-navbar.png" alt="Logo Ormawa" class="h-16 md:h-20 w-auto object-contain mix-blend-multiply brightness-[1.08] contrast-[1.15]" />
         </NuxtLink>
         
@@ -19,11 +19,11 @@
         <div class="hidden md:flex items-center gap-4 lg:gap-6">
           <!-- Beranda -->
           <NuxtLink 
-            to="/dashboard" 
+            to="/beranda" 
             @click="handleBerandaClick"
             :class="[
               'flex items-center gap-2 px-3 py-2 rounded-lg text-base font-semibold transition-all duration-200',
-              isActiveLink('/dashboard') 
+              isActiveLink('/beranda') 
                 ? 'text-slate-900 bg-transparent hover:bg-slate-100' 
                 : 'text-slate-900 hover:bg-slate-100 hover:text-slate-900'
             ]"
@@ -218,11 +218,11 @@
       <div class="space-y-1 px-4">
         <!-- Beranda -->
         <NuxtLink 
-          to="/dashboard" 
+          to="/beranda" 
           @click="() => { isMobileMenuOpen = false; handleBerandaClick(); }" 
           :class="[
             'flex items-center gap-3 px-4 py-3 text-sm font-semibold rounded-xl transition-all',
-            isActiveLink('/dashboard') 
+            isActiveLink('/beranda') 
               ? 'bg-slate-100 text-slate-900' 
               : 'text-slate-900 hover:bg-slate-50'
           ]"
@@ -508,7 +508,7 @@ const toggleMobileKontak = () => {
 }
 
 const handleBerandaClick = () => {
-  if (route.path === '/dashboard') {
+  if (route.path === '/beranda') {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 }

@@ -4,11 +4,20 @@ import { getFirestore } from 'firebase-admin/firestore'
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event)
-  const { email, password, name, role } = body
   const config = useRuntimeConfig()
 
-  if (!email || !password || !role) {
-    throw createError({ statusCode: 400, statusMessage: 'Email, Password, and Role are required' })
+  const normalizedEmail = typeof body?.email === 'string' ? body.email.trim() : ''
+  const normalizedPassword = typeof body?.password === 'string' ? body.password : ''
+  const normalizedName = typeof body?.name === 'string' ? body.name.trim() : ''
+  const normalizedRole = typeof body?.role === 'string' && ['SUPER_ADMIN', 'ADMIN'].includes(body.role)
+    ? body.role
+    : 'ADMIN'
+  const normalizedOrganizationId = typeof body?.organization_id === 'string' && body.organization_id.trim()
+    ? body.organization_id
+    : null
+
+  if (!normalizedEmail || !normalizedPassword) {
+    throw createError({ statusCode: 400, statusMessage: 'Email and Password are required' })
   }
 
   // Parse service account key
@@ -38,20 +47,22 @@ export default defineEventHandler(async (event) => {
   try {
     // 1. Create user in Firebase Auth
     const userRecord = await getAuth().createUser({
-      email,
-      password,
-      displayName: name,
+      email: normalizedEmail,
+      password: normalizedPassword,
+      displayName: normalizedName,
     })
 
     // 2. Set Custom Claims for security rules (optional but recommended)
-    await getAuth().setCustomUserClaims(userRecord.uid, { role })
+    await getAuth().setCustomUserClaims(userRecord.uid, { role: normalizedRole })
 
     // 3. Save user role to Firestore
     const db = getFirestore()
     await db.collection('users').doc(userRecord.uid).set({
-      email,
-      nama: name || '',
-      role,
+      id: userRecord.uid,
+      email: normalizedEmail,
+      full_name: normalizedName,
+      role: normalizedRole,
+      organization_id: normalizedOrganizationId,
       createdAt: new Date().toISOString()
     })
 

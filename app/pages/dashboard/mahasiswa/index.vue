@@ -88,7 +88,7 @@
             <div class="text-center py-10 border-2 border-dashed border-slate-100 rounded-xl">
               <div class="text-4xl mb-3">📅</div>
               <p class="text-slate-500 font-medium">Belum ada agenda yang Anda simpan atau ikuti.</p>
-              <NuxtLink to="/dashboard" class="mt-4 inline-block px-5 py-2 bg-lemon text-admiral font-bold rounded-lg hover:bg-lemon-dark transition">
+              <NuxtLink to="/beranda" class="mt-4 inline-block px-5 py-2 bg-lemon text-admiral font-bold rounded-lg hover:bg-lemon-dark transition">
                 Cari Agenda
               </NuxtLink>
             </div>

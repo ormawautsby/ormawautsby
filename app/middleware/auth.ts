@@ -1,49 +1,76 @@
-export default defineNuxtRouteMiddleware((to, from) => {
-  // Gunakan state yang diset oleh plugin firebase.client.ts
+/**
+ * ============================================================
+ * NUXT ROUTE MIDDLEWARE: auth
+ * Proteksi semua rute /dashboard dengan Role-Based Access Control.
+ *
+ * Hierarki Role (dari database.types.ts):
+ *   SUPER_ADMIN → Akses ke semua halaman dashboard
+ *   ADMIN       → Hanya /dashboard/articles, redirect jika akses /users atau /organizations
+ *
+ * Kompatibilitas mundur: role lowercase ('super_admin', 'admin') dari
+ * sistem lama tetap diterima selama migrasi.
+ * ============================================================
+ */
+
+import type { UserRole } from '~/types/database.types'
+
+/** Normalkan role dari berbagai format menjadi UserRole yang valid */
+function normalizeRole(rawRole: unknown): UserRole | null {
+  if (typeof rawRole !== 'string') return null
+  const upperRole = rawRole.toUpperCase()
+  if (upperRole === 'SUPER_ADMIN') return 'SUPER_ADMIN'
+  if (upperRole === 'ADMIN') return 'ADMIN'
+  return null
+}
+
+export default defineNuxtRouteMiddleware((to) => {
   const firebaseUser = useState('firebaseUser')
   const userRole = useState('userRole')
   const isAuthReady = useState('isAuthReady')
-  // Skip middleware checks until auth state is initialized
-  if (!isAuthReady.value) {
-    return // allow navigation to proceed
+
+  // Biarkan navigasi berlanjut hingga auth Firebase siap
+  if (!isAuthReady.value) return
+
+  const isAuthenticated: boolean = !!firebaseUser.value
+  const role: UserRole | null = normalizeRole(userRole.value)
+
+  // ── 1. Proteksi semua rute /dashboard ──────────────────────
+  if (to.path.startsWith('/dashboard')) {
+
+    // Jika belum login → redirect ke halaman login admin
+    if (!isAuthenticated) {
+      return navigateTo('/login/admin', { replace: true })
+    }
+
+    // Jika role tidak dikenali → redirect ke login
+    if (role === null) {
+      return navigateTo('/login/admin', { replace: true })
+    }
   }
 
-  // Jika auth belum siap saat inisialisasi awal, kita biarkan dulu atau tangani di komponen dengan loading state.
-  // Untuk kesederhanaan, kita anggap middleware ini berjalan client-side setelah auth siap, atau server-side tanpa sesi untuk SPA
-  
-  const isAuthenticated = !!firebaseUser.value
-  const role = userRole.value as string
+  // ── 2. Proteksi /dashboard/users ───────────────────────────
+  // Hanya SUPER_ADMIN yang boleh mengakses halaman Users
+  if (to.path.startsWith('/dashboard/users')) {
+    if (role !== 'SUPER_ADMIN') {
+      return navigateTo('/dashboard/articles', { replace: true })
+    }
+  }
 
-  console.log('AUTH MIDDLEWARE RAN! To:', to.path)
-  console.log('isAuthenticated:', isAuthenticated, 'role:', role)
+  // ── 3. Proteksi /dashboard/organizations ───────────────────
+  // Hanya SUPER_ADMIN yang boleh mengakses halaman Organizations
+  if (to.path.startsWith('/dashboard/organizations')) {
+    if (role !== 'SUPER_ADMIN') {
+      return navigateTo('/dashboard/articles', { replace: true })
+    }
+  }
 
-  // 1. Cek apakah route membutuhkan autentikasi (misal semua route di /dashboard/admin-area)
+  // ── 4. Kompatibilitas mundur: proteksi admin-area lama ─────
   if (to.path.startsWith('/dashboard/admin-area')) {
     if (!isAuthenticated) {
-      return navigateTo('/login/admin')
+      return navigateTo('/login/admin', { replace: true })
     }
-    
-    // 2. Cek Role Hierarchy
-    // Hanya super_admin dan admin yang boleh masuk admin-area
-    const allowedRoles = ['super_admin', 'admin']
-    if (!allowedRoles.includes(role)) {
-      console.log('ROLE REJECTED! Allowed:', allowedRoles, 'Got:', role)
-      // Jika role tidak sesuai, lemparkan kembali ke beranda dashboard
-      return navigateTo('/dashboard', { 
-        replace: true 
-      })
-    }
-    console.log('ROLE ACCEPTED! Proceeding to admin-area.')
-  }
-
-  // Cek untuk route organisasi khusus pengurus
-  if (to.path.startsWith('/dashboard/organisasi/kelola')) {
-    if (!isAuthenticated) {
-      return navigateTo('/login/mahasiswa')
-    }
-
-    const allowedRoles = ['super_admin', 'admin', 'pengurus']
-    if (!allowedRoles.includes(role)) {
+    const allowedRoles: readonly string[] = ['SUPER_ADMIN', 'ADMIN', 'super_admin', 'admin']
+    if (!allowedRoles.includes(userRole.value as string)) {
       return navigateTo('/dashboard', { replace: true })
     }
   }
