@@ -9,7 +9,16 @@ export default defineNuxtConfig({
   nitro: {
     preset: 'firebase',
     firebase: {
-      gen: 2
+      gen: 2,
+      nodeVersion: '22'
+    },
+    externals: {
+      external: [
+        '@img/sharp-win32-x64',
+        '@img/sharp-linux-x64',
+        '@img/sharp-linux-arm64',
+        'sharp'
+      ]
     }
   },
 
