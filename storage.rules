@@ -41,5 +41,13 @@ service firebase.storage {
       // Sementara dibuka untuk menguji upload tanpa blokir permission
       allow write: if true;
     }
+
+    // ── Aturan untuk folder pengurus ──
+    match /pengurus/{imageId} {
+      // Siapapun bisa melihat foto profil pengurus (untuk halaman publik)
+      allow read: if true;
+      // Pengguna yang sudah login bisa upload foto pengurus
+      allow write: if isAuthenticated() && isImage() && isFileSizeValid();
+    }
   }
 }
