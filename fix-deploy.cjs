@@ -9,6 +9,7 @@ delete pkg.dependencies['@img/sharp-win32-x64'];
 delete pkg.dependencies['@img/sharp-linux-x64'];
 delete pkg.dependencies['@img/sharp-linux-arm64'];
 pkg.engines = { node: '22' };
+pkg.main = 'index.js';
 
 // Tambahkan/update firebase-functions ke versi terbaru
 pkg.dependencies['firebase-functions'] = '^7.2.5';
@@ -44,6 +45,13 @@ if (fs.existsSync(src)) {
   console.error('❌ firebase-functions not found in root node_modules. Run: npm install');
   process.exit(1);
 }
+
+// 5. Buat index.js wrapper untuk Firebase Functions (ESM karena package.json "type": "module")
+const indexJsContent = `// ESM re-export wrapper — package.json has "type": "module"
+export * from './index.mjs';
+`;
+fs.writeFileSync('.output/server/index.js', indexJsContent);
+console.log('✅ Created index.js ESM wrapper for Firebase Functions');
 
 console.log('🚀 Ready to deploy! Run: firebase deploy');
 

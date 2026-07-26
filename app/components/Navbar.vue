@@ -182,8 +182,11 @@
               <NuxtLink to="/kontak/aspirasi" class="block px-4 py-2.5 text-sm text-slate-900 hover:bg-slate-50 hover:text-slate-900 transition-all font-medium border-b border-slate-50">
                 Aspirasi
               </NuxtLink>
-              <NuxtLink to="/kontak/pelaporan" class="block px-4 py-2.5 text-sm text-slate-900 hover:bg-slate-50 hover:text-slate-900 transition-all font-medium">
+              <NuxtLink to="/kontak/pelaporan" class="block px-4 py-2.5 text-sm text-slate-900 hover:bg-slate-50 hover:text-slate-900 transition-all font-medium border-b border-slate-50">
                 Pelaporan
+              </NuxtLink>
+              <NuxtLink to="/kontak/wa_prodi_2026_2" class="block px-4 py-2.5 text-sm text-slate-900 hover:bg-slate-50 hover:text-slate-900 transition-all font-medium">
+                WA Prodi 2026
               </NuxtLink>
             </div>
           </div>
@@ -418,6 +421,13 @@
               class="block px-4 py-2 text-xs font-semibold text-slate-900 hover:text-slate-900 rounded-lg hover:bg-slate-50"
             >
               Pelaporan
+            </NuxtLink>
+            <NuxtLink 
+              to="/kontak/wa_prodi_2026_2" 
+              @click="isMobileMenuOpen = false" 
+              class="block px-4 py-2 text-xs font-semibold text-slate-900 hover:text-slate-900 rounded-lg hover:bg-slate-50"
+            >
+              WA Prodi 2026
             </NuxtLink>
           </div>
         </div>
