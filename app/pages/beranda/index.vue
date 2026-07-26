@@ -249,9 +249,9 @@ const AwardIcon = () => h('svg', { fill: 'none', stroke: 'currentColor', viewBox
 ])
 
 const stats: StatItem[] = [
-  { label: 'Anggota Aktif', value: '1,240', icon: UsersIcon },
-  { label: 'Agenda Tahun Ini', value: '45+', icon: CalendarIcon },
-  { label: 'Proposal & LPJ', value: '120', icon: DocumentIcon },
+  { label: 'Anggota Aktif', value: '30', icon: UsersIcon },
+  { label: 'Agenda Tahun Ini', value: '10+', icon: CalendarIcon },
+  { label: 'Proposal & LPJ', value: '10', icon: DocumentIcon },
   { label: 'Penghargaan', value: '15', icon: AwardIcon },
 ]
 
