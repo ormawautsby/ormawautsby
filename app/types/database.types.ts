@@ -27,8 +27,14 @@ export type UserRole = 'SUPER_ADMIN' | 'ADMIN'
  * Tipe organisasi.
  * - HIMPUNAN_MAHASISWA       : Himpunan Mahasiswa (HM / IMF).
  * - UNIT_KEGIATAN_MAHASISWA  : Unit Kegiatan Mahasiswa (UKM).
+ * - ORMAWA                   : Organisasi Mahasiswa (BEM / DPM dll).
+ * - ORGANISASI_LAIN          : Organisasi lainnya di luar kategori di atas.
  */
-export type OrganizationType = 'HIMPUNAN_MAHASISWA' | 'UNIT_KEGIATAN_MAHASISWA'
+export type OrganizationType =
+  | 'HIMPUNAN_MAHASISWA'
+  | 'UNIT_KEGIATAN_MAHASISWA'
+  | 'ORMAWA'
+  | 'ORGANISASI_LAIN'
 
 /**
  * Status publikasi artikel.

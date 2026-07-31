@@ -110,19 +110,46 @@
           </div>
 
           <div v-if="isSuperAdmin">
-            <label class="block text-xs font-bold text-slate-600 uppercase mb-1.5">Organisasi <span class="text-red-500">*</span></label>
-            <select
-              v-model="form.organization_id"
-              required
-              class="w-full px-4 py-3 border border-slate-200 bg-slate-50 rounded-xl text-sm focus:ring-2 focus:ring-emerald-500 transition"
-            >
-              <option value="" disabled>-- Pilih Organisasi --</option>
-              <option v-for="org in organizations" :key="org.id" :value="org.id">
-                {{ org.name }}
-              </option>
-            </select>
-            <p class="text-[10px] text-slate-400 mt-1">Super Admin wajib memilih organisasi pemilik artikel.</p>
+            <!-- Filter Kategori Organisasi -->
+            <div class="mb-3">
+              <label class="block text-xs font-bold text-slate-600 uppercase mb-1.5">
+                Kategori Organisasi <span class="text-red-500">*</span>
+              </label>
+              <select
+                v-model="selectedOrgType"
+                class="w-full px-4 py-3 border border-slate-200 bg-slate-50 rounded-xl text-sm focus:ring-2 focus:ring-emerald-500 transition"
+              >
+                <option
+                  v-for="opt in ORG_TYPE_OPTIONS"
+                  :key="opt.value"
+                  :value="opt.value"
+                >
+                  {{ opt.label }}
+                </option>
+              </select>
+              <p class="text-[10px] text-slate-400 mt-1">Pilih kategori untuk menyaring daftar organisasi.</p>
+            </div>
+
+            <!-- Pilih Organisasi (difilter berdasarkan kategori) -->
+            <div>
+              <label class="block text-xs font-bold text-slate-600 uppercase mb-1.5">Organisasi <span class="text-red-500">*</span></label>
+              <select
+                v-model="form.organization_id"
+                required
+                class="w-full px-4 py-3 border border-slate-200 bg-slate-50 rounded-xl text-sm focus:ring-2 focus:ring-emerald-500 transition"
+              >
+                <option value="" disabled>-- Pilih Organisasi --</option>
+                <option v-for="org in organizations" :key="org.id" :value="org.id">
+                  {{ org.name }}
+                </option>
+              </select>
+              <p v-if="selectedOrgType && organizations.length === 0" class="text-[10px] text-amber-500 mt-1 font-medium">
+                Tidak ada organisasi dalam kategori ini.
+              </p>
+              <p v-else class="text-[10px] text-slate-400 mt-1">Super Admin wajib memilih organisasi pemilik artikel.</p>
+            </div>
           </div>
+
         </div>
 
         <!-- Media Settings -->
@@ -164,9 +191,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, onMounted, computed } from 'vue'
+import { ref, reactive, onMounted, computed, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import type { ArticleStatus, CreateArticlePayload, UpdateArticlePayload, OrganizationDocument, ArticleDocument, UserDocument } from '~/types/database.types'
+import type { ArticleStatus, CreateArticlePayload, UpdateArticlePayload, OrganizationDocument, ArticleDocument, UserDocument, OrganizationType } from '~/types/database.types'
 
 definePageMeta({ layout: 'admin', middleware: 'auth' })
 useHead({ title: 'Form Artikel — Admin Panel Ormawa' })
@@ -185,12 +212,33 @@ const isLoading = ref<boolean>(true)
 const isSubmitting = ref<boolean>(false)
 const pageError = ref<string>('')
 
-const organizations = ref<OrganizationDocument[]>([])
+const allOrganizations = ref<OrganizationDocument[]>([])
+const organizations = computed(() => {
+  if (!selectedOrgType.value) return allOrganizations.value
+  return allOrganizations.value.filter(org => org.organization_type === selectedOrgType.value)
+})
 const currentUser = ref<UserDocument | null>(null)
+
+// Pilihan tipe organisasi untuk filter
+const ORG_TYPE_OPTIONS: { value: OrganizationType | ''; label: string }[] = [
+  { value: '', label: '-- Semua Kategori --' },
+  { value: 'HIMPUNAN_MAHASISWA', label: 'IMF (Himpunan Mahasiswa)' },
+  { value: 'UNIT_KEGIATAN_MAHASISWA', label: 'UKM (Unit Kegiatan Mahasiswa)' },
+  { value: 'ORMAWA', label: 'ORMAWA (Organisasi Mahasiswa)' },
+  { value: 'ORGANISASI_LAIN', label: 'Organisasi Lain' },
+]
 
 const userRole = useState<string | null>('userRole')
 const firebaseUser = useState<any>('firebaseUser')
 const isSuperAdmin = computed(() => (userRole.value || '').toUpperCase() === 'SUPER_ADMIN')
+
+// ── Filter Tipe Organisasi (Super Admin) ────────────────────
+const selectedOrgType = ref<OrganizationType | ''>('')
+
+watch(selectedOrgType, () => {
+  // Reset pilihan organisasi saat kategori berubah
+  form.organization_id = ''
+})
 
 // ── Form State ──────────────────────────────────────────────
 const form = reactive({
@@ -257,9 +305,9 @@ onMounted(async () => {
     }
 
     if ((userRole.value || '').toUpperCase() === 'SUPER_ADMIN') {
-      organizations.value = await getAllOrganizations()
+      allOrganizations.value = await getAllOrganizations()
     } else if (currentUser.value?.role === 'ADMIN' && currentUser.value.organization_id) {
-      organizations.value = await getAllOrganizations()
+      allOrganizations.value = await getAllOrganizations()
     }
 
     if (isEdit.value && articleId.value) {

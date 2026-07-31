@@ -26,10 +26,8 @@
           </p>
 
           <!-- ✅ Shortcut: Grup WA Prodi OSMB 2026.2 -->
-          <a
-            href="https://chat.whatsapp.com/GANTI_LINK_GRUP_DISINI"
-            target="_blank"
-            rel="noopener noreferrer"
+          <NuxtLink
+            to="/kontak/wa_prodi_2026_2"
             class="group inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white hover:border-green-300 rounded-2xl shadow-lg hover:shadow-xl px-6 py-4 transition-all duration-300 hover:-translate-y-1"
           >
             <!-- WhatsApp Icon -->
@@ -44,7 +42,7 @@
             <svg class="w-4 h-4 text-white/60 group-hover:text-green-500 group-hover:translate-x-1 transition-all ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/>
             </svg>
-          </a>
+          </NuxtLink>
         </div>
       </div>
 

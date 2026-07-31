@@ -313,6 +313,41 @@ export const useArticles = () => {
   }
 
   /**
+   * Mengambil satu artikel berdasarkan slug-nya.
+   * Digunakan untuk halaman detail artikel publik.
+   *
+   * @param slug - Slug artikel yang ingin diambil
+   * @returns Data artikel atau null jika tidak ditemukan
+   */
+  const getArticleBySlug = async (slug: string): Promise<ArticleDocument | null> => {
+    if (!$db) throw new Error('Firestore belum diinisialisasi.')
+
+    const {
+      collection,
+      query,
+      where,
+      getDocs,
+      limit,
+    } = await import('firebase/firestore')
+
+    const articlesQuery = query(
+      collection($db, COLLECTION_ARTICLES),
+      where('slug', '==', slug),
+      where('status', '==', 'PUBLISHED'),
+      limit(1)
+    )
+
+    const snapshot = await getDocs(articlesQuery)
+    if (snapshot.empty) return null
+
+    const docSnap = snapshot.docs[0]
+    return {
+      id: docSnap.id,
+      ...(docSnap.data() as Omit<ArticleDocument, 'id'>),
+    }
+  }
+
+  /**
    * Menghapus artikel berdasarkan ID dokumen.
    */
   const deleteArticle = async (article_id: string): Promise<void> => {
@@ -332,6 +367,7 @@ export const useArticles = () => {
     getAllArticles,
     getUkmArticles,
     getArticlesByOrganization,
+    getArticleBySlug,
     updateArticleStatus,
     updateArticle,
     deleteArticle,

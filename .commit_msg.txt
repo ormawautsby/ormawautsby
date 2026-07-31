@@ -1,11 +1,4 @@
-feat: tambah fitur struktur pengurus
+fix: update firebase-functions to v7.2.5 in deploy script
 
-- Tambah halaman dashboard admin CRUD struktur pengurus (BPH dan bidang)
-- Tambah composable usePengurus untuk operasi Firestore
-- Update halaman publik profil/struktur-pengurus baca dari Firestore
-- Tambah menu Struktur Pengurus di sidebar admin
-- Fix auth middleware agar tidak memblokir navigasi (await isAuthReady)
-- Tambah NuxtLayout di app.vue agar layout admin berfungsi
-- Update Firestore rules: koleksi pengurus dan isSuperAdmin case-insensitive
-- Update Storage rules: tambah folder pengurus untuk upload foto
-- Redesign card tampilan struktur pengurus di halaman publik
+- Update fix-deploy.cjs: bump firebase-functions dari ^6.0.0 ke ^7.2.5
+- Tambah add-fb-functions.cjs sebagai helper script
