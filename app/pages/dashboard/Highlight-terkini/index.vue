@@ -11,7 +11,7 @@
         </p>
       </div>
       <NuxtLink
-        to="/dashboard/articles/form"
+        to="/dashboard/Highlight-terkini/form"
         class="inline-flex items-center gap-2 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-bold rounded-xl shadow-sm transition-colors"
       >
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -99,7 +99,7 @@
             <td class="px-6 py-4 text-right">
               <div class="flex items-center justify-end gap-2">
                 <NuxtLink
-                  :to="`/dashboard/articles/form?id=${article.id}`"
+                  :to="`/dashboard/Highlight-terkini/form?id=${article.id}`"
                   class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors"
                 >
                   Edit

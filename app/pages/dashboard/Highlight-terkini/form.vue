@@ -5,7 +5,7 @@
     ════════════════════════════════════════════════ -->
     <div class="flex items-center justify-between mb-8">
       <div>
-        <NuxtLink to="/dashboard/articles" class="inline-flex items-center gap-2 text-sm font-bold text-slate-500 hover:text-emerald-600 transition-colors mb-2">
+        <NuxtLink to="/dashboard/Highlight-terkini" class="inline-flex items-center gap-2 text-sm font-bold text-slate-500 hover:text-emerald-600 transition-colors mb-2">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
           </svg>
@@ -402,7 +402,7 @@ async function submitForm() {
       await createArticle(payload)
     }
 
-    router.push('/dashboard/articles')
+    router.push('/dashboard/Highlight-terkini')
   } catch (err: any) {
     pageError.value = err.message || 'Gagal menyimpan artikel.'
   } finally {

@@ -5,7 +5,7 @@
  *
  * Hierarki Role (dari database.types.ts):
  *   SUPER_ADMIN → Akses ke semua halaman dashboard
- *   ADMIN       → Hanya /dashboard/articles, redirect jika akses /users atau /organizations
+ *   ADMIN       → Hanya /dashboard/Highlight-terkini, redirect jika akses /users atau /organizations
  *
  * Kompatibilitas mundur: role lowercase ('super_admin', 'admin') dari
  * sistem lama tetap diterima selama migrasi.
@@ -67,7 +67,7 @@ export default defineNuxtRouteMiddleware(async (to) => {
   // Hanya SUPER_ADMIN yang boleh mengakses halaman Users
   if (to.path.startsWith('/dashboard/users')) {
     if (role !== 'SUPER_ADMIN') {
-      return navigateTo('/dashboard/articles', { replace: true })
+      return navigateTo('/dashboard/Highlight-terkini', { replace: true })
     }
   }
 
@@ -75,7 +75,7 @@ export default defineNuxtRouteMiddleware(async (to) => {
   // Hanya SUPER_ADMIN yang boleh mengakses halaman Organizations
   if (to.path.startsWith('/dashboard/organizations')) {
     if (role !== 'SUPER_ADMIN') {
-      return navigateTo('/dashboard/articles', { replace: true })
+      return navigateTo('/dashboard/Highlight-terkini', { replace: true })
     }
   }
 
