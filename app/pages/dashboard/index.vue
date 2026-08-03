@@ -79,7 +79,7 @@ const summaryCards: SummaryCard[] = [
 
 const quickLinks = computed<QuickLink[]>(() => {
   const links: QuickLink[] = [
-    { label: 'Kelola Artikel', to: '/dashboard/articles' },
+    { label: 'Kelola Artikel', to: '/dashboard/Highlight-terkini' },
   ]
 
   if (normalizedRole.value === 'SUPER_ADMIN') {
