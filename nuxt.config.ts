@@ -14,9 +14,6 @@ export default defineNuxtConfig({
     },
     externals: {
       external: [
-        '@img/sharp-win32-x64',
-        '@img/sharp-linux-x64',
-        '@img/sharp-linux-arm64',
         'sharp'
       ]
     }
