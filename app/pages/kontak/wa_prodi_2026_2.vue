@@ -153,7 +153,7 @@ const prodiList = [
     fakultas: 'Fakultas Ekonomi dan Bisnis',
     icon: '📡',
     nomorWa: 'Klik disini',
-    waLink: 'nolink12345',
+    waLink: 'https://chat.whatsapp.com/IVDnibO4Pjs0htkBjY82Qz',
     badgeClass: 'bg-blue-100 text-blue-700'
   },
   {
@@ -161,7 +161,7 @@ const prodiList = [
     fakultas: 'Fakultas Keguruan dan Ilmu Pendidikan',
     icon: '🏛️',
     nomorWa: 'Klik disini',
-    waLink: 'nolink12345',
+    waLink: 'https://chat.whatsapp.com/GRmXMS28vtL17NkyaoBWTX',
     badgeClass: 'bg-blue-100 text-blue-700'
   },
   
