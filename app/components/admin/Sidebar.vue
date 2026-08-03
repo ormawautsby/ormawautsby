@@ -74,6 +74,88 @@
         </NuxtLink>
 
       </nav>
+
+      <!-- Section: Halaman Publik -->
+      <div class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 px-4 mt-6">Halaman Publik</div>
+      <nav class="space-y-1 flex flex-col">
+        
+        <NuxtLink to="/" class="nav-item group">
+          <svg class="w-5 h-5 text-blue-500 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+          1. Beranda
+        </NuxtLink>
+
+        <details class="group/details">
+          <summary class="nav-item group cursor-pointer list-none flex justify-between items-center">
+            <div class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-blue-500 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+              2. Profile
+            </div>
+            <svg class="w-4 h-4 text-slate-400 transition-transform group-open/details:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </summary>
+          <div class="pl-12 pr-4 py-2 flex flex-col gap-3">
+            <NuxtLink to="/profil/tentang-ut" class="text-xs font-medium text-slate-500 hover:text-emerald-600 transition-colors">Tentang UT Surabaya</NuxtLink>
+            <NuxtLink to="/profil/tentang-ormawa" class="text-xs font-medium text-slate-500 hover:text-emerald-600 transition-colors">Tentang Ormawa</NuxtLink>
+            <NuxtLink to="/profil/visi-misi" class="text-xs font-medium text-slate-500 hover:text-emerald-600 transition-colors">Visi dan Misi</NuxtLink>
+            <NuxtLink to="/profil/struktur-pengurus" class="text-xs font-medium text-slate-500 hover:text-emerald-600 transition-colors">Struktur Pengurus</NuxtLink>
+          </div>
+        </details>
+
+        <details class="group/details">
+          <summary class="nav-item group cursor-pointer list-none flex justify-between items-center">
+            <div class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-blue-500 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+              3. Zona Kampus
+            </div>
+            <svg class="w-4 h-4 text-slate-400 transition-transform group-open/details:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </summary>
+          <div class="pl-12 pr-4 py-2 flex flex-col gap-3">
+            <div class="text-[10px] font-bold text-slate-400 uppercase">Kegiatan</div>
+            <NuxtLink to="/zona-kampus/akademik" class="text-xs font-medium text-slate-500 hover:text-emerald-600 transition-colors pl-2">Akademik</NuxtLink>
+            <NuxtLink to="/zona-kampus/non-akademik" class="text-xs font-medium text-slate-500 hover:text-emerald-600 transition-colors pl-2 mb-2">Non Akademik</NuxtLink>
+            
+            <div class="text-[10px] font-bold text-slate-400 uppercase">Pendaftaran</div>
+            <NuxtLink to="/zona-kampus/ukm" class="text-xs font-medium text-slate-500 hover:text-emerald-600 transition-colors pl-2">Unit Kreatifitas Mahasiswa</NuxtLink>
+            <NuxtLink to="/zona-kampus/imf" class="text-xs font-medium text-slate-500 hover:text-emerald-600 transition-colors pl-2">Iam Fakultas (IMF/HIMA)</NuxtLink>
+          </div>
+        </details>
+
+        <details class="group/details">
+          <summary class="nav-item group cursor-pointer list-none flex justify-between items-center">
+            <div class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-blue-500 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path></svg>
+              4. Media
+            </div>
+            <svg class="w-4 h-4 text-slate-400 transition-transform group-open/details:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </summary>
+          <div class="pl-12 pr-4 py-2 flex flex-col gap-3">
+            <NuxtLink to="/media/artikel" class="text-xs font-medium text-slate-500 hover:text-emerald-600 transition-colors">Artikel dan berita</NuxtLink>
+            <NuxtLink to="/media/perlombaan" class="text-xs font-medium text-slate-500 hover:text-emerald-600 transition-colors">Informasi perlombaan</NuxtLink>
+            <NuxtLink to="/media/laporan" class="text-xs font-medium text-slate-500 hover:text-emerald-600 transition-colors">Laporan Kegiatas</NuxtLink>
+            <NuxtLink to="/media/social-media" class="text-xs font-medium text-slate-500 hover:text-emerald-600 transition-colors">Social Media Ormawa</NuxtLink>
+          </div>
+        </details>
+
+        <details class="group/details">
+          <summary class="nav-item group cursor-pointer list-none flex justify-between items-center">
+            <div class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-blue-500 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+              5. Kontak
+            </div>
+            <svg class="w-4 h-4 text-slate-400 transition-transform group-open/details:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </summary>
+          <div class="pl-12 pr-4 py-2 flex flex-col gap-3">
+            <NuxtLink to="/kontak/aspirasi" class="text-xs font-medium text-slate-500 hover:text-emerald-600 transition-colors">Aspirasi</NuxtLink>
+            <NuxtLink to="/kontak/pelaporan" class="text-xs font-medium text-slate-500 hover:text-emerald-600 transition-colors">Pelaporan</NuxtLink>
+            <NuxtLink to="/kontak/wa_prodi_2026_2" class="text-xs font-medium text-slate-500 hover:text-emerald-600 transition-colors">WA Prodi 2026</NuxtLink>
+          </div>
+        </details>
+
+        <NuxtLink to="/login/admin" class="nav-item group">
+          <svg class="w-5 h-5 text-blue-500 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path></svg>
+          6. Masuk
+        </NuxtLink>
+
+      </nav>
     </div>
 
     <!-- Debug role indicator -->
