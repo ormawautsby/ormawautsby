@@ -153,7 +153,7 @@
               </span>
             </div>
             
-            <h3 class="mb-3 text-3xl md:text-4xl lg:text-5xl font-extrabold text-white leading-tight drop-shadow-md group-hover:text-lemon transition-colors duration-300">
+            <h3 class="mb-3 text-2xl md:text-3xl lg:text-4xl font-extrabold text-white leading-tight drop-shadow-md group-hover:text-lemon transition-colors duration-300">
               <NuxtLink :to="`/berita/${highlight_articles[0].slug}`" class="focus:outline-none">
                 <span class="absolute inset-0" aria-hidden="true"></span>
                 {{ highlight_articles[0].title }}
@@ -184,7 +184,7 @@
                 <span class="inline-flex rounded-full bg-white/20 backdrop-blur-md border border-white/10 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-white">{{ article.organization_name }}</span>
               </div>
               
-              <h4 class="mb-2 text-xl font-bold text-white leading-snug group-hover:text-lemon transition-colors duration-300 line-clamp-3">
+              <h4 class="mb-2 text-lg font-bold text-white leading-snug group-hover:text-lemon transition-colors duration-300 line-clamp-3">
                 <NuxtLink :to="`/berita/${article.slug}`" class="focus:outline-none">
                   <span class="absolute inset-0" aria-hidden="true"></span>
                   {{ article.title }}
