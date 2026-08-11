@@ -71,7 +71,7 @@
           <div>
             <label class="block text-xs font-bold text-slate-600 uppercase mb-1.5">Slug URL <span class="text-red-500">*</span></label>
             <div class="flex items-center">
-              <span class="px-4 py-3 bg-slate-100 border border-r-0 border-slate-200 rounded-l-xl text-slate-500 text-sm">ormawautsby.com/</span>
+              <span class="px-4 py-3 bg-slate-100 border border-r-0 border-slate-200 rounded-l-xl text-slate-500 text-sm">ormawa-utsurabaya.web.id/</span>
               <input
                 v-model="form.slug"
                 type="text"
@@ -107,6 +107,16 @@
               <option value="DRAFT">Draf (Sembunyikan)</option>
               <option value="PUBLISHED">Publikasi (Tampilkan)</option>
             </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-600 uppercase mb-1.5">Tanggal Artikel <span class="font-medium text-slate-400 normal-case">(opsional)</span></label>
+            <input
+              v-model="form.created_at"
+              type="datetime-local"
+              class="w-full px-4 py-3 border border-slate-200 bg-slate-50 rounded-xl text-sm focus:ring-2 focus:ring-emerald-500 transition"
+            />
+            <p class="text-[10px] text-slate-400 mt-1">Biarkan kosong untuk menggunakan waktu saat ini.</p>
           </div>
 
           <div v-if="isSuperAdmin">
@@ -248,6 +258,7 @@ const form = reactive({
   cover_image_url: '',
   status: 'DRAFT' as ArticleStatus,
   organization_id: '',
+  created_at: '',
 })
 
 const coverFile = ref<File | null>(null)
@@ -320,6 +331,11 @@ onMounted(async () => {
         form.cover_image_url = data.cover_image_url || ''
         form.status = data.status as ArticleStatus
         form.organization_id = data.organization_id || ''
+        if (data.created_at && typeof data.created_at.toDate === 'function') {
+          const date = data.created_at.toDate()
+          const tzOffset = date.getTimezoneOffset() * 60000
+          form.created_at = (new Date(date.getTime() - tzOffset)).toISOString().slice(0, 16)
+        }
       } else {
         throw new Error('Artikel tidak ditemukan')
       }
@@ -381,7 +397,7 @@ async function submitForm() {
       throw new Error('Data organisasi pemilik artikel tidak ditemukan.')
     }
 
-    const payloadBase = {
+    const payloadBase: any = {
       title: form.title.trim(),
       slug: form.slug.trim(),
       content: form.content.trim(),
@@ -390,8 +406,16 @@ async function submitForm() {
       organization_id: organizationId,
     }
 
+    if (form.created_at) {
+      payloadBase.created_at = new Date(form.created_at)
+    }
+
     if (isEdit.value && articleId.value) {
-      const payload: UpdateArticlePayload = payloadBase
+      const payload: UpdateArticlePayload = {
+        ...payloadBase,
+        organization_name: organizationName,
+        organization_type: organizationType,
+      }
       await updateArticle(articleId.value, payload)
     } else {
       const payload: CreateArticlePayload = {

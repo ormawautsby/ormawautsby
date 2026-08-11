@@ -82,8 +82,8 @@ export const useArticles = () => {
       organization_name: organizationData.name,
       organization_type: organizationData.organization_type,
 
-      // Timestamps otomatis dari server Firestore (bukan dari klien)
-      created_at: serverTimestamp(),
+      // Timestamps otomatis dari server Firestore (bukan dari klien) kecuali jika disetel manual
+      created_at: payload.created_at || serverTimestamp(),
       updated_at: serverTimestamp(),
     }
 

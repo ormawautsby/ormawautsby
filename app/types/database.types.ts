@@ -179,12 +179,12 @@ export interface Article extends ArticleDocument {}
 export type CreateArticlePayload = Omit<
   ArticleDocument,
   'id' | 'organization_name' | 'organization_type' | 'created_at' | 'updated_at'
->
+> & { created_at?: Date | Timestamp }
 
 /**
  * Tipe data yang diperlukan saat memperbarui artikel.
  * Semua field bersifat opsional kecuali `updated_at` yang selalu diperbarui otomatis.
  */
 export type UpdateArticlePayload = Partial<
-  Omit<ArticleDocument, 'id' | 'organization_name' | 'organization_type' | 'created_at' | 'updated_at'>
->
+  Omit<ArticleDocument, 'id' | 'created_at' | 'updated_at'>
+> & { created_at?: Date | Timestamp }

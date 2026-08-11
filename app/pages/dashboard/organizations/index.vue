@@ -246,6 +246,8 @@
                     <option value="" disabled>-- Pilih Tipe --</option>
                     <option value="HIMPUNAN_MAHASISWA">Himpunan Mahasiswa (HM)</option>
                     <option value="UNIT_KEGIATAN_MAHASISWA">Unit Kegiatan Mahasiswa (UKM)</option>
+                    <option value="ORMAWA">ORMAWA (Organisasi Mahasiswa)</option>
+                    <option value="ORGANISASI_LAIN">Organisasi Lain</option>
                   </select>
                 </div>
 
@@ -438,6 +440,8 @@ function organizationTypeLabel(type: OrganizationType): string {
   const labels: Record<OrganizationType, string> = {
     HIMPUNAN_MAHASISWA: 'Himpunan Mahasiswa',
     UNIT_KEGIATAN_MAHASISWA: 'Unit Kegiatan Mahasiswa',
+    ORMAWA: 'ORMAWA',
+    ORGANISASI_LAIN: 'Organisasi Lain',
   }
   return labels[type] ?? type
 }
