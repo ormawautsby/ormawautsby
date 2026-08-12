@@ -16,7 +16,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '20'
 
       - name: Install Dependencies
         run: npm install
@@ -41,6 +41,7 @@ jobs:
 
       - name: Deploy to Firebase (Hosting & Functions)
         run: |
+          echo "legacy-peer-deps=true" > .output/server/.npmrc
           mv package-lock.json package-lock.json.bak
           firebase deploy --only hosting,functions,firestore,storage
           mv package-lock.json.bak package-lock.json
