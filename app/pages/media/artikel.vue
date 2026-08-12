@@ -39,12 +39,23 @@
               : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 hover:border-blue-300 hover:text-blue-600'
           ]"
         >
-          {{ cat }}
+          {{ categoryLabel(cat) }}
         </button>
       </div>
 
+      <!-- Loading State -->
+      <div v-if="isLoading" class="text-center py-20">
+        <div class="inline-flex items-center justify-center mb-4">
+          <svg class="animate-spin w-10 h-10 text-blue-600" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+          </svg>
+        </div>
+        <p class="text-slate-500">Memuat artikel...</p>
+      </div>
+
       <!-- Articles Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div v-else-if="filteredArticles.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <article 
           v-for="article in filteredArticles" 
           :key="article.id"
@@ -53,7 +64,7 @@
           <!-- Image Container -->
           <div class="relative h-56 overflow-hidden">
             <img 
-              :src="article.image" 
+              :src="article.cover_image_url || '/img/background-landingpage.png'" 
               :alt="article.title" 
               class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
             />
@@ -61,7 +72,7 @@
             <!-- Category Badge -->
             <div class="absolute top-4 left-4">
               <span class="px-3 py-1 bg-white/90 backdrop-blur-sm text-blue-600 text-xs font-bold uppercase tracking-wider rounded-full shadow-sm">
-                {{ article.category }}
+                {{ article.organization_name }}
               </span>
             </div>
           </div>
@@ -71,12 +82,12 @@
             <div class="flex items-center gap-3 text-sm text-slate-500 mb-3">
               <span class="flex items-center gap-1">
                 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                {{ article.date }}
+                {{ formatDate(article.created_at) }}
               </span>
               <span>•</span>
               <span class="flex items-center gap-1">
                 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
-                {{ article.author }}
+                {{ categoryLabel(article.organization_type) }}
               </span>
             </div>
             
@@ -85,24 +96,17 @@
             </h3>
             
             <p class="text-slate-600 mb-6 line-clamp-3 text-sm leading-relaxed flex-1">
-              {{ article.excerpt }}
+              {{ stripHtml(article.content) }}
             </p>
             
             <div class="mt-auto pt-4 border-t border-slate-100">
-              <button class="inline-flex items-center gap-2 text-blue-600 font-semibold text-sm hover:text-blue-700 transition-colors group/btn">
+              <NuxtLink :to="`/berita/${article.slug}`" class="inline-flex items-center gap-2 text-blue-600 font-semibold text-sm hover:text-blue-700 transition-colors group/btn">
                 Baca Selengkapnya 
                 <svg class="w-4 h-4 transform transition-transform group-hover/btn:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-              </button>
+              </NuxtLink>
             </div>
           </div>
         </article>
-      </div>
-
-      <!-- Load More (Mock) -->
-      <div class="mt-12 text-center" v-if="filteredArticles.length > 0">
-        <button class="px-8 py-3 bg-white border-2 border-slate-200 text-slate-700 font-bold rounded-xl hover:border-blue-600 hover:text-blue-600 transition-colors shadow-sm">
-          Muat Lebih Banyak
-        </button>
       </div>
 
       <!-- Empty State -->
@@ -120,7 +124,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
+import type { Article } from '~/types/database.types'
+import type { Timestamp } from 'firebase/firestore'
 
 useHead({
   title: 'Artikel & Berita - Ormawa UT Surabaya',
@@ -130,72 +136,52 @@ useHead({
 })
 
 // Categories
-const categories = ['Semua', 'Berita Kampus', 'Opini Mahasiswa', 'Prestasi', 'Kegiatan']
+const categories = ['Semua', 'HIMPUNAN_MAHASISWA', 'UNIT_KEGIATAN_MAHASISWA', 'ORMAWA', 'ORGANISASI_LAIN']
 const selectedCategory = ref('Semua')
 
-// Mock Data
-const articles = [
-  {
-    id: 1,
-    title: 'Pelantikan Pengurus Ormawa UT Surabaya Periode 2026/2027 Berlangsung Khidmat',
-    excerpt: 'Acara pelantikan pengurus baru organisasi kemahasiswaan Universitas Terbuka Surabaya telah sukses dilaksanakan dengan dihadiri oleh direktur dan jajaran rektorat.',
-    category: 'Berita Kampus',
-    image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    date: '10 Jun 2026',
-    author: 'Humas Ormawa'
-  },
-  {
-    id: 2,
-    title: 'Mahasiswa UT Surabaya Sabet Juara 1 Lomba Esai Nasional di Jakarta',
-    excerpt: 'Prestasi membanggakan kembali ditorehkan oleh mahasiswa UT Surabaya dalam ajang kompetisi esai tingkat nasional bergengsi yang diselenggarakan pekan lalu.',
-    category: 'Prestasi',
-    image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    date: '05 Jun 2026',
-    author: 'Redaksi'
-  },
-  {
-    id: 3,
-    title: 'Menyikapi Tantangan Pembelajaran Jarak Jauh: Sudut Pandang Mahasiswa',
-    excerpt: 'Sebuah opini menarik tentang bagaimana mahasiswa Universitas Terbuka beradaptasi dan berkembang melalui sistem pembelajaran mandiri yang modern.',
-    category: 'Opini Mahasiswa',
-    image: 'https://images.unsplash.com/photo-1456324504439-367cee3b3c32?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    date: '01 Jun 2026',
-    author: 'Budi Santoso'
-  },
-  {
-    id: 4,
-    title: 'Sukses! Seminar Nasional Entrepreneurship Gen-Z Dihadiri 500 Peserta',
-    excerpt: 'BEM UT Surabaya sukses menyelenggarakan seminar nasional bertemakan kewirausahaan di era digital yang menghadirkan narasumber-narasumber ternama.',
-    category: 'Kegiatan',
-    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    date: '28 Mei 2026',
-    author: 'Divisi Acara'
-  },
-  {
-    id: 5,
-    title: 'Persiapan Jelang Ujian Akhir Semester: Tips Lulus dengan Nilai Memuaskan',
-    excerpt: 'Ujian sudah di depan mata. Simak tips dan trik efektif mengatur jadwal belajar dari mahasiswa peraih IPK tertinggi tahun lalu.',
-    category: 'Berita Kampus',
-    image: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    date: '20 Mei 2026',
-    author: 'Tim Akademik'
-  },
-  {
-    id: 6,
-    title: 'Open Recruitment Panitia Bakti Sosial Ormawa UT Surabaya 2026',
-    excerpt: 'Kami memanggil mahasiswa-mahasiswi berjiwa sosial tinggi untuk ikut serta menjadi bagian dari kepanitiaan bakti sosial tahunan.',
-    category: 'Kegiatan',
-    image: 'https://images.unsplash.com/photo-1559027615-cd4628902d4a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    date: '15 Mei 2026',
-    author: 'Humas Ormawa'
+function categoryLabel(cat: string) {
+  if (cat === 'Semua') return 'Semua Kategori'
+  if (cat === 'HIMPUNAN_MAHASISWA') return 'Himpunan Mahasiswa (IMF)'
+  if (cat === 'UNIT_KEGIATAN_MAHASISWA') return 'UKM'
+  if (cat === 'ORMAWA') return 'ORMAWA'
+  if (cat === 'ORGANISASI_LAIN') return 'Organisasi Lain'
+  return cat
+}
+
+const formatDate = (timestamp: Timestamp | string | Date | null | undefined) => {
+  const normalized = timestamp as { toDate?: () => Date } | undefined
+  const date = normalized?.toDate ? normalized.toDate() : timestamp instanceof Date ? timestamp : typeof timestamp === 'string' ? new Date(timestamp) : null
+
+  if (!date || Number.isNaN(date.getTime())) {
+    return '—'
   }
-]
+
+  return new Intl.DateTimeFormat('id-ID', { day: '2-digit', month: 'short', year: 'numeric' }).format(date)
+}
+
+const stripHtml = (value: string) => value.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim()
+
+const { getPublishedArticles } = useArticles()
+
+const articles = ref<Article[]>([])
+const isLoading = ref<boolean>(true)
+
+onMounted(async () => {
+  isLoading.value = true
+  try {
+    articles.value = await getPublishedArticles()
+  } catch (error) {
+    console.error('Gagal mengambil artikel:', error)
+  } finally {
+    isLoading.value = false
+  }
+})
 
 // Filter Logic
 const filteredArticles = computed(() => {
   if (selectedCategory.value === 'Semua') {
-    return articles
+    return articles.value
   }
-  return articles.filter(article => article.category === selectedCategory.value)
+  return articles.value.filter(article => article.organization_type === selectedCategory.value)
 })
 </script>
