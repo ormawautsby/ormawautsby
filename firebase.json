@@ -6,7 +6,15 @@
     "rules": "storage.rules"
   },
   "functions": {
-    "source": ".output/server"
+    "source": ".output/server",
+    "ignore": [
+      "package-lock.json",
+      "yarn.lock",
+      "pnpm-lock.yaml",
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
   },
   "hosting": {
     "public": ".output/public",
