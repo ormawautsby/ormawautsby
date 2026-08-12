@@ -12,7 +12,6 @@
       "yarn.lock",
       "pnpm-lock.yaml",
       "firebase.json",
-      "**/.*",
       "**/node_modules/**"
     ]
   },
