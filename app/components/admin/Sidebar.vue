@@ -1,5 +1,16 @@
 <template>
-  <aside class="w-64 border-r border-slate-200 bg-white flex flex-col shrink-0 overflow-y-auto hidden md:flex admin-scroll relative z-10">
+  <aside 
+    :class="[
+      'w-64 border-r border-slate-200 bg-white flex-col shrink-0 overflow-y-auto admin-scroll absolute md:relative z-40 h-full transition-transform duration-300 ease-in-out flex',
+      isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
+    ]"
+  >
+    <!-- Mobile Close Button -->
+    <div class="md:hidden flex justify-end p-4 pb-0">
+      <button @click="$emit('close')" class="p-2 text-slate-500 hover:bg-slate-100 rounded-lg">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+    </div>
     <div class="p-4">
 
       <!-- Active: Beranda link -->
@@ -178,11 +189,24 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import type { UserRole } from '~/types/database.types'
 
+const props = defineProps<{
+  isOpen: boolean
+}>()
+
+const emit = defineEmits<{
+  (e: 'close'): void
+}>()
+
 const route = useRoute()
+
+// Auto close sidebar on mobile when route changes
+watch(() => route.path, () => {
+  emit('close')
+})
 const isDashboard = computed(() => route.path === '/dashboard' || route.path === '/dashboard/')
 
 const userRole = useState<string | null>('userRole')

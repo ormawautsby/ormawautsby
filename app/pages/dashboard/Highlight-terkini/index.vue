@@ -53,8 +53,8 @@
     <!-- ═══════════════════════════════════════════════
          DATA TABLE
     ════════════════════════════════════════════════ -->
-    <div v-else class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
-      <table class="w-full text-sm">
+    <div v-else class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-x-auto">
+      <table class="w-full text-sm min-w-[600px]">
         <thead>
           <tr class="bg-slate-50 border-b border-slate-200">
             <th class="text-left px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Judul</th>
