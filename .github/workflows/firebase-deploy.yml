@@ -13,10 +13,10 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js 20 LTS
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
 
       - name: Install Dependencies
         run: npm install
@@ -31,13 +31,10 @@ jobs:
           FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.FIREBASE_MESSAGING_SENDER_ID }}
           FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
 
-      - name: Provide Firebase Functions Dependencies
-        run: ln -s $(pwd)/node_modules .output/server/node_modules
-
       - name: Setup Firebase CLI
         run: npm install -g firebase-tools
 
       - name: Deploy to Firebase (Hosting & Functions)
-        run: firebase deploy --only hosting,functions,firestore,storage
+        run: firebase deploy --only hosting,functions,firestore,storage --debug
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
