@@ -1,12 +1,12 @@
 <template>
   <aside 
     :class="[
-      'w-64 border-r border-slate-200 bg-white flex-col shrink-0 overflow-y-auto admin-scroll absolute md:relative z-40 h-full transition-transform duration-300 ease-in-out flex',
-      isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
+      'w-64 border-r border-slate-200 bg-white flex-col shrink-0 overflow-y-auto admin-scroll absolute lg:relative z-40 h-full transition-transform duration-300 ease-in-out flex',
+      isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
     ]"
   >
     <!-- Mobile Close Button -->
-    <div class="md:hidden flex justify-end p-4 pb-0">
+    <div class="lg:hidden flex justify-end p-4 pb-0">
       <button @click="$emit('close')" class="p-2 text-slate-500 hover:bg-slate-100 rounded-lg">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
       </button>
