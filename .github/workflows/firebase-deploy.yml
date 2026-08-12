@@ -31,6 +31,11 @@ jobs:
           FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.FIREBASE_MESSAGING_SENDER_ID }}
           FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
 
+      - name: Provide Firebase Functions Dependencies
+        run: |
+          rm -rf .output/server/node_modules
+          ln -s ${{ github.workspace }}/node_modules .output/server/node_modules
+
       - name: Setup Firebase CLI
         run: npm install -g firebase-tools
 
