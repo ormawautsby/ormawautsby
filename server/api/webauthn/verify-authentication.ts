@@ -1,5 +1,5 @@
 import { verifyAuthenticationResponse } from '@simplewebauthn/server'
-import { adminDb, adminAuth } from '../../utils/firebaseAdmin'
+import { getAdminDb, getAdminAuth } from '../../utils/firebaseAdmin'
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event)
@@ -12,6 +12,8 @@ export default defineEventHandler(async (event) => {
   const rpID = 'localhost' // PENTING: Ganti dengan domain asli saat production
   const origin = `http://${rpID}:3000`
 
+  const adminDb = getAdminDb()
+  const adminAuth = getAdminAuth()
   if (!adminDb || !adminAuth) {
     throw createError({ statusCode: 500, message: 'Firebase Admin not initialized' })
   }

@@ -221,6 +221,48 @@
                 </p>
               </div>
 
+              <!-- Hak Akses (Khusus Admin) -->
+              <div v-if="form.role === 'ADMIN'">
+                <label class="block text-xs font-bold text-slate-600 uppercase mb-3">Hak Akses Modul</label>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-slate-50 border border-slate-200 p-4 rounded-xl text-sm">
+                  <label class="flex items-center gap-2 cursor-pointer">
+                    <input type="checkbox" v-model="form.access_modules" value="manage_articles" class="w-4 h-4 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500" />
+                    <span>Kelola Artikel</span>
+                  </label>
+                  <label class="flex items-center gap-2 cursor-pointer">
+                    <input type="checkbox" v-model="form.access_modules" value="manage_events" class="w-4 h-4 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500" />
+                    <span>Kelola Event</span>
+                  </label>
+                  <label class="flex items-center gap-2 cursor-pointer">
+                    <input type="checkbox" v-model="form.access_modules" value="manage_gallery" class="w-4 h-4 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500" />
+                    <span>Kelola Galeri</span>
+                  </label>
+                  <label class="flex items-center gap-2 cursor-pointer">
+                    <input type="checkbox" v-model="form.access_modules" value="manage_members" class="w-4 h-4 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500" />
+                    <span>Kelola Keanggotaan</span>
+                  </label>
+                  <label class="flex items-center gap-2 cursor-pointer">
+                    <input type="checkbox" v-model="form.access_modules" value="manage_structure" class="w-4 h-4 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500" />
+                    <span>Struktur Pengurus</span>
+                  </label>
+                  <label class="flex items-center gap-2 cursor-pointer">
+                    <input type="checkbox" v-model="form.access_modules" value="manage_organizations" class="w-4 h-4 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500" />
+                    <span>Kelola Organisasi</span>
+                  </label>
+                  <label class="flex items-center gap-2 cursor-pointer">
+                    <input type="checkbox" v-model="form.access_modules" value="manage_users" class="w-4 h-4 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500" />
+                    <span>Kelola Pengguna</span>
+                  </label>
+                  <label class="flex items-center gap-2 cursor-pointer">
+                    <input type="checkbox" v-model="form.access_modules" value="manage_settings" class="w-4 h-4 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500" />
+                    <span>Pengaturan Sistem</span>
+                  </label>
+                </div>
+                <p class="mt-2 text-[11px] text-slate-500">
+                  Pilih menu-menu mana saja yang boleh dibuka oleh Admin ini di Admin Panel.
+                </p>
+              </div>
+
               <div v-if="formError" class="p-3 bg-red-50 text-red-700 text-xs font-medium rounded-xl border border-red-200">
                 {{ formError }}
               </div>
@@ -270,7 +312,7 @@
 
 <script setup lang="ts">
 import { ref, reactive, onMounted } from 'vue'
-import type { UserDocument, UserRole, OrganizationDocument } from '~/types/database.types'
+import type { UserDocument, UserRole, OrganizationDocument, AdminModule } from '~/types/database.types'
 
 definePageMeta({ layout: 'admin', middleware: 'auth' })
 useHead({ title: 'Pengguna — Admin Panel Ormawa' })
@@ -297,6 +339,7 @@ const form = reactive({
   full_name: '',
   role: '' as UserRole | '',
   organization_id: '',
+  access_modules: [] as AdminModule[],
 })
 
 const isDeleteModalOpen = ref<boolean>(false)
@@ -349,6 +392,7 @@ function resetForm() {
   form.full_name = ''
   form.role = ''
   form.organization_id = ''
+  form.access_modules = []
   formError.value = ''
   editingId.value = null
 }
@@ -376,6 +420,7 @@ async function openEditModal(user: UserDocument) {
   form.full_name = user.full_name
   form.role = user.role
   form.organization_id = user.organization_id || ''
+  form.access_modules = Array.isArray(user.access_modules) ? [...user.access_modules] : []
   isModalOpen.value = true
 
   try {
@@ -402,6 +447,7 @@ async function submitForm() {
       full_name: form.full_name.trim(),
       role: form.role as UserRole,
       organization_id: form.role === 'SUPER_ADMIN' ? null : (form.organization_id || null),
+      access_modules: form.role === 'SUPER_ADMIN' ? [] : [...form.access_modules],
     }
 
     if (modalMode.value === 'create') {

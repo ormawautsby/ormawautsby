@@ -55,6 +55,7 @@ export default defineNuxtPlugin((nuxtApp) => {
   // State global untuk User dan Role
   const firebaseUser = useState<User | null>('firebaseUser', () => null)
   const userRole = useState<string | null>('userRole', () => null)
+  const accessModules = useState<string[]>('accessModules', () => [])
   const isAuthReady = useState<boolean>('isAuthReady', () => false)
 
   // Listen ke status autentikasi
@@ -67,17 +68,22 @@ export default defineNuxtPlugin((nuxtApp) => {
         const userDocRef = doc(db, 'users', user.uid)
         const userDocSnap = await getDoc(userDocRef)
         if (userDocSnap.exists()) {
-          userRole.value = userDocSnap.data().role || 'mahasiswa'
+          const data = userDocSnap.data()
+          userRole.value = data.role || 'mahasiswa'
+          accessModules.value = Array.isArray(data.access_modules) ? data.access_modules : []
         } else {
           // Jika dokumen belum ada, asumsikan mahasiswa baru (akan di-handle pembuatannya nanti)
           userRole.value = 'mahasiswa'
+          accessModules.value = []
         }
       } catch (error) {
         console.error("Error fetching user role:", error)
         userRole.value = 'mahasiswa'
+        accessModules.value = []
       }
     } else {
       userRole.value = null
+      accessModules.value = []
     }
     
     isAuthReady.value = true

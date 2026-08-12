@@ -1,10 +1,11 @@
 import { generateAuthenticationOptions } from '@simplewebauthn/server'
-import { adminDb } from '../../utils/firebaseAdmin'
+import { getAdminDb } from '../../utils/firebaseAdmin'
 import crypto from 'crypto'
 
 export default defineEventHandler(async (event) => {
   const rpID = 'localhost' // PENTING: Ganti dengan domain asli saat production
 
+  const adminDb = getAdminDb()
   if (!adminDb) {
     throw createError({ statusCode: 500, message: 'Firebase Admin not initialized' })
   }

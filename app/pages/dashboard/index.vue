@@ -61,6 +61,7 @@ interface QuickLink {
 }
 
 const userRole = useState<string | null>('userRole')
+const accessModules = useState<string[]>('accessModules', () => [])
 
 const normalizedRole = computed<UserRole | null>(() => {
   const raw: string | null = userRole.value
@@ -78,15 +79,19 @@ const summaryCards: SummaryCard[] = [
 ]
 
 const quickLinks = computed<QuickLink[]>(() => {
-  const links: QuickLink[] = [
-    { label: 'Kelola Artikel', to: '/dashboard/Highlight-terkini' },
-  ]
+  const links: QuickLink[] = []
 
-  if (normalizedRole.value === 'SUPER_ADMIN') {
-    links.unshift(
-      { label: 'Kelola Organisasi', to: '/dashboard/organizations' },
-      { label: 'Kelola Pengguna', to: '/dashboard/users' },
-    )
+  const isSuperAdmin = normalizedRole.value === 'SUPER_ADMIN'
+  const hasAccess = (moduleName: string) => isSuperAdmin || accessModules.value.includes(moduleName)
+
+  if (hasAccess('manage_articles')) {
+    links.push({ label: 'Kelola Artikel', to: '/dashboard/Highlight-terkini' })
+  }
+  if (hasAccess('manage_organizations')) {
+    links.push({ label: 'Kelola Organisasi', to: '/dashboard/organizations' })
+  }
+  if (hasAccess('manage_users')) {
+    links.push({ label: 'Kelola Pengguna', to: '/dashboard/users' })
   }
 
   return links

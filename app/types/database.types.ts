@@ -24,6 +24,20 @@ import type { Timestamp } from 'firebase/firestore'
 export type UserRole = 'SUPER_ADMIN' | 'ADMIN'
 
 /**
+ * Modul akses di Admin Panel.
+ * Digunakan untuk mengatur izin akses spesifik (terutama bagi role ADMIN).
+ */
+export type AdminModule =
+  | 'manage_articles'
+  | 'manage_events'
+  | 'manage_gallery'
+  | 'manage_members'
+  | 'manage_structure'
+  | 'manage_organizations'
+  | 'manage_users'
+  | 'manage_settings'
+
+/**
  * Tipe organisasi.
  * - HIMPUNAN_MAHASISWA       : Himpunan Mahasiswa (HM / IMF).
  * - UNIT_KEGIATAN_MAHASISWA  : Unit Kegiatan Mahasiswa (UKM).
@@ -76,6 +90,13 @@ export interface UserDocument {
    * Null jika pengguna adalah SUPER_ADMIN yang tidak terikat satu organisasi.
    */
   organization_id: string | null
+
+  /**
+   * Daftar modul yang boleh diakses pengguna.
+   * SUPER_ADMIN memiliki akses penuh secara default, 
+   * fitur ini lebih diperuntukkan untuk membatasi akses role ADMIN.
+   */
+  access_modules?: AdminModule[]
 }
 
 // ────────────────────────────────────────────────────────────

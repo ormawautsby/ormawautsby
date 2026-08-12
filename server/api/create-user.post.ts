@@ -15,6 +15,7 @@ export default defineEventHandler(async (event) => {
   const normalizedOrganizationId = typeof body?.organization_id === 'string' && body.organization_id.trim()
     ? body.organization_id
     : null
+  const accessModules = Array.isArray(body?.access_modules) ? body.access_modules : []
 
   if (!normalizedEmail || !normalizedPassword) {
     throw createError({ statusCode: 400, statusMessage: 'Email and Password are required' })
@@ -63,6 +64,7 @@ export default defineEventHandler(async (event) => {
       full_name: normalizedName,
       role: normalizedRole,
       organization_id: normalizedOrganizationId,
+      access_modules: accessModules,
       createdAt: new Date().toISOString()
     })
 

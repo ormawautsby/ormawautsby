@@ -38,6 +38,7 @@ export const useUsers = () => {
           full_name: typeof data.full_name === 'string' ? data.full_name : '',
           role: data.role === 'SUPER_ADMIN' || data.role === 'ADMIN' ? data.role : 'ADMIN',
           organization_id: typeof data.organization_id === 'string' ? data.organization_id : null,
+          access_modules: Array.isArray(data.access_modules) ? data.access_modules : [],
         } as UserDocument
       })
       .sort((left, right) => {
@@ -68,6 +69,7 @@ export const useUsers = () => {
         name: payload.full_name, // di endpoint masih membaca "name"
         role: payload.role,
         organization_id: payload.organization_id || null,
+        access_modules: payload.access_modules || [],
       })
     })
 
