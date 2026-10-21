@@ -275,11 +275,13 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-useHead({
-  title: 'Cari Teman & Kolaborasi - Ormawa UT Surabaya',
-  meta: [
-    { name: 'description', content: 'Temukan teman diskusi, bentuk kelompok tugas, atau cari anggota tim perlombaan di jaringan mahasiswa UT Surabaya.' }
-  ]
+useSeoMeta({
+  title: 'Cari Teman & Kolaborasi',
+  ogTitle: 'Cari Teman & Kolaborasi Mahasiswa - Ormawa UT Surabaya',
+  description: 'Temukan teman diskusi, bentuk kelompok belajar, atau cari partner tim perlombaan di jejaring mahasiswa Universitas Terbuka Surabaya.',
+  ogDescription: 'Temukan teman diskusi, bentuk kelompok belajar, atau cari partner tim perlombaan di jejaring mahasiswa Universitas Terbuka Surabaya.',
+  ogImage: 'https://ormawa-utsurabaya.web.app/img/Background%20ormawa.png',
+  ogType: 'website',
 })
 
 // Tab State

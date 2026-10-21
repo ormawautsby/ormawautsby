@@ -241,11 +241,13 @@
 import { ref } from 'vue'
 import { useRoute } from 'vue-router'
 
-useHead({
-  title: 'Kontak & Aspirasi - Ormawa UT Surabaya',
-  meta: [
-    { name: 'description', content: 'Suaramu Berharga. Sampaikan pendapat, ide, kritik, saran, atau laporan Anda langsung kepada kami.' }
-  ]
+useSeoMeta({
+  title: 'Layanan Aspirasi Mahasiswa',
+  ogTitle: 'Layanan Aspirasi & Suara Mahasiswa - Ormawa UT Surabaya',
+  description: 'Suaramu Berharga. Sampaikan ide, masukan, kritik konstruktif, dan saran Anda secara aman dan transparan untuk kemajuan kampus.',
+  ogDescription: 'Suaramu Berharga. Sampaikan ide, masukan, kritik konstruktif, dan saran Anda secara aman dan transparan untuk kemajuan kampus.',
+  ogImage: 'https://ormawa-utsurabaya.web.app/img/Background%20ormawa.png',
+  ogType: 'website',
 })
 
 // ==========================================

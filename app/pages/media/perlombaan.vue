@@ -92,11 +92,13 @@
 </template>
 
 <script setup lang="ts">
-useHead({
-  title: 'Informasi Perlombaan - Ormawa UT Surabaya',
-  meta: [
-    { name: 'description', content: 'Dapatkan informasi terbaru mengenai berbagai ajang kompetisi bergengsi tingkat regional, nasional, hingga internasional.' }
-  ]
+useSeoMeta({
+  title: 'Informasi Perlombaan',
+  ogTitle: 'Informasi Perlombaan & Kompetisi Mahasiswa - Ormawa UT Surabaya',
+  description: 'Dapatkan informasi terbaru mengenai berbagai ajang kompetisi dan perlombaan bergengsi tingkat regional, nasional, hingga internasional.',
+  ogDescription: 'Dapatkan informasi terbaru mengenai berbagai ajang kompetisi dan perlombaan bergengsi tingkat regional, nasional, hingga internasional.',
+  ogImage: 'https://ormawa-utsurabaya.web.app/img/Background%20ormawa.png',
+  ogType: 'website',
 })
 
 // Mock Data

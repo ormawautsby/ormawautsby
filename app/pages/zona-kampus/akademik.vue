@@ -73,11 +73,13 @@
 </template>
 
 <script setup lang="ts">
-useHead({
-  title: 'Kegiatan Akademik - Ormawa UT Surabaya',
-  meta: [
-    { name: 'description', content: 'Informasi kegiatan seminar, workshop, dan kuliah tamu Universitas Terbuka Surabaya.' }
-  ]
+useSeoMeta({
+  title: 'Kegiatan Akademik',
+  ogTitle: 'Kegiatan Akademik - Ormawa UT Surabaya',
+  description: 'Informasi kegiatan seminar, workshop, webinar, dan kuliah tamu di lingkungan Universitas Terbuka Surabaya.',
+  ogDescription: 'Informasi kegiatan seminar, workshop, webinar, dan kuliah tamu di lingkungan Universitas Terbuka Surabaya.',
+  ogImage: 'https://ormawa-utsurabaya.web.app/img/Background%20ormawa.png',
+  ogType: 'website',
 })
 
 const akademikList = [

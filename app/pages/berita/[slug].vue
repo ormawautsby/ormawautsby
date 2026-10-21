@@ -102,18 +102,41 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import type { ArticleDocument } from '~/types/database.types'
 import type { Timestamp } from 'firebase/firestore'
 
 const route = useRoute()
-const slug = route.params.slug as string
+const config = useRuntimeConfig()
+const slug = computed(() => (route.params.slug as string) || '')
+const siteUrl = (config.public.siteUrl as string) || 'https://ormawa-utsurabaya.web.app'
 
-const { getArticleBySlug } = useArticles()
+// Ambil data artikel melalui server API endpoint agar meta tags terisi saat SSR
+const { data: articleData, pending: isLoading } = await useAsyncData(
+  `article-${slug.value}`,
+  async () => {
+    try {
+      return await $fetch<ArticleDocument>(`/api/articles/${slug.value}`)
+    } catch (e) {
+      // Fallback ke Firebase client composable jika di browser dan API gagal
+      if (import.meta.client) {
+        try {
+          const { getArticleBySlug } = useArticles()
+          return await getArticleBySlug(slug.value)
+        } catch (clientErr) {
+          console.error('[Article Client Fallback] Gagal:', clientErr)
+        }
+      }
+      return null
+    }
+  },
+  {
+    watch: [slug],
+  }
+)
 
-const article = ref<ArticleDocument | null>(null)
-const isLoading = ref(true)
+const article = computed(() => articleData.value)
 
 const formatDate = (timestamp: Timestamp | string | Date | null | undefined) => {
   const normalized = timestamp as { toDate?: () => Date } | undefined
@@ -134,30 +157,75 @@ const formatDate = (timestamp: Timestamp | string | Date | null | undefined) => 
   }).format(date)
 }
 
-onMounted(async () => {
-  isLoading.value = true
-  try {
-    article.value = await getArticleBySlug(slug)
+const articleExcerpt = computed(() => {
+  if (!article.value?.content) return 'Baca liputan dan artikel selengkapnya di Ormawa Universitas Terbuka Surabaya.'
+  return article.value.content
+    .replace(/<[^>]*>/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .slice(0, 160)
+})
 
-    // Set dynamic SEO meta
-    if (article.value) {
-      useHead({
-        title: `${article.value.title} — Ormawa UT Surabaya`,
-        meta: [
-          { name: 'description', content: article.value.content.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 160) },
-          { property: 'og:title', content: article.value.title },
-          { property: 'og:image', content: article.value.cover_image_url || '' },
-        ],
-      })
-    } else {
-      useHead({ title: 'Artikel Tidak Ditemukan — Ormawa UT Surabaya' })
-    }
-  } catch (err) {
-    console.error('Gagal memuat artikel:', err)
-    article.value = null
-  } finally {
-    isLoading.value = false
-  }
+const pageTitle = computed(() => {
+  return article.value?.title ? article.value.title : 'Artikel Tidak Ditemukan'
+})
+
+const articleUrl = computed(() => `${siteUrl}/berita/${slug.value}`)
+const articleImage = computed(() => article.value?.cover_image_url || `${siteUrl}/img/Background%20ormawa.png`)
+
+// Dynamic SEO Meta Tags (SSR Compatible)
+useSeoMeta({
+  title: pageTitle,
+  ogTitle: pageTitle,
+  description: articleExcerpt,
+  ogDescription: articleExcerpt,
+  ogImage: articleImage,
+  ogUrl: articleUrl,
+  ogType: 'article',
+  articlePublishedTime: () => (typeof article.value?.created_at === 'string' ? article.value.created_at : undefined),
+  articleModifiedTime: () => (typeof article.value?.updated_at === 'string' ? article.value.updated_at : undefined),
+  articleAuthor: () => article.value?.organization_name || 'Ormawa UT Surabaya',
+  twitterCard: 'summary_large_image',
+  twitterTitle: pageTitle,
+  twitterDescription: articleExcerpt,
+  twitterImage: articleImage,
+})
+
+// Schema.org NewsArticle Structured Data
+useHead({
+  script: computed(() => {
+    if (!article.value) return []
+    return [
+      {
+        type: 'application/ld+json',
+        innerHTML: JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'NewsArticle',
+          headline: article.value.title,
+          image: [articleImage.value],
+          datePublished: article.value.created_at || new Date().toISOString(),
+          dateModified: article.value.updated_at || article.value.created_at || new Date().toISOString(),
+          author: {
+            '@type': 'Organization',
+            name: article.value.organization_name || 'Ormawa UT Surabaya',
+          },
+          publisher: {
+            '@type': 'Organization',
+            name: 'Ormawa UT Surabaya',
+            logo: {
+              '@type': 'ImageObject',
+              url: `${siteUrl}/img/Favicon_bulat_transparan.png`,
+            },
+          },
+          description: articleExcerpt.value,
+          mainEntityOfPage: {
+            '@type': 'WebPage',
+            '@id': articleUrl.value,
+          },
+        }),
+      },
+    ]
+  }),
 })
 </script>
 

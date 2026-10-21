@@ -197,11 +197,13 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-useHead({
-  title: 'Pendaftaran IMF/HIMA - Ormawa UT Surabaya',
-  meta: [
-    { name: 'description', content: 'Pendaftaran pengurus Ikatan Mahasiswa Fakultas (IMF) dan Himpunan Mahasiswa Jurusan.' }
-  ]
+useSeoMeta({
+  title: 'Pendaftaran IMF / HIMA',
+  ogTitle: 'Pendaftaran IMF / HIMA - Ormawa UT Surabaya',
+  description: 'Pendaftaran keanggotaan dan kepengurusan Ikatan Mahasiswa Fakultas (IMF) dan Himpunan Mahasiswa Program Studi di Universitas Terbuka Surabaya.',
+  ogDescription: 'Pendaftaran keanggotaan dan kepengurusan Ikatan Mahasiswa Fakultas (IMF) dan Himpunan Mahasiswa Program Studi di Universitas Terbuka Surabaya.',
+  ogImage: 'https://ormawa-utsurabaya.web.app/img/Background%20ormawa.png',
+  ogType: 'website',
 })
 
 const himaList = [

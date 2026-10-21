@@ -128,11 +128,13 @@ import { ref, computed, onMounted } from 'vue'
 import type { Article } from '~/types/database.types'
 import type { Timestamp } from 'firebase/firestore'
 
-useHead({
-  title: 'Artikel & Berita - Ormawa UT Surabaya',
-  meta: [
-    { name: 'description', content: 'Dapatkan informasi terbaru mengenai kegiatan, prestasi, dan opini menarik dari ruang lingkup kemahasiswaan Universitas Terbuka Surabaya.' }
-  ]
+useSeoMeta({
+  title: 'Artikel & Berita',
+  ogTitle: 'Artikel & Berita Terkini Ormawa UT Surabaya',
+  description: 'Dapatkan informasi terbaru mengenai kegiatan, prestasi, dan kabar terkini dari ruang lingkup kemahasiswaan Universitas Terbuka Surabaya.',
+  ogDescription: 'Dapatkan informasi terbaru mengenai kegiatan, prestasi, dan kabar terkini dari ruang lingkup kemahasiswaan Universitas Terbuka Surabaya.',
+  ogImage: 'https://ormawa-utsurabaya.web.app/img/Background%20ormawa.png',
+  ogType: 'website',
 })
 
 // Categories

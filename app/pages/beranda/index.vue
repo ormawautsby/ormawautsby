@@ -244,24 +244,21 @@ import { computed, h, onMounted, ref } from 'vue'
 import type { Article } from '~/types/database.types'
 import type { Timestamp } from 'firebase/firestore'
 
-useHead({
-  title: 'Ormawa UT Surabaya - Website Resmi Organisasi Mahasiswa',
-  meta: [
-    { name: 'description', content: 'Sistem Informasi Resmi Ormawa UT Surabaya. Temukan berita, kegiatan, dan informasi terbaru dari organisasi mahasiswa.' }
-  ],
-  script: [
-    {
-      type: 'application/ld+json',
-      innerHTML: JSON.stringify({
-        '@context': 'https://schema.org',
-        '@type': 'Organization',
-        name: 'Ormawa UT Surabaya',
-        url: 'https://ormawa-utsurabaya.web.app',
-        logo: 'https://ormawa-utsurabaya.web.app/img/Favicon_bulat_transparan.png'
-      })
-    }
-  ]
+useSeoMeta({
+  title: 'Beranda - Portal Resmi Organisasi Mahasiswa',
+  ogTitle: 'Ormawa UT Surabaya - Kreasi, Kolaborasi, Berprestasi',
+  description: 'Portal resmi Organisasi Mahasiswa Universitas Terbuka Surabaya. Wadah kreasi, kolaborasi, aspirasi, informasi kegiatan, Himpunan Mahasiswa (IMF), UKM, dan prestasi mahasiswa.',
+  ogDescription: 'Portal resmi Organisasi Mahasiswa Universitas Terbuka Surabaya. Wadah kreasi, kolaborasi, aspirasi, informasi kegiatan, Himpunan Mahasiswa (IMF), UKM, dan prestasi mahasiswa.',
+  ogImage: 'https://ormawa-utsurabaya.web.app/img/Background%20ormawa.png',
+  ogUrl: 'https://ormawa-utsurabaya.web.app/beranda',
+  ogType: 'website',
+  twitterCard: 'summary_large_image',
+  twitterTitle: 'Ormawa UT Surabaya - Kreasi, Kolaborasi, Berprestasi',
+  twitterDescription: 'Portal resmi Organisasi Mahasiswa Universitas Terbuka Surabaya. Wadah kreasi, kolaborasi, dan prestasi mahasiswa.',
+  twitterImage: 'https://ormawa-utsurabaya.web.app/img/Background%20ormawa.png',
+  keywords: 'ormawa ut surabaya, universitas terbuka surabaya, ukm ut surabaya, himpunan mahasiswa ut surabaya, kkb ut surabaya, osmb ut surabaya 2026',
 })
+
 
 interface StatItem {
   label: string

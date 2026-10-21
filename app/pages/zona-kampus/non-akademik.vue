@@ -67,11 +67,13 @@
 </template>
 
 <script setup lang="ts">
-useHead({
-  title: 'Kegiatan Non Akademik - Ormawa UT Surabaya',
-  meta: [
-    { name: 'description', content: 'Informasi kegiatan minat bakat, olahraga, dan kesenian Universitas Terbuka Surabaya.' }
-  ]
+useSeoMeta({
+  title: 'Kegiatan Non-Akademik',
+  ogTitle: 'Kegiatan Non-Akademik - Ormawa UT Surabaya',
+  description: 'Informasi kegiatan minat bakat, olahraga, seni budaya, dan pengabdian masyarakat Universitas Terbuka Surabaya.',
+  ogDescription: 'Informasi kegiatan minat bakat, olahraga, seni budaya, dan pengabdian masyarakat Universitas Terbuka Surabaya.',
+  ogImage: 'https://ormawa-utsurabaya.web.app/img/Background%20ormawa.png',
+  ogType: 'website',
 })
 
 const nonAkademikList = [

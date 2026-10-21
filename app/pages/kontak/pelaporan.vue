@@ -202,11 +202,13 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-useHead({
-  title: 'Pusat Pelaporan - Ormawa UT Surabaya',
-  meta: [
-    { name: 'description', content: 'Laporkan kendala, pelanggaran, atau kejadian yang tidak menyenangkan. Keamanan dan kerahasiaan identitas Anda adalah prioritas utama kami.' }
-  ]
+useSeoMeta({
+  title: 'Pusat Pelaporan & Pengaduan',
+  ogTitle: 'Pusat Pelaporan & Pengaduan - Ormawa UT Surabaya',
+  description: 'Layanan pelaporan kendala, pelanggaran, atau kejadian penting di lingkungan kampus. Keamanan dan kerahasiaan identitas Anda terjamin.',
+  ogDescription: 'Layanan pelaporan kendala, pelanggaran, atau kejadian penting di lingkungan kampus. Keamanan dan kerahasiaan identitas Anda terjamin.',
+  ogImage: 'https://ormawa-utsurabaya.web.app/img/Background%20ormawa.png',
+  ogType: 'website',
 })
 
 // ==========================================

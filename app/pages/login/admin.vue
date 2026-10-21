@@ -212,6 +212,14 @@
 import { ref, onMounted } from 'vue'
 import { startAuthentication } from '@simplewebauthn/browser'
 
+useHead({
+  title: 'Login Portal',
+  meta: [
+    { name: 'robots', content: 'noindex, nofollow' }
+  ]
+})
+
+
 // Tab State
 const activeTab = ref('admin')
 

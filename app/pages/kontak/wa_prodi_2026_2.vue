@@ -111,11 +111,13 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 
-useHead({
-  title: 'WA Prodi 2026 - Ormawa UT Surabaya',
-  meta: [
-    { name: 'description', content: 'Daftar kontak WhatsApp resmi program studi angkatan 2026 Universitas Terbuka Surabaya.' }
-  ]
+useSeoMeta({
+  title: 'Grup WhatsApp Prodi & OSMB 2026.2',
+  ogTitle: 'Grup WhatsApp Resmi Prodi & OSMB 2026.2 - Ormawa UT Surabaya',
+  description: 'Daftar link grup WhatsApp resmi program studi dan OSMB angkatan 2026.2 Universitas Terbuka Surabaya. Terhubung dengan teman sejurusan.',
+  ogDescription: 'Daftar link grup WhatsApp resmi program studi dan OSMB angkatan 2026.2 Universitas Terbuka Surabaya. Terhubung dengan teman sejurusan.',
+  ogImage: 'https://ormawa-utsurabaya.web.app/img/Background%20ormawa.png',
+  ogType: 'website',
 })
 
 const searchQuery = ref('')

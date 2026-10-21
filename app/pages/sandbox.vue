@@ -528,7 +528,10 @@ definePageMeta({
 })
 
 useHead({
-  title: 'MCLIS - Dashboard'
+  title: 'MCLIS - Dashboard',
+  meta: [
+    { name: 'robots', content: 'noindex, nofollow' }
+  ]
 })
 </script>
 

@@ -143,6 +143,15 @@
 import { ref, onMounted } from 'vue'
 import type { PengurusMember, BidangItem } from '~/composables/usePengurus'
 
+useSeoMeta({
+  title: 'Struktur Kepengurusan',
+  ogTitle: 'Struktur Kepengurusan Ormawa UT Surabaya',
+  description: 'Daftar Badan Pengurus Harian (BPH) dan koordinator bidang strategis Organisasi Kemahasiswaan Universitas Terbuka Surabaya.',
+  ogDescription: 'Daftar Badan Pengurus Harian (BPH) dan koordinator bidang strategis Organisasi Kemahasiswaan Universitas Terbuka Surabaya.',
+  ogImage: 'https://ormawa-utsurabaya.web.app/img/Background%20ormawa.png',
+  ogType: 'website',
+})
+
 const { getStruktur } = usePengurus()
 
 const isLoading = ref(true)

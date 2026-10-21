@@ -53,6 +53,12 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
+useHead({
+  meta: [
+    { name: 'robots', content: 'noindex, nofollow' }
+  ]
+})
+
 const isSidebarOpen = ref(false)
 
 const logout = async () => {

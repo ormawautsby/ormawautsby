@@ -56,6 +56,13 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
+useHead({
+  title: 'Login Mahasiswa',
+  meta: [
+    { name: 'robots', content: 'noindex, nofollow' }
+  ]
+})
+
 const errorMessage = ref('')
 const loginWithGoogle = async () => {
   errorMessage.value = ''

@@ -13,11 +13,14 @@
 </template>
 
 <script setup lang="ts">
-useHead({
-  title: 'Profil Organisasi - Ormawa UT Surabaya',
-  meta: [
-    { name: 'description', content: 'Mengenal lebih dekat Universitas Terbuka Surabaya dan kepengurusan Organisasi Kemahasiswaan.' }
-  ]
+useSeoMeta({
+  title: 'Profil Organisasi',
+  ogTitle: 'Profil Organisasi - Ormawa UT Surabaya',
+  description: 'Mengenal lebih dekat profil Universitas Terbuka Surabaya dan kepengurusan Organisasi Kemahasiswaan (Ormawa).',
+  ogDescription: 'Mengenal lebih dekat profil Universitas Terbuka Surabaya dan kepengurusan Organisasi Kemahasiswaan (Ormawa).',
+  ogImage: 'https://ormawa-utsurabaya.web.app/img/Background%20ormawa.png',
+  ogType: 'website',
 })
 </script>
+
 
