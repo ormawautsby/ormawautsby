@@ -2,20 +2,17 @@
 echo Building Nuxt App...
 call npm run build
 
-echo Removing sharp-win32 from output package.json...
-python remove-sharp.py
-
-echo Syncing node_modules...
-if exist .output\server\node_modules rmdir /s /q .output\server\node_modules
-xcopy /e /i /q node_modules .output\server\node_modules
+echo Preparing Server for Firebase deployment...
+node fix-deploy.cjs
 
 echo Backing up package-lock.json...
 if exist package-lock.json move package-lock.json package-lock.json.bak
 
 echo Deploying to Firebase...
-call firebase deploy
+call npx firebase-tools deploy --only hosting,functions,firestore,storage
 
 echo Restoring package-lock.json...
 if exist package-lock.json.bak move package-lock.json.bak package-lock.json
 
 echo Deploy Complete!
+
