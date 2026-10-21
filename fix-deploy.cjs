@@ -8,7 +8,7 @@ const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
 delete pkg.dependencies['@img/sharp-win32-x64'];
 delete pkg.dependencies['@img/sharp-linux-x64'];
 delete pkg.dependencies['@img/sharp-linux-arm64'];
-pkg.engines = { node: '22' };
+pkg.engines = { node: '20' };
 pkg.main = 'index.js';
 
 // Tambahkan/update firebase-functions ke versi terbaru
