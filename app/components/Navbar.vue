@@ -6,17 +6,13 @@
     <!-- Top Yellow Bar -->
     <div class="h-12 md:h-14 w-full bg-[#FFD700]"></div>
     
-    <nav class="bg-white border-b border-slate-200/80 shadow-sm transition-all relative">
+    <nav class="bg-white border-b border-slate-200/80 shadow-sm transition-all">
       <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-12">
         <div class="flex items-center justify-between md:justify-start md:gap-6 lg:gap-8 h-20 md:h-24 py-2">
         
         <!-- Logo Brand -->
-        <NuxtLink to="/beranda" class="flex items-center cursor-pointer min-w-0 shrink max-w-[calc(100%-54px)] md:max-w-none">
-          <img 
-            src="/img/Logo-ormawa-navbar.png" 
-            alt="Logo Ormawa" 
-            class="h-12 sm:h-14 md:h-20 w-auto max-w-full object-contain mix-blend-multiply brightness-[1.08] contrast-[1.15]" 
-          />
+        <NuxtLink to="/beranda" class="flex items-center gap-3 cursor-pointer">
+          <img src="/img/Logo-ormawa-navbar.png" alt="Logo Ormawa" class="h-16 md:h-20 w-auto object-contain mix-blend-multiply brightness-[1.08] contrast-[1.15]" />
         </NuxtLink>
         
         <!-- Desktop Navigation -->
@@ -210,27 +206,23 @@
 
         <!-- Mobile Menu Button -->
         <button 
-          type="button"
+          type="button" 
           @click.stop="toggleMobileMenu" 
-          class="md:hidden relative z-20 flex items-center justify-center w-11 h-11 rounded-xl text-slate-800 hover:bg-slate-100 active:bg-slate-200 focus:outline-none transition-colors shrink-0 cursor-pointer"
-          aria-label="Menu Navigasi"
-          :aria-expanded="isMobileMenuOpen"
+          class="md:hidden text-slate-900 hover:text-slate-900 focus:outline-none p-1 cursor-pointer"
+          aria-label="Menu"
         >
           <svg v-if="!isMobileMenuOpen" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
           </svg>
-          <svg v-else class="w-6 h-6 text-slate-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path>
+          <svg v-else class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
           </svg>
         </button>
       </div>
     </div>
 
     <!-- Mobile Dropdown Menu -->
-    <div 
-      v-if="isMobileMenuOpen" 
-      class="md:hidden absolute top-full left-0 right-0 w-full bg-white border-b border-slate-200 shadow-2xl transition-all py-3 max-h-[calc(100vh-140px)] overflow-y-auto z-50"
-    >
+    <div v-if="isMobileMenuOpen" class="md:hidden border-t border-slate-100 bg-white shadow-inner transition-all py-2 max-h-[85vh] overflow-y-auto">
       <div class="space-y-1 px-4">
         <!-- Beranda -->
         <NuxtLink 
@@ -410,12 +402,7 @@
           <button 
             type="button"
             @click.stop="toggleMobileKontak" 
-            :class="[
-              'flex items-center justify-between w-full px-4 py-3 text-sm font-semibold rounded-xl transition-all text-left cursor-pointer',
-              isActiveLink('/kontak') 
-                ? 'bg-slate-100 text-slate-900' 
-                : 'text-slate-900 hover:bg-slate-50'
-            ]"
+            class="flex items-center justify-between w-full px-5 py-3 text-sm font-bold rounded-full bg-red-500 text-slate-900 hover:bg-red-600 transition-all text-left shadow-md border border-red-600 my-2 cursor-pointer"
           >
             <span class="flex items-center gap-2">
               <svg class="w-4 h-4 text-slate-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
