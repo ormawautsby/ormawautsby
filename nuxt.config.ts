@@ -43,9 +43,16 @@ export default defineNuxtConfig({
 
   sitemap: {
     exclude: [
+      '/',
+      '/profil',
+      '/berita',
+      '/media',
+      '/kontak',
+      '/zona-kampus',
       '/dashboard/**',
       '/login/**',
-      '/sandbox'
+      '/sandbox',
+      '/sandbox/**'
     ],
     sources: [
       '/api/__sitemap__/urls'
@@ -62,6 +69,7 @@ export default defineNuxtConfig({
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
         { name: 'format-detection', content: 'telephone=no' },
         { name: 'author', content: 'Ormawa UT Surabaya' },
+        { name: 'robots', content: 'index, follow' },
         { name: 'theme-color', content: '#0f172a' },
         { property: 'og:site_name', content: 'Ormawa UT Surabaya' },
         { property: 'og:locale', content: 'id_ID' },
@@ -80,7 +88,7 @@ export default defineNuxtConfig({
     public: {
       siteUrl: 'https://ormawa-utsurabaya.web.app',
       siteName: 'Ormawa UT Surabaya',
-      googleSiteVerification: process.env.GOOGLE_SITE_VERIFICATION || '',
+      googleSiteVerification: process.env.GOOGLE_SITE_VERIFICATION || 'google58b0918f7efbac0e',
       googleAnalyticsId: process.env.GOOGLE_ANALYTICS_ID || '',
       firebaseApiKey: process.env.FIREBASE_API_KEY,
       firebaseAuthDomain: process.env.FIREBASE_AUTH_DOMAIN,

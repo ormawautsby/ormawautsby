@@ -6,13 +6,17 @@
     <!-- Top Yellow Bar -->
     <div class="h-12 md:h-14 w-full bg-[#FFD700]"></div>
     
-    <nav class="bg-white border-b border-slate-200/80 shadow-sm transition-all">
+    <nav class="bg-white border-b border-slate-200/80 shadow-sm transition-all relative">
       <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-12">
         <div class="flex items-center justify-between md:justify-start md:gap-6 lg:gap-8 h-20 md:h-24 py-2">
         
         <!-- Logo Brand -->
-        <NuxtLink to="/beranda" class="flex items-center gap-3 cursor-pointer">
-          <img src="/img/Logo-ormawa-navbar.png" alt="Logo Ormawa" class="h-16 md:h-20 w-auto object-contain mix-blend-multiply brightness-[1.08] contrast-[1.15]" />
+        <NuxtLink to="/beranda" class="flex items-center cursor-pointer min-w-0 shrink max-w-[calc(100%-54px)] md:max-w-none">
+          <img 
+            src="/img/Logo-ormawa-navbar.png" 
+            alt="Logo Ormawa" 
+            class="h-12 sm:h-14 md:h-20 w-auto max-w-full object-contain mix-blend-multiply brightness-[1.08] contrast-[1.15]" 
+          />
         </NuxtLink>
         
         <!-- Desktop Navigation -->
@@ -205,19 +209,28 @@
         </div>
 
         <!-- Mobile Menu Button -->
-        <button @click="toggleMobileMenu" class="md:hidden text-slate-900 hover:text-slate-900 focus:outline-none p-1">
+        <button 
+          type="button"
+          @click.stop="toggleMobileMenu" 
+          class="md:hidden relative z-20 flex items-center justify-center w-11 h-11 rounded-xl text-slate-800 hover:bg-slate-100 active:bg-slate-200 focus:outline-none transition-colors shrink-0 cursor-pointer"
+          aria-label="Menu Navigasi"
+          :aria-expanded="isMobileMenuOpen"
+        >
           <svg v-if="!isMobileMenuOpen" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"></path>
           </svg>
-          <svg v-else class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          <svg v-else class="w-6 h-6 text-slate-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path>
           </svg>
         </button>
       </div>
     </div>
 
     <!-- Mobile Dropdown Menu -->
-    <div v-if="isMobileMenuOpen" class="md:hidden border-t border-slate-100 bg-white shadow-inner transition-all py-2 max-h-[85vh] overflow-y-auto">
+    <div 
+      v-if="isMobileMenuOpen" 
+      class="md:hidden absolute top-full left-0 right-0 w-full bg-white border-b border-slate-200 shadow-2xl transition-all py-3 max-h-[calc(100vh-140px)] overflow-y-auto z-50"
+    >
       <div class="space-y-1 px-4">
         <!-- Beranda -->
         <NuxtLink 
@@ -236,9 +249,10 @@
         <!-- Profil Expandable Section -->
         <div>
           <button 
-            @click="toggleMobileProfil" 
+            type="button"
+            @click.stop="toggleMobileProfil" 
             :class="[
-              'flex items-center justify-between w-full px-4 py-3 text-sm font-semibold rounded-xl transition-all text-left',
+              'flex items-center justify-between w-full px-4 py-3 text-sm font-semibold rounded-xl transition-all text-left cursor-pointer',
               isActiveLink('/profil') 
                 ? 'bg-slate-100 text-slate-900' 
                 : 'text-slate-900 hover:bg-slate-50'
@@ -286,9 +300,10 @@
         <!-- Zona Kampus Expandable Section -->
         <div>
           <button 
-            @click="toggleMobileZonaKampus" 
+            type="button"
+            @click.stop="toggleMobileZonaKampus" 
             :class="[
-              'flex items-center justify-between w-full px-4 py-3 text-sm font-semibold rounded-xl transition-all text-left',
+              'flex items-center justify-between w-full px-4 py-3 text-sm font-semibold rounded-xl transition-all text-left cursor-pointer',
               isActiveLink('/zona-kampus') 
                 ? 'bg-slate-100 text-slate-900' 
                 : 'text-slate-900 hover:bg-slate-50'
@@ -342,9 +357,10 @@
         <!-- Media Expandable Section -->
         <div>
           <button 
-            @click="toggleMobileMedia" 
+            type="button"
+            @click.stop="toggleMobileMedia" 
             :class="[
-              'flex items-center justify-between w-full px-4 py-3 text-sm font-semibold rounded-xl transition-all text-left',
+              'flex items-center justify-between w-full px-4 py-3 text-sm font-semibold rounded-xl transition-all text-left cursor-pointer',
               isActiveLink('/media') 
                 ? 'bg-slate-100 text-slate-900' 
                 : 'text-slate-900 hover:bg-slate-50'
@@ -392,8 +408,14 @@
         <!-- Kontak Expandable Section -->
         <div>
           <button 
-            @click="toggleMobileKontak" 
-            class="flex items-center justify-between w-full px-5 py-3 text-sm font-bold rounded-full bg-red-500 text-slate-900 hover:bg-red-600 transition-all text-left shadow-md border border-red-600 my-2"
+            type="button"
+            @click.stop="toggleMobileKontak" 
+            :class="[
+              'flex items-center justify-between w-full px-4 py-3 text-sm font-semibold rounded-xl transition-all text-left cursor-pointer',
+              isActiveLink('/kontak') 
+                ? 'bg-slate-100 text-slate-900' 
+                : 'text-slate-900 hover:bg-slate-50'
+            ]"
           >
             <span class="flex items-center gap-2">
               <svg class="w-4 h-4 text-slate-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -468,11 +490,16 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
 const isScrolled = ref(false)
+
+// Tutup menu otomatis saat rute berpindah
+watch(() => route.fullPath, () => {
+  isMobileMenuOpen.value = false
+})
 
 const handleScroll = () => {
   isScrolled.value = window.scrollY > 0
